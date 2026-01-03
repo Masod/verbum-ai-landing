@@ -256,29 +256,41 @@
       </div>
 
       <!-- Windows Basic -->
-      <div class="card">
-        <div class="card-top">
-          <h3>Windows</h3>
-          <span class="badge orange">Basic</span>
-        </div>
-        <p>Recommended for first-time users. Offline summarization with lightweight models.</p>
+<div class="card">
+  <h3>Windows — Basic</h3>
+  <p class="card-sub">Offline summarization (T5 + DistilBART). Requires BIN files.</p>
 
-        <a class="btn orange"
-           href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/basic/VerbumAI-Basic-Setup-x64.exe"
-           onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_exe_v1.0.0'});">
-          ⬇ Download Basic (.exe)
-        </a>
+  <div class="step">
+    <div class="step-title">Step 1 — Download installer</div>
+    <a class="btn primary" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/basic/VerbumAI-Basic-Setup-x64.exe">
+      ⬇ Download Basic Installer (.exe)
+    </a>
 
-        <div class="small"><strong>Required .bin files</strong> (download all 3):</div>
-        <ul class="bins">
-          <li><a href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/basic/VerbumAI-Basic-Setup-x64-1.bin"
-                 onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_bin1_v1.0.0'});">Basic BIN 1</a></li>
-          <li><a href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/basic/VerbumAI-Basic-Setup-x64-2.bin"
-                 onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_bin2_v1.0.0'});">Basic BIN 2</a></li>
-          <li><a href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/basic/VerbumAI-Basic-Setup-x64-3.bin"
-                 onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_bin3_v1.0.0'});">Basic BIN 3</a></li>
-        </ul>
-      </div>
+    <div class="warning">
+      ⚠ <b>Important:</b> You must also download <b>all BIN files</b> below and keep them in the <b>same folder</b> as the EXE.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-title">Step 2 — Download required BIN files</div>
+    <div class="bin-grid">
+      <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/basic/VerbumAI-Basic-Setup-x64-1.bin">
+        Download BIN 1 (2.0 GB)
+      </a>
+      <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/basic/VerbumAI-Basic-Setup-x64-2.bin">
+        Download BIN 2 (2.0 GB)
+      </a>
+      <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/basic/VerbumAI-Basic-Setup-x64-3.bin">
+        Download BIN 3 (1.3 GB)
+      </a>
+    </div>
+  </div>
+
+  <div class="note">
+    ✅ Tip: Create a folder like <code>Downloads\VerbumAI\basic\</code>, download everything there, then run the EXE.
+  </div>
+</div>
+
 
       <!-- Windows Pro -->
       <div class="card">
