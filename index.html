@@ -1,120 +1,633 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q7XW2FW7W8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    /* Keep both GA properties */
+    gtag('config', 'G-Q7XW2FW7W8');
+    gtag('config', 'G-MYZ36TRY04');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Verbum AI — Offline Document Summarizer for macOS & Windows</title>
-  <meta name="description" content="Verbum AI is a privacy-first offline document summarizer that runs on-device with no cloud uploads. Download for macOS or Windows." />
-  <link rel="canonical" href="https://verbum-ai.com/" />
-  <link rel="stylesheet" href="/assets/style.css" />
-  <meta property="og:title" content="Verbum AI — Offline Document Summarizer" />
-  <meta property="og:description" content="Summarize documents fully on-device. No cloud uploads. Download for macOS & Windows." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://verbum-ai.com/" />
-  <meta name="theme-color" content="#0b1220" />
+<meta name="description" content="Verbum AI is a privacy-first offline document summarizer that runs on-device with no cloud uploads. Download for macOS and Windows." />
+<link rel="canonical" href="https://verbum-ai.com/" />
+
+<meta property="og:title" content="Verbum AI — Offline Document Summarizer" />
+<meta property="og:description" content="Smart. Private. Offline. Summarize documents on-device with no cloud uploads." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://verbum-ai.com/" />
+<meta name="theme-color" content="#f7f9fc" />
+
+
+  <style>
+    :root{
+      --blue:#3B82F6;
+      --blueDark:#1E3A8A;
+      --orange:#FF7A00;
+      --bg:#f7f9fc;
+      --text:#111827;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --border:rgba(17,24,39,0.12);
+      --shadow:0 10px 30px rgba(17,24,39,0.08);
+      --radius:18px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin:0;
+      padding:0;
+      background:
+        radial-gradient(1100px 500px at 50% -200px, rgba(59,130,246,0.18), transparent 60%),
+        radial-gradient(900px 450px at 90% 0px, rgba(255,122,0,0.12), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+
+    header{
+      text-align:center;
+      padding:56px 18px 18px;
+    }
+    header img{
+      width:116px;
+      height:auto;
+      margin-bottom:16px;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.10));
+    }
+    header h1{
+      font-size:2.55em;
+      margin:0;
+      letter-spacing:-0.02em;
+    }
+    header p{
+      font-size:1.12em;
+      color:#374151;
+      margin-top:10px;
+      margin-bottom:0;
+    }
+
+    .container{
+      max-width:1080px;
+      margin:0 auto;
+      padding:0 16px 30px;
+    }
+
+    .info-banner{
+      background:linear-gradient(180deg, #ffffff, #fbfdff);
+      border:1px solid var(--border);
+      border-left:6px solid var(--blueDark);
+      padding:16px 16px;
+      margin:20px auto 18px;
+      border-radius:14px;
+      max-width:980px;
+      box-shadow: 0 8px 26px rgba(17,24,39,0.06);
+      text-align:center;
+      font-size:0.98em;
+      color:#374151;
+    }
+    .info-banner p{
+      margin:0.55em 0;
+      line-height:1.6;
+    }
+    .info-banner strong{ color:var(--blueDark); }
+
+    .downloads-head{
+      text-align:center;
+      margin:22px 0 14px;
+    }
+    .downloads-head h2{
+      margin:0;
+      font-size:1.65em;
+      letter-spacing:-0.01em;
+    }
+    .downloads-head p{
+      margin:8px 0 0;
+      color:#4b5563;
+    }
+
+    .howto{
+      max-width:980px;
+      margin:14px auto 18px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:16px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .howto details{
+      border-top:1px solid rgba(17,24,39,0.08);
+      padding:0;
+    }
+    .howto details:first-child{ border-top:none; }
+    .howto summary{
+      list-style:none;
+      cursor:pointer;
+      padding:14px 16px;
+      font-weight:700;
+      color:#111827;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .howto summary::-webkit-details-marker{ display:none; }
+    .howto .chev{
+      color:#6b7280;
+      font-weight:700;
+      transform: rotate(0deg);
+      transition: transform 0.15s ease;
+      user-select:none;
+    }
+    details[open] .chev{ transform: rotate(180deg); }
+
+    .howto .content{
+      padding:0 16px 14px;
+      color:#374151;
+      line-height:1.65;
+    }
+    .howto .content code{
+      background:#f3f4f6;
+      padding:2px 7px;
+      border-radius:8px;
+      font-size:0.95em;
+    }
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      border:1px solid rgba(59,130,246,0.24);
+      background:rgba(59,130,246,0.08);
+      color:#1e3a8a;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:0.92em;
+      font-weight:600;
+    }
+    .pill.orange{
+      border:1px solid rgba(255,122,0,0.28);
+      background:rgba(255,122,0,0.10);
+      color:#8a3c00;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute;
+      top:-80px;
+      right:-80px;
+      width:220px;
+      height:220px;
+      border-radius:999px;
+      background: radial-gradient(circle, rgba(59,130,246,0.18), transparent 60%);
+      pointer-events:none;
+    }
+    .card.pro::before, .card.advanced::before{
+      background: radial-gradient(circle, rgba(255,122,0,0.16), transparent 62%);
+    }
+
+    .card-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+    }
+    .card h3{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-0.01em;
+    }
+    .badge{
+      font-size:12px;
+      padding:5px 10px;
+      border-radius:999px;
+      background:rgba(59,130,246,0.12);
+      color:var(--blueDark);
+      white-space:nowrap;
+      font-weight:700;
+    }
+    .badge.orange{
+      background:rgba(255,122,0,0.14);
+      color:#8a3c00;
+    }
+    .sub{
+      margin:0 0 12px;
+      color:#4b5563;
+      line-height:1.55;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      width:100%;
+      background:var(--blueDark);
+      color:#fff;
+      border:none;
+      padding:12px 14px;
+      font-size:0.98em;
+      border-radius:14px;
+      cursor:pointer;
+      transition: transform 0.08s ease, background-color 0.2s ease;
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:0.01em;
+    }
+    .btn:hover{ background:#2c4fc7; transform: translateY(-1px); }
+    .btn.orange{ background:var(--orange); }
+    .btn.orange:hover{ background:#ff8f22; }
+    .btn.outline{
+      background:#fff;
+      color:#111827;
+      border:1px solid rgba(17,24,39,0.18);
+      font-weight:800;
+    }
+    .btn.outline:hover{
+      background:#f9fafb;
+      transform: translateY(-1px);
+    }
+
+    .section-title{
+      margin:14px 0 8px;
+      font-size:0.95em;
+      color:#111827;
+      font-weight:800;
+    }
+
+    .bin-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:8px;
+    }
+
+    .hint{
+      margin-top:10px;
+      color:#6b7280;
+      font-size:0.92em;
+      line-height:1.55;
+    }
+    .hint code{
+      background:#f3f4f6;
+      padding:2px 7px;
+      border-radius:8px;
+      font-size:0.95em;
+    }
+
+    .important{
+      margin-top:12px;
+      border:1px solid rgba(255,122,0,0.35);
+      background:rgba(255,122,0,0.08);
+      border-radius:14px;
+      padding:10px 12px;
+      color:#7a3500;
+      line-height:1.55;
+      font-size:0.95em;
+      font-weight:700;
+    }
+
+    .tiny{
+      margin-top:10px;
+      color:#6b7280;
+      font-size:0.9em;
+      line-height:1.55;
+    }
+
+    footer{
+      text-align:center;
+      padding:28px 10px 40px;
+      font-size:0.92em;
+      color:#9ca3af;
+    }
+
+    /* Small screens */
+    @media (max-width:520px){
+      header h1{ font-size:2.15em; }
+      .btn{ border-radius:12px; }
+      .card{ border-radius:16px; }
+    }
+
+    /* Top navigation */
+.topnav{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(247,249,252,0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(17,24,39,0.10);
+}
+.topnav-inner{
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.topnav-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight: 900;
+  color: var(--text);
+  text-decoration:none;
+}
+.topnav-brand img{
+  width: 30px;
+  height:auto;
+  margin:0;
+  filter: none;
+}
+.topnav-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 10px;
+  justify-content:flex-end;
+}
+.topnav-links a{
+  color:#374151;
+  text-decoration:none;
+  font-weight: 800;
+  font-size: 0.95em;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+}
+.topnav-links a:hover{
+  border-color: rgba(17,24,39,0.14);
+  background: rgba(255,255,255,0.65);
+}
+.topnav-links a.active{
+  background: rgba(59,130,246,0.10);
+  border-color: rgba(59,130,246,0.22);
+  color: var(--blueDark);
+}
+
+@media (max-width: 720px){
+  .topnav-inner{ align-items:flex-start; flex-direction:column; }
+  .topnav-links{ justify-content:flex-start; }
+}
+
+  </style>
 </head>
 
 <body>
-  <div class="header">
-    <div class="container">
-      <div class="nav">
-        <a class="brand" href="/">
-          <img src="/assets/logo.png" alt="Verbum AI logo" />
-          <span>Verbum AI</span>
+    <div class="topnav">
+    <div class="topnav-inner">
+      <a class="topnav-brand" href="/">
+        <img src="assets/verbum-logo.png" alt="Verbum AI Logo"/>
+        <span>Verbum AI</span>
+      </a>
+      <div class="topnav-links">
+        <a class="active" href="/">Home</a>
+        <a href="/offline-document-summarizer/">Offline Summarizer</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/features/">Features</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/download/">Download</a>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <img src="assets/verbum-logo.png" alt="Verbum AI Logo"/>
+    <h1>Verbum AI</h1>
+    <p>Smart. Private. Offline. Document Summarization Reimagined.</p>
+  </header>
+
+  <div class="container">
+    <div class="info-banner">
+      <p><strong>Verbum AI</strong> runs entirely on your device — no internet required, no cloud, no tracking.</p>
+      <p>What you get: full offline summarization, instant response, zero data leaks.</p>
+    </div>
+        <div class="info-banner" style="margin-top:14px;">
+      <p><strong>Offline document summarizer:</strong> Verbum AI helps you summarize PDFs and documents locally on macOS and Windows.</p>
+      <p>Designed for privacy-first workflows — <strong>on-device</strong>, <strong>offline-ready</strong>, and <strong>no cloud uploads required</strong>.</p>
+    </div>
+
+
+    <div class="downloads-head">
+      <h2>Downloads</h2>
+      <p>macOS DMG + Windows installers (Basic / Pro / Advanced)</p>
+    </div>
+
+    <!-- Install How-To (professional, reduces “Disk 1” confusion) -->
+    <div class="howto">
+      <details open>
+        <summary>
+          Windows install (important — prevents “Setup needs the next disk”)
+          <span class="chev">▾</span>
+        </summary>
+        <div class="content">
+          <div><strong>Rule:</strong> Put the <code>.exe</code> and <strong>all matching</strong> <code>.bin</code> files into the <strong>same folder</strong>, then run the <code>.exe</code>.</div>
+          <div style="margin-top:8px;">
+            Recommended folder:
+            <code>Downloads\VerbumAI\basic\</code>,
+            <code>Downloads\VerbumAI\pro\</code>,
+            <code>Downloads\VerbumAI\advanced\</code>
+          </div>
+          <div class="pill-row">
+            <span class="pill">EXE + BINs same folder</span>
+            <span class="pill">Run EXE from that folder</span>
+            <span class="pill orange">If prompted for “Disk 1” → select the same folder</span>
+          </div>
+          <div style="margin-top:10px; color:#4b5563;">
+            Browser warning (“isn’t commonly downloaded”) can happen until the installer is code-signed.
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          macOS first launch note
+          <span class="chev">▾</span>
+        </summary>
+        <div class="content">
+          If macOS blocks the app on first launch: right-click the app → <strong>Open</strong> → confirm.
+        </div>
+      </details>
+    </div>
+
+    <div class="cards">
+
+      <!-- macOS -->
+      <div class="card">
+        <div class="card-top">
+          <h3>macOS</h3>
+          <span class="badge">DMG</span>
+        </div>
+        <p class="sub">Offline installer for macOS.</p>
+
+        <a class="btn"
+           href="https://downloads.verbum-ai.com/releases/macos/v1.0.0/VerbumAI.dmg"
+           onclick="gtag('event','download_click',{event_category:'download',event_label:'macos_dmg_v1.0.0'});">
+          ⬇ Download Verbum AI (macOS)
         </a>
-        <div class="navlinks">
-          <a href="/" class="active">Home</a>
-          <a href="/offline-document-summarizer/">Offline Summarizer</a>
-          <a href="/privacy/">Privacy</a>
-          <a href="/features/">Features</a>
-          <a href="/faq/">FAQ</a>
-          <a href="/download/">Download</a>
+
+        <div class="tiny">
+          If blocked on first launch: right-click → <strong>Open</strong>.
         </div>
       </div>
+
+      <!-- Windows Basic -->
+      <div class="card basic">
+        <div class="card-top">
+          <h3>Windows — Basic</h3>
+          <span class="badge">Basic</span>
+        </div>
+
+        <p class="sub">Offline summarization. Smaller download, fast setup.</p>
+
+        <a class="btn"
+           href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/basic/VerbumAI-Basic-Setup-x64.exe"
+           onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_exe_v1.0.0'});">
+          ⬇ Download Basic Installer (.exe)
+        </a>
+
+        <div class="important">
+          Important: Download the EXE <u>and all BIN files</u> below into the <u>same folder</u>.
+        </div>
+
+        <div class="section-title">Required BIN files (download all 3)</div>
+        <div class="bin-grid">
+          <a class="btn outline"
+             href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/basic/VerbumAI-Basic-Setup-x64-1.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_bin1_v1.0.0'});">
+            Download BIN 1 (≈ 2.0 GB)
+          </a>
+          <a class="btn outline"
+             href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/basic/VerbumAI-Basic-Setup-x64-2.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_bin2_v1.0.0'});">
+            Download BIN 2 (≈ 2.0 GB)
+          </a>
+          <a class="btn outline"
+             href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/basic/VerbumAI-Basic-Setup-x64-3.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_bin3_v1.0.0'});">
+            Download BIN 3 (≈ 1.3 GB)
+          </a>
+        </div>
+
+        <div class="hint">
+          Tip: Create <code>Downloads\VerbumAI\basic\</code>, download everything there, then run the EXE.
+        </div>
+      </div>
+
+      <!-- Windows Pro -->
+      <div class="card pro">
+        <div class="card-top">
+          <h3>Windows — Pro</h3>
+          <span class="badge orange">Pro</span>
+        </div>
+
+        <p class="sub">Higher quality models and better summaries. Recommended for power users.</p>
+
+        <a class="btn orange"
+           href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/pro/VerbumAI-Pro-Setup-x64.exe"
+           onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_pro_exe_v1.0.0'});">
+          ⬇ Download Pro Installer (.exe)
+        </a>
+
+        <div class="important">
+          Important: Download the EXE <u>and all BIN files</u> below into the <u>same folder</u>.
+        </div>
+
+        <div class="section-title">Required BIN files (download all 5)</div>
+        <div class="bin-grid">
+          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/pro/VerbumAI-Pro-Setup-x64-1.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_pro_bin1_v1.0.0'});">Download BIN 1 (≈ 2.0 GB)</a>
+          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/pro/VerbumAI-Pro-Setup-x64-2.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_pro_bin2_v1.0.0'});">Download BIN 2 (≈ 2.0 GB)</a>
+          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/pro/VerbumAI-Pro-Setup-x64-3.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_pro_bin3_v1.0.0'});">Download BIN 3 (≈ 2.0 GB)</a>
+          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/pro/VerbumAI-Pro-Setup-x64-4.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_pro_bin4_v1.0.0'});">Download BIN 4 (≈ 2.0 GB)</a>
+          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/pro/VerbumAI-Pro-Setup-x64-5.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_pro_bin5_v1.0.0'});">Download BIN 5 (≈ 0.3 GB)</a>
+        </div>
+
+        <div class="hint">
+          Tip: Create <code>Downloads\VerbumAI\pro\</code>, download everything there, then run the EXE.
+        </div>
+      </div>
+
+      <!-- Windows Advanced -->
+      <div class="card advanced">
+        <div class="card-top">
+          <h3>Windows — Advanced</h3>
+          <span class="badge orange">Advanced</span>
+        </div>
+
+        <p class="sub">Full offline pack (largest). Best summary quality and maximum capability.</p>
+
+        <a class="btn orange"
+           href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64.exe"
+           onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_advanced_exe_v1.0.0'});">
+          ⬇ Download Advanced Installer (.exe)
+        </a>
+
+        <div class="important">
+          Important: Download the EXE <u>and all BIN files</u> below into the <u>same folder</u>.
+        </div>
+
+        <div class="section-title">Required BIN files (download all 9)</div>
+        <div class="bin-grid">
+          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-1.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin1_v1.0.0'});">Download BIN 1 (≈ 2.0 GB)</a>
+          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-2.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin2_v1.0.0'});">Download BIN 2 (≈ 2.0 GB)</a>
+          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-3.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin3_v1.0.0'});">Download BIN 3 (≈ 2.0 GB)</a>
+          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-4.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin4_v1.0.0'});">Download BIN 4 (≈ 2.0 GB)</a>
+          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-5.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin5_v1.0.0'});">Download BIN 5 (≈ 2.0 GB)</a>
+          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-6.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin6_v1.0.0'});">Download BIN 6 (≈ 2.0 GB)</a>
+          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-7.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin7_v1.0.0'});">Download BIN 7 (≈ 2.0 GB)</a>
+          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-8.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin8_v1.0.0'});">Download BIN 8 (≈ 2.0 GB)</a>
+          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-9.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin9_v1.0.0'});">Download BIN 9 (≈ 0.6 GB)</a>
+        </div>
+
+        <div class="hint">
+          Tip: Create <code>Downloads\VerbumAI\advanced\</code>, download everything there, then run the EXE.
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <main class="container">
-    <section class="hero">
-      <span class="badge">Offline • On-device • No cloud uploads</span>
-      <h1>Offline document summarization that stays on your device.</h1>
-      <p class="lead">
-        Verbum AI is a privacy-first offline document summarizer built for people who don’t want to upload sensitive
-        documents to the cloud. Summarize PDFs and documents locally, even without internet.
-      </p>
-
-      <div class="btns">
-        <a class="btn primary" href="/download/">Download Verbum AI</a>
-        <a class="btn" href="/privacy/">Privacy-first promise</a>
-        <a class="btn orange" href="/offline-document-summarizer/">Learn more</a>
-      </div>
-
-      <div class="kpis">
-        <div class="kpi"><strong>Offline-first</strong> — works without internet</div>
-        <div class="kpi"><strong>On-device</strong> — your files stay local</div>
-        <div class="kpi"><strong>Fast workflow</strong> — copy/export summaries</div>
-      </div>
-    </section>
-
-    <div class="grid">
-      <div class="card col6">
-        <h2 style="margin:0 0 8px;">What Verbum AI does</h2>
-        <ul>
-          <li>Summarizes documents locally to help you extract key points faster</li>
-          <li>Supports common formats (PDF/DOCX/TXT — see <a href="/features/">Features</a>)</li>
-          <li>Designed for privacy: no account required, no cloud upload required</li>
-          <li>Ideal for technical docs, long reports, notes, and everyday reading</li>
-        </ul>
-        <div class="small" style="margin-top:10px;">
-          Want the full overview? Start here: <a href="/offline-document-summarizer/">Offline Summarizer</a>.
-        </div>
-      </div>
-
-      <div class="card col6">
-        <h2 style="margin:0 0 8px;">Quick links</h2>
-        <ul>
-          <li><a href="/download/">Download</a> — macOS & Windows installers</li>
-          <li><a href="/faq/">FAQ</a> — installation tips and common questions</li>
-          <li><a href="/privacy/">Privacy</a> — how Verbum AI keeps data local</li>
-          <li><a href="/features/">Features</a> — formats, workflow, and capabilities</li>
-        </ul>
-        <hr />
-        <div class="small">
-          Note: Verbum AI is not affiliated with other products named “Verbum”.
-        </div>
-      </div>
-    </div>
-
-    <div class="grid" style="margin-top:14px;">
-      <div class="card col12">
-        <h2 style="margin:0 0 8px;">Downloads</h2>
-        <p class="small" style="margin:0 0 12px;">
-          Choose your platform. If you’re unsure, start with Basic/Express.
-        </p>
-
-        <div class="btns">
-          <!-- Replace these links with your actual download URLs -->
-          <a class="btn primary" href="https://downloads.verbum-ai.com/">Download for Windows</a>
-          <a class="btn" href="https://downloads.verbum-ai.com/">Download for macOS</a>
-          <a class="btn orange" href="/download/">See all download options</a>
-        </div>
-
-        <div class="small" style="margin-top:12px;">
-          Tip: If you have questions about installers or storage, check the <a href="/faq/">FAQ</a>.
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <div class="container footer">
-    <div>© <span id="y"></span> Verbum AI — Privacy-first offline summarization.</div>
-    <div class="small" style="margin-top:6px;">
-      Not affiliated with other products named “Verbum”. All trademarks belong to their respective owners.
-    </div>
-  </div>
-
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+  <footer>
+    Created by Masod — 2025 © Verbum AI Technologies
+  </footer>
 </body>
 </html>
