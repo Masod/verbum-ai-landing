@@ -12,6 +12,71 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://verbum-ai.com/offline-document-summarizer/" />
   <meta name="theme-color" content="#0b1220" />
+
+
+  <style>
+    /* Top navigation */
+.topnav{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(247,249,252,0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(17,24,39,0.10);
+}
+.topnav-inner{
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.topnav-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight: 900;
+  color: var(--text);
+  text-decoration:none;
+}
+.topnav-brand img{
+  width: 30px;
+  height:auto;
+  margin:0;
+  filter: none;
+}
+.topnav-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 10px;
+  justify-content:flex-end;
+}
+.topnav-links a{
+  color:#374151;
+  text-decoration:none;
+  font-weight: 800;
+  font-size: 0.95em;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+}
+.topnav-links a:hover{
+  border-color: rgba(17,24,39,0.14);
+  background: rgba(255,255,255,0.65);
+}
+.topnav-links a.active{
+  background: rgba(59,130,246,0.10);
+  border-color: rgba(59,130,246,0.22);
+  color: var(--blueDark);
+}
+
+@media (max-width: 720px){
+  .topnav-inner{ align-items:flex-start; flex-direction:column; }
+  .topnav-links{ justify-content:flex-start; }
+}
+    </style>
 </head>
 
 <body>
