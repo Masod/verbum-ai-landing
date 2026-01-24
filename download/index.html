@@ -429,6 +429,49 @@
 .contact-line a:hover{
   text-decoration:underline;
 }
+.contact-section{
+  max-width:980px;
+  margin:18px auto 6px;
+  padding:16px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:16px;
+  box-shadow: var(--shadow);
+  text-align:center;
+}
+.contact-section h3{
+  margin:0 0 8px;
+  font-size:1.15em;
+  letter-spacing:-0.01em;
+}
+.contact-section p{
+  margin:0;
+  color:#4b5563;
+  line-height:1.6;
+}
+.contact-section .email{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin-top:12px;
+  padding:10px 14px;
+  border-radius:14px;
+  border:1px solid rgba(17,24,39,0.12);
+  background:rgba(59,130,246,0.06);
+  font-weight:900;
+}
+.contact-section .email a{
+  color:var(--blueDark);
+  text-decoration:none;
+}
+.contact-section .email a:hover{
+  text-decoration:underline;
+}
+.contact-section .micro{
+  margin-top:10px;
+  font-size:0.92em;
+  color:#6b7280;
+}
 
     @media (max-width: 720px){
       .topnav-inner{ align-items:flex-start; flex-direction:column; }
@@ -656,6 +699,23 @@ Thanks!
       </div>
 
     </div>
+    <!-- Contact -->
+<div class="contact-section" id="contact">
+  <h3>Need Pro / Advanced access or have questions?</h3>
+  <p>
+    Pro and Advanced are commercial editions. If you’d like access, licensing info, or help with installation,
+    contact us and we’ll respond with next steps.
+  </p>
+
+  <div class="email">
+    ✉️ <a href="mailto:access@verbum-ai.com">access@verbum-ai.com</a>
+  </div>
+
+  <div class="micro">
+    Tip: Include your platform (Windows/macOS) and your use case so we can respond faster.
+  </div>
+</div>
+
   </main>
 
   <div class="container footer">
