@@ -269,6 +269,34 @@
       transform: translateY(-1px);
     }
 
+    /* NEW: disabled-style button (still looks like UI, but no link) */
+    .btn.disabled{
+      background:#e5e7eb !important;
+      color:#6b7280 !important;
+      cursor:not-allowed !important;
+      transform:none !important;
+    }
+    .btn.disabled:hover{ background:#e5e7eb !important; transform:none !important; }
+
+    .gate{
+      margin-top:10px;
+      border:1px solid rgba(255,122,0,0.35);
+      background:rgba(255,122,0,0.08);
+      border-radius:14px;
+      padding:10px 12px;
+      color:#7a3500;
+      line-height:1.55;
+      font-size:0.95em;
+      font-weight:800;
+    }
+    .gate small{
+      display:block;
+      margin-top:6px;
+      font-weight:700;
+      color:#7a3500;
+      opacity:0.9;
+    }
+
     .section-title{
       margin:14px 0 8px;
       font-size:0.95em;
@@ -321,7 +349,6 @@
       color:#9ca3af;
     }
 
-    /* Small screens */
     @media (max-width:520px){
       header h1{ font-size:2.15em; }
       .btn{ border-radius:12px; }
@@ -329,67 +356,66 @@
     }
 
     /* Top navigation */
-.topnav{
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(247,249,252,0.86);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(17,24,39,0.10);
-}
-.topnav-inner{
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-}
-.topnav-brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight: 900;
-  color: var(--text);
-  text-decoration:none;
-}
-.topnav-brand img{
-  width: 30px;
-  height:auto;
-  margin:0;
-  filter: none;
-}
-.topnav-links{
-  display:flex;
-  flex-wrap:wrap;
-  gap: 10px;
-  justify-content:flex-end;
-}
-.topnav-links a{
-  color:#374151;
-  text-decoration:none;
-  font-weight: 800;
-  font-size: 0.95em;
-  padding: 8px 10px;
-  border-radius: 12px;
-  border: 1px solid transparent;
-}
-.topnav-links a:hover{
-  border-color: rgba(17,24,39,0.14);
-  background: rgba(255,255,255,0.65);
-}
-.topnav-links a.active{
-  background: rgba(59,130,246,0.10);
-  border-color: rgba(59,130,246,0.22);
-  color: var(--blueDark);
-}
+    .topnav{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(247,249,252,0.86);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(17,24,39,0.10);
+    }
+    .topnav-inner{
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .topnav-brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 900;
+      color: var(--text);
+      text-decoration:none;
+    }
+    .topnav-brand img{
+      width: 30px;
+      height:auto;
+      margin:0;
+      filter: none;
+    }
+    .topnav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      justify-content:flex-end;
+    }
+    .topnav-links a{
+      color:#374151;
+      text-decoration:none;
+      font-weight: 800;
+      font-size: 0.95em;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+    }
+    .topnav-links a:hover{
+      border-color: rgba(17,24,39,0.14);
+      background: rgba(255,255,255,0.65);
+    }
+    .topnav-links a.active{
+      background: rgba(59,130,246,0.10);
+      border-color: rgba(59,130,246,0.22);
+      color: var(--blueDark);
+    }
 
-@media (max-width: 720px){
-  .topnav-inner{ align-items:flex-start; flex-direction:column; }
-  .topnav-links{ justify-content:flex-start; }
-}
-
+    @media (max-width: 720px){
+      .topnav-inner{ align-items:flex-start; flex-direction:column; }
+      .topnav-links{ justify-content:flex-start; }
+    }
   </style>
 </head>
 
@@ -401,12 +427,12 @@
         <span>Verbum AI</span>
       </a>
       <div class="topnav-links">
-        <a class="active" href="/">Home</a>
+        <a href="/">Home</a>
         <a href="/offline-document-summarizer/">Offline Summarizer</a>
         <a href="/privacy/">Privacy</a>
         <a href="/features/">Features</a>
         <a href="/faq/">FAQ</a>
-        <a href="/download/">Download</a>
+        <a class="active" href="/download/">Download</a>
       </div>
     </div>
   </div>
@@ -421,33 +447,18 @@
       </p>
 
       <div class="btns">
-        <!-- Replace these with your exact download URLs -->
-        <a class="btn primary" href="https://verbum-ai.com/">Windows Download</a>
-        <a class="btn" href="https://verbum-ai.com/">macOS Download</a>
+        <!-- FIXED: now points to the correct download anchors on this page -->
+        <a class="btn primary" href="#windows-basic">Windows Basic</a>
+        <a class="btn" href="#macos">macOS</a>
         <a class="btn orange" href="/faq/">FAQ</a>
       </div>
     </section>
 
-    <div class="grid">
-      <div class="card col6">
-        <h2 style="margin:0 0 8px;">Recommended</h2>
-        <ul>
-          <li><strong>Basic/Express:</strong> simplest way to try Verbum AI</li>
-          <li><strong>Pro:</strong> for heavier daily use</li>
-          <li><strong>Advanced:</strong> for maximum capability</li>
-        </ul>
-        <div class="small" style="margin-top:10px;">
-          Tip: Start Basic first. Upgrade later if you need more.
-        </div>
-      </div>
-    </div>
-    
-     <div class="downloads-head">
+    <div class="downloads-head">
       <h2>Downloads</h2>
       <p>macOS DMG + Windows installers (Basic / Pro / Advanced)</p>
     </div>
 
-    <!-- Install How-To (professional, reduces “Disk 1” confusion) -->
     <div class="howto">
       <details open>
         <summary>
@@ -483,10 +494,11 @@
         </div>
       </details>
     </div>
-     <div class="cards">
+
+    <div class="cards">
 
       <!-- macOS -->
-      <div class="card">
+      <div class="card" id="macos">
         <div class="card-top">
           <h3>macOS</h3>
           <span class="badge">DMG</span>
@@ -495,7 +507,7 @@
 
         <a class="btn"
            href="https://downloads.verbum-ai.com/downloads/macos/VerbumAI.dmg"
-           onclick="gtag('event','download_click',{event_category:'download',event_label:'macos_dmg_v1.0.0'});">
+           onclick="gtag('event','download_click',{event_category:'download',event_label:'macos_dmg'});">
           ⬇ Download Verbum AI (macOS)
         </a>
 
@@ -505,7 +517,7 @@
       </div>
        
       <!-- Windows Basic -->
-      <div class="card basic">
+      <div class="card basic" id="windows-basic">
         <div class="card-top">
           <h3>Windows — Basic</h3>
           <span class="badge">Basic</span>
@@ -515,7 +527,7 @@
 
         <a class="btn"
            href="https://downloads.verbum-ai.com/downloads/windows/basic/VerbumAI-Setup-x64.exe"
-           onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_exe_v1.0.0'});">
+           onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_exe'});">
           ⬇ Download Basic Installer (.exe)
         </a>
 
@@ -526,19 +538,19 @@
         <div class="section-title">Required BIN files (download all 3)</div>
         <div class="bin-grid">
           <a class="btn outline"
-             href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/basic/VerbumAI-Basic-Setup-x64-1.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_bin1_v1.0.0'});">
+             href="https://downloads.verbum-ai.com/downloads/windows/basic/VerbumAI-Setup-x64-1.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_bin1'});">
             Download BIN 1 (≈ 2.0 GB)
           </a>
           <a class="btn outline"
-             href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/basic/VerbumAI-Basic-Setup-x64-2.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_bin2_v1.0.0'});">
+             href="https://downloads.verbum-ai.com/downloads/windows/basic/VerbumAI-Setup-x64-2.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_bin2'});">
             Download BIN 2 (≈ 2.0 GB)
           </a>
           <a class="btn outline"
-             href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/basic/VerbumAI-Basic-Setup-x64-3.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_bin3_v1.0.0'});">
-            Download BIN 3 (≈ 1.3 GB)
+             href="https://downloads.verbum-ai.com/downloads/windows/basic/VerbumAI-Setup-x64-3.bin"
+             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_bin3'});">
+            Download BIN 3 (≈ 2.0 GB)
           </a>
         </div>
 
@@ -547,8 +559,8 @@
         </div>
       </div>
 
-      <!-- Windows Pro -->
-      <div class="card pro">
+      <!-- Windows Pro (GATED — NO LINKS) -->
+      <div class="card pro" id="windows-pro">
         <div class="card-top">
           <h3>Windows — Pro</h3>
           <span class="badge orange">Pro</span>
@@ -556,37 +568,28 @@
 
         <p class="sub">Higher quality models and better summaries. Recommended for power users.</p>
 
+        <div class="btn disabled" aria-disabled="true">
+          🔒 Pro download is not free
+        </div>
+
+        <div class="gate">
+          Pro is available for licensed users only.
+          <small>Request access and we’ll send you a private download link.</small>
+        </div>
+
         <a class="btn orange"
-           href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/pro/VerbumAI-Pro-Setup-x64.exe"
-           onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_pro_exe_v1.0.0'});">
-          ⬇ Download Pro Installer (.exe)
+           href="mailto:hello@verbum-ai.com?subject=Verbum%20AI%20Pro%20Access&body=Hi%20Verbum%20AI%20team%2C%0A%0AI%27d%20like%20access%20to%20Verbum%20AI%20Pro%20(Windows).%0A%0AName%3A%0ACompany%3A%0AUse%20case%3A%0A%0AThanks!"
+           onclick="gtag('event','request_access',{event_category:'download',event_label:'windows_pro_request'});">
+          Request Pro Access
         </a>
 
-        <div class="important">
-          Important: Download the EXE <u>and all BIN files</u> below into the <u>same folder</u>.
-        </div>
-
-        <div class="section-title">Required BIN files (download all 5)</div>
-        <div class="bin-grid">
-          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/pro/VerbumAI-Pro-Setup-x64-1.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_pro_bin1_v1.0.0'});">Download BIN 1 (≈ 2.0 GB)</a>
-          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/pro/VerbumAI-Pro-Setup-x64-2.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_pro_bin2_v1.0.0'});">Download BIN 2 (≈ 2.0 GB)</a>
-          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/pro/VerbumAI-Pro-Setup-x64-3.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_pro_bin3_v1.0.0'});">Download BIN 3 (≈ 2.0 GB)</a>
-          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/pro/VerbumAI-Pro-Setup-x64-4.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_pro_bin4_v1.0.0'});">Download BIN 4 (≈ 2.0 GB)</a>
-          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/pro/VerbumAI-Pro-Setup-x64-5.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_pro_bin5_v1.0.0'});">Download BIN 5 (≈ 0.3 GB)</a>
-        </div>
-
         <div class="hint">
-          Tip: Create <code>Downloads\VerbumAI\pro\</code>, download everything there, then run the EXE.
+          Tip: After approval, we’ll provide an EXE + BIN bundle link for your license.
         </div>
       </div>
 
-      <!-- Windows Advanced -->
-      <div class="card advanced">
+      <!-- Windows Advanced (GATED — NO LINKS) -->
+      <div class="card advanced" id="windows-advanced">
         <div class="card-top">
           <h3>Windows — Advanced</h3>
           <span class="badge orange">Advanced</span>
@@ -594,46 +597,30 @@
 
         <p class="sub">Full offline pack (largest). Best summary quality and maximum capability.</p>
 
+        <div class="btn disabled" aria-disabled="true">
+          🔒 Advanced download is not free
+        </div>
+
+        <div class="gate">
+          Advanced is available for licensed users only.
+          <small>Request access and we’ll send you a private download link.</small>
+        </div>
+
         <a class="btn orange"
-           href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64.exe"
-           onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_advanced_exe_v1.0.0'});">
-          ⬇ Download Advanced Installer (.exe)
+           href="mailto:hello@verbum-ai.com?subject=Verbum%20AI%20Advanced%20Access&body=Hi%20Verbum%20AI%20team%2C%0A%0AI%27d%20like%20access%20to%20Verbum%20AI%20Advanced%20(Windows).%0A%0AName%3A%0ACompany%3A%0AUse%20case%3A%0A%0AThanks!"
+           onclick="gtag('event','request_access',{event_category:'download',event_label:'windows_adv_request'});">
+          Request Advanced Access
         </a>
 
-        <div class="important">
-          Important: Download the EXE <u>and all BIN files</u> below into the <u>same folder</u>.
-        </div>
-
-        <div class="section-title">Required BIN files (download all 9)</div>
-        <div class="bin-grid">
-          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-1.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin1_v1.0.0'});">Download BIN 1 (≈ 2.0 GB)</a>
-          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-2.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin2_v1.0.0'});">Download BIN 2 (≈ 2.0 GB)</a>
-          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-3.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin3_v1.0.0'});">Download BIN 3 (≈ 2.0 GB)</a>
-          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-4.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin4_v1.0.0'});">Download BIN 4 (≈ 2.0 GB)</a>
-          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-5.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin5_v1.0.0'});">Download BIN 5 (≈ 2.0 GB)</a>
-          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-6.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin6_v1.0.0'});">Download BIN 6 (≈ 2.0 GB)</a>
-          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-7.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin7_v1.0.0'});">Download BIN 7 (≈ 2.0 GB)</a>
-          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-8.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin8_v1.0.0'});">Download BIN 8 (≈ 2.0 GB)</a>
-          <a class="btn outline" href="https://downloads.verbum-ai.com/releases/windows/v1.0.0/advanced/VerbumAI-Advanced-Setup-x64-9.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_adv_bin9_v1.0.0'});">Download BIN 9 (≈ 0.6 GB)</a>
-        </div>
-
         <div class="hint">
-          Tip: Create <code>Downloads\VerbumAI\advanced\</code>, download everything there, then run the EXE.
+          Tip: Advanced includes the largest offline model bundle. We’ll provide the correct EXE + BIN set.
         </div>
       </div>
 
     </div>
   </main>
-    <div class="container footer">
+
+  <div class="container footer">
     <div>© <span id="y"></span> Verbum AI — Privacy-first offline summarization.</div>
     <div class="small" style="margin-top:6px;">
       Not affiliated with other products named “Verbum”. All trademarks belong to their respective owners.
@@ -645,4 +632,3 @@
   </script>
 </body>
 </html>
-
