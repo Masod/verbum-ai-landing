@@ -411,6 +411,24 @@
       border-color: rgba(59,130,246,0.22);
       color: var(--blueDark);
     }
+.contact-line{
+  margin-top:10px;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid rgba(17,24,39,0.12);
+  background:rgba(255,255,255,0.65);
+  color:#374151;
+  font-size:0.93em;
+  line-height:1.55;
+}
+.contact-line a{
+  color:var(--blueDark);
+  font-weight:900;
+  text-decoration:none;
+}
+.contact-line a:hover{
+  text-decoration:underline;
+}
 
     @media (max-width: 720px){
       .topnav-inner{ align-items:flex-start; flex-direction:column; }
@@ -589,6 +607,9 @@ Thanks!
            onclick="gtag('event','request_access',{event_category:'download',event_label:'windows_pro_request'});">
           Request Pro Access
         </a>
+<div class="contact-line">
+  Prefer email? Write to <a href="mailto:access@verbum-ai.com">access@verbum-ai.com</a>
+</div>
 
         <div class="hint">
           Tip: After approval, we’ll provide an EXE + BIN bundle link for your license.
@@ -625,6 +646,9 @@ Thanks!
            onclick="gtag('event','request_access',{event_category:'download',event_label:'windows_adv_request'});">
           Request Advanced Access
         </a>
+<div class="contact-line">
+  Prefer email? Write to <a href="mailto:access@verbum-ai.com">access@verbum-ai.com</a>
+</div>
 
         <div class="hint">
           Tip: Advanced includes the largest offline model bundle. We’ll provide the correct EXE + BIN set.
