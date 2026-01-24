@@ -461,7 +461,47 @@
           If blocked on first launch: right-click → <strong>Open</strong>.
         </div>
       </div>
+ <div class="downloads-head">
+      <h2>Downloads</h2>
+      <p>macOS DMG + Windows installers (Basic / Pro / Advanced)</p>
+    </div>
 
+    <!-- Install How-To (professional, reduces “Disk 1” confusion) -->
+    <div class="howto">
+      <details open>
+        <summary>
+          Windows install (important — prevents “Setup needs the next disk”)
+          <span class="chev">▾</span>
+        </summary>
+        <div class="content">
+          <div><strong>Rule:</strong> Put the <code>.exe</code> and <strong>all matching</strong> <code>.bin</code> files into the <strong>same folder</strong>, then run the <code>.exe</code>.</div>
+          <div style="margin-top:8px;">
+            Recommended folder:
+            <code>Downloads\VerbumAI\basic\</code>,
+            <code>Downloads\VerbumAI\pro\</code>,
+            <code>Downloads\VerbumAI\advanced\</code>
+          </div>
+          <div class="pill-row">
+            <span class="pill">EXE + BINs same folder</span>
+            <span class="pill">Run EXE from that folder</span>
+            <span class="pill orange">If prompted for “Disk 1” → select the same folder</span>
+          </div>
+          <div style="margin-top:10px; color:#4b5563;">
+            Browser warning (“isn’t commonly downloaded”) can happen until the installer is code-signed.
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          macOS first launch note
+          <span class="chev">▾</span>
+        </summary>
+        <div class="content">
+          If macOS blocks the app on first launch: right-click the app → <strong>Open</strong> → confirm.
+        </div>
+      </details>
+    </div>
       <!-- Windows Basic -->
       <div class="card basic">
         <div class="card-top">
