@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://verbum-ai.com/</loc></url>
-  <url><loc>https://verbum-ai.com/offline-document-summarizer/</loc></url>
-  <url><loc>https://verbum-ai.com/privacy/</loc></url>
-  <url><loc>https://verbum-ai.com/features/</loc></url>
-  <url><loc>https://verbum-ai.com/faq/</loc></url>
-  <url><loc>https://verbum-ai.com/download/</loc></url>
-  <lastmod>2026-01-28</lastmod>
+  <url>
+    <loc>https://verbum-ai.com/</loc>
+    <lastmod>2026-01-28</lastmod>
+  </url>
+  <url>
+    <loc>https://verbum-ai.com/offline-document-summarizer/</loc>
+    <lastmod>2026-01-28</lastmod>
+  </url>
+  <url>
+    <loc>https://verbum-ai.com/privacy/</loc>
+    <lastmod>2026-01-28</lastmod>
+  </url>
+  <url>
+    <loc>https://verbum-ai.com/features/</loc>
+    <lastmod>2026-01-28</lastmod>
+  </url>
+  <url>
+    <loc>https://verbum-ai.com/faq/</loc>
+    <lastmod>2026-01-28</lastmod>
+  </url>
+  <url>
+    <loc>https://verbum-ai.com/download/</loc>
+    <lastmod>2026-01-28</lastmod>
+  </url>
 </urlset>
+
 
