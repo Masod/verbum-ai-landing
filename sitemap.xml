@@ -41,4 +41,25 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+ 
+  <url>
+    <loc>https://verbum-ai.com/labs/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://verbum-ai.com/labs/realestate-ai/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://verbum-ai.com/labs/shieldscope/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
