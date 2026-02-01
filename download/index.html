@@ -618,7 +618,7 @@
 
         <a class="btn"
            href="https://downloads.verbum-ai.com/downloads/macos/VerbumAI.dmg"
-           onclick="gtag('event','download_click',{event_category:'download',event_label:'macos_dmg'});">
+           onclick="return verbumTrackAndGo('download_click','mac','macos_dmg',this.href,220);">
           ⬇ Download Verbum AI (macOS)
         </a>
 
@@ -634,11 +634,9 @@
           <span class="badge">Basic</span>
         </div>
 
-        <p class="sub">Offline summarization. Smaller download, fast setup.</p>
-
-        <a class="btn"
+          <a class="btn"
            href="https://downloads.verbum-ai.com/downloads/windows/basic/VerbumAI-Setup-x64.exe"
-           onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_exe'});">
+           onclick="return verbumTrackAndGo('download_click','windows','windows_basic_exe',this.href,220);">
           ⬇ Download Basic Installer (.exe)
         </a>
 
@@ -648,21 +646,30 @@
 
         <div class="section-title">Required BIN files (download all 3)</div>
         <div class="bin-grid">
-          <a class="btn outline"
-             href="https://downloads.verbum-ai.com/downloads/windows/basic/VerbumAI-Setup-x64-1.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_bin1'});">
+          <a class="btn outline verbum-track"
+             data-event="download_click"
+             data-platform="windows"
+             data-artifact="windows_basic_bin1"
+             href="https://downloads.verbum-ai.com/downloads/windows/basic/VerbumAI-Setup-x64-1.bin">
             Download BIN 1 (≈ 2.0 GB)
           </a>
-          <a class="btn outline"
-             href="https://downloads.verbum-ai.com/downloads/windows/basic/VerbumAI-Setup-x64-2.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_bin2'});">
+          
+          <a class="btn outline verbum-track"
+             data-event="download_click"
+             data-platform="windows"
+             data-artifact="windows_basic_bin2"
+             href="https://downloads.verbum-ai.com/downloads/windows/basic/VerbumAI-Setup-x64-2.bin">
             Download BIN 2 (≈ 2.0 GB)
           </a>
-          <a class="btn outline"
-             href="https://downloads.verbum-ai.com/downloads/windows/basic/VerbumAI-Setup-x64-3.bin"
-             onclick="gtag('event','download_click',{event_category:'download',event_label:'windows_basic_bin3'});">
+          
+          <a class="btn outline verbum-track"
+             data-event="download_click"
+             data-platform="windows"
+             data-artifact="windows_basic_bin3"
+             href="https://downloads.verbum-ai.com/downloads/windows/basic/VerbumAI-Setup-x64-3.bin">
             Download BIN 3 (≈ 2.0 GB)
           </a>
+
         </div>
 
         <div class="hint">
@@ -688,21 +695,15 @@
           <small>Request access and we’ll send you a private download link.</small>
         </div>
 
-        <a class="btn orange"
-           href="mailto:access@verbum-ai.com
-?subject=Verbum%20AI%20Pro%20Access
-&body=Hi%20Verbum%20AI%20team%2C%0A%0A
-I%27m%20interested%20in%20Verbum%20AI%20Pro.%0A
-Platform%3A%20Windows%20/%20macOS%0A
-Use%20case%3A%0A%0A
-Thanks!
-"
-           onclick="gtag('event','request_access',{event_category:'download',event_label:'windows_pro_request'});">
-          Request Pro Access
-        </a>
-<div class="contact-line">
-  Access: <a href="mailto:access@verbum-ai.com">access@verbum-ai.com</a>
-</div>
+          <a class="btn orange"
+             href="mailto:access@verbum-ai.com?subject=Verbum%20AI%20Pro%20Access&body=Hi%20Verbum%20AI%20team%2C%0A%0AI%27m%20interested%20in%20Verbum%20AI%20Pro.%0APlatform%3A%20Windows%20/%20macOS%0AUse%20case%3A%0A%0AThanks!"
+             onclick="return verbumTrackAndGo('request_access','windows','windows_pro_request',this.href,160);">
+            Request Pro Access
+          </a>
+
+          <div class="contact-line">
+            Access: <a href="mailto:access@verbum-ai.com">access@verbum-ai.com</a>
+          </div>
 
         <div class="hint">
           Tip: After approval, we’ll provide an EXE + BIN bundle link for your license.
@@ -778,5 +779,75 @@ Thanks!
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
   </script>
+<script>
+(function () {
+  function utmParams() {
+    const p = new URLSearchParams(window.location.search);
+    return {
+      utm_source: p.get("utm_source") || "",
+      utm_medium: p.get("utm_medium") || "",
+      utm_campaign: p.get("utm_campaign") || "",
+      utm_content: p.get("utm_content") || "",
+      utm_term: p.get("utm_term") || ""
+    };
+  }
+
+  function shouldLetBrowserHandleNormally(e) {
+    // Allow new tab / new window behaviors without interfering
+    return e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1;
+  }
+
+  function navigate(href) {
+    // mailto: should use location.href
+    window.location.href = href;
+  }
+
+  function trackThenNavigate(a) {
+    const href = a.getAttribute("href");
+    const eventName = a.getAttribute("data-event") || "download_click";
+    const platform = a.getAttribute("data-platform") || "unknown";
+    const artifact = a.getAttribute("data-artifact") || "unknown";
+
+    // If GA is blocked/unavailable, just navigate
+    if (typeof gtag !== "function") {
+      navigate(href);
+      return;
+    }
+
+    let done = false;
+    const go = () => {
+      if (done) return;
+      done = true;
+      navigate(href);
+    };
+
+    // Safety fallback (if event_callback doesn't fire)
+    const timer = setTimeout(go, 220);
+
+    gtag("event", eventName, {
+      platform: platform,
+      artifact: artifact,
+      link_url: href,
+      ...utmParams(),
+      transport_type: "beacon",
+      event_callback: function () {
+        clearTimeout(timer);
+        // tiny tick improves reliability across browsers
+        setTimeout(go, 30);
+      }
+    });
+  }
+
+  document.querySelectorAll("a.verbum-track").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (shouldLetBrowserHandleNormally(e)) return;
+      e.preventDefault();
+      trackThenNavigate(a);
+    });
+  });
+})();
+</script>
+
+
 </body>
 </html>
