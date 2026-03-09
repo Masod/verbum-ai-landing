@@ -156,7 +156,30 @@
     .actions a:hover{
       text-decoration:underline;
     }
+    .table-wrap{
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+      border:1px solid rgba(17,24,39,.08);
+      border-radius:16px;
+      background:#fff;
+    }
 
+    @media (max-width:640px){
+  body{ padding:14px; }
+
+  .toolbar{
+    grid-template-columns:1fr;
+  }
+
+  th, td{
+    font-size:13px;
+    padding:9px 8px;
+  }
+
+  .msg{
+    max-width:220px;
+  }
+}
     .badge{
       display:inline-block;
       padding:5px 10px;
@@ -292,11 +315,11 @@
 
     function escapeHtml(value) {
       return String(value || "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#39;");
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
     }
 
     function formatDate(iso) {
@@ -402,36 +425,56 @@ Founder, Verbum AI`
       statusEl.textContent = `${rows.length} request(s) shown.`;
     }
 
-    async function loadRequests() {
-      statusEl.textContent = "Loading requests...";
-      tbody.innerHTML = "";
-      emptyState.style.display = "none";
+  async function loadRequests() {
+    statusEl.textContent = "Loading requests...";
+    tbody.innerHTML = "";
+    emptyState.style.display = "none";
 
-      try {
-        const res = await fetch("/admin-api/requests?limit=300", {
-          credentials: "include"
+    try {
+      const res = await fetch("/admin-api/requests?limit=300", {
+        method: "GET",
+        credentials: "include",
+        cache: "no-store",
+        headers: {
+          "Accept": "application/json"
+        }
+      });
+
+      const contentType = res.headers.get("content-type") || "";
+      const rawText = await res.text();
+
+      if (!contentType.includes("application/json")) {
+        const preview = rawText.slice(0, 160).toLowerCase();
+
+        if (preview.includes("cloudflare") || preview.includes("access") || preview.includes("<!doctype html")) {
+          statusEl.textContent = "Login/session issue on this device. Please re-open the protected page and try again.";
+        } else {
+          statusEl.textContent = `Unexpected server response (${res.status}).`;
+        }
+
+        console.error("Non-JSON response:", {
+          status: res.status,
+          contentType,
+          preview: rawText.slice(0, 300)
         });
-
-        const contentType = res.headers.get("content-type") || "";
-        if (!contentType.includes("application/json")) {
-          statusEl.textContent = "Unexpected server response.";
-          return;
-        }
-
-        const data = await res.json();
-
-        if (!res.ok || !data.success) {
-          statusEl.textContent = data.error || "Failed to load requests.";
-          return;
-        }
-
-        allRows = data.requests || [];
-        applyLocalFilters();
-      } catch (err) {
-        console.error(err);
-        statusEl.textContent = "Something went wrong while loading requests.";
+        return;
       }
+
+      const data = JSON.parse(rawText);
+
+      if (!res.ok || !data.success) {
+        statusEl.textContent = data.error || `Failed to load requests (${res.status}).`;
+        return;
+      }
+
+      allRows = data.requests || [];
+      applyLocalFilters();
+    } catch (err) {
+      console.error(err);
+      statusEl.textContent = "Something went wrong while loading requests.";
     }
+  }
+
 
     function exportCsv() {
       const headers = [
@@ -449,7 +492,7 @@ Founder, Verbum AI`
       const lines = [
         headers.join(","),
         ...currentRows.map(row =>
-          headers.map(h => `"${String(row[h] || "").replaceAll('"', '""')}"`).join(",")
+          headers.map(h => `"${String(row[h] || "").replace(/"/g, '""')}"`).join(",")
         )
       ];
 
