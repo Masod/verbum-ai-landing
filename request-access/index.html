@@ -744,71 +744,81 @@
     return valid;
   }
 </script>
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-      const formData = new FormData(form);
-      const payload = Object.fromEntries(formData.entries());
-      payload.name = (payload.name || "").trim();
-      payload.email = (payload.email || "").trim();
-      payload.organization = (payload.organization || "").trim();
-      payload.interest = (payload.interest || "").trim().toLowerCase();
-      payload.platform = (payload.platform || "").trim().toLowerCase();
-      payload.message = (payload.message || "").trim();
-      
-      if (!validateForm(payload)) {
-        status.textContent = "Please correct the highlighted fields.";
-        return;
-      }
+  const formData = new FormData(form);
+  const payload = Object.fromEntries(formData.entries());
 
-      status.textContent = "Submitting request...";
-      successBox.classList.remove("show");
-      basicDownloads.classList.remove("show");
+  payload.name = (payload.name || "").trim();
+  payload.email = (payload.email || "").trim();
+  payload.organization = (payload.organization || "").trim();
+  payload.interest = (payload.interest || "").trim().toLowerCase();
+  payload.platform = (payload.platform || "").trim().toLowerCase();
+  payload.message = (payload.message || "").trim();
 
-      try {
-        const response = await fetch(WORKER_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(payload)
-        });
+  if (!validateForm(payload)) {
+    status.textContent = "Please correct the highlighted fields.";
+    return;
+  }
 
-        const result = await response.json();
+  status.textContent = "Submitting request...";
+  successBox.classList.remove("show");
+  basicDownloads.classList.remove("show");
 
-        if (!response.ok || !result.success) {
-          status.textContent = result.error || "Submission failed. Please try again.";
-          return;
-        }
-
-        status.textContent = "";
-        successBox.classList.add("show");
-        form.style.display = "none";
-
-        if (payload.interest === "basic") {
-          successTitle.textContent = "Basic request received";
-          successText.textContent = "Thank you. You can continue with the Basic download below.";
-          if (payload.platform === "windows") {
-            basicDownloads.classList.add("show");
-          }
-        } else if (payload.interest === "pro") {
-          successTitle.textContent = "Pro request received";
-          successText.textContent = "Thank you. We’ll review your Pro request and follow up with next steps.";
-        } else if (payload.interest === "academic") {
-          successTitle.textContent = "Academic request received";
-          successText.textContent = "Thank you. We’ll review your academic or institutional request and follow up with next steps.";
-        } else if (payload.interest === "advanced") {
-          successTitle.textContent = "Advanced request received";
-          successText.textContent = "Thank you. We’ll review your Advanced request and follow up with next steps.";
-        } else {
-          successTitle.textContent = "Request received";
-          successText.textContent = "Thank you. Your request has been received successfully.";
-        }
-
-      } catch (err) {
-        status.textContent = "Something went wrong. Please try again.";
-      }
+  try {
+    const response = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
     });
+
+    const contentType = response.headers.get("content-type") || "";
+
+    if (!contentType.includes("application/json")) {
+      const rawText = await response.text();
+      console.error("Non-JSON response from endpoint:", rawText);
+      status.textContent = "Unexpected server response. Please try again.";
+      return;
+    }
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      status.textContent = result.error || "Submission failed. Please try again.";
+      return;
+    }
+
+    status.textContent = "";
+    successBox.classList.add("show");
+    form.style.display = "none";
+
+    if (payload.interest === "basic") {
+      successTitle.textContent = "Basic request received";
+      successText.textContent = "Thank you. You can continue with the Basic download below.";
+      if (payload.platform === "windows") {
+        basicDownloads.classList.add("show");
+      }
+    } else if (payload.interest === "pro") {
+      successTitle.textContent = "Pro request received";
+      successText.textContent = "Thank you. We’ll review your Pro request and follow up with next steps.";
+    } else if (payload.interest === "academic") {
+      successTitle.textContent = "Academic request received";
+      successText.textContent = "Thank you. We’ll review your academic or institutional request and follow up with next steps.";
+    } else if (payload.interest === "advanced") {
+      successTitle.textContent = "Advanced request received";
+      successText.textContent = "Thank you. We’ll review your Advanced request and follow up with next steps.";
+    } else {
+      successTitle.textContent = "Request received";
+      successText.textContent = "Thank you. Your request has been received successfully.";
+    }
+  } catch (err) {
+    console.error("Submit error:", err);
+    status.textContent = "Something went wrong. Please try again.";
+  }
+});
   </script>
 </body>
 </html>
