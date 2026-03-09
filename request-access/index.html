@@ -1,1 +1,717 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q7XW2FW7W8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Q7XW2FW7W8');
+    gtag('config', 'G-MYZ36TRY04');
+  </script>
 
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Request Access — Verbum AI</title>
+  <meta name="description" content="Request access to Verbum AI downloads, including Basic, Pro, and Academic/Institutional options." />
+  <link rel="canonical" href="https://verbum-ai.com/request-access/" />
+
+  <link rel="stylesheet" href="/assets/style.css" />
+  <meta property="og:title" content="Request Access — Verbum AI" />
+  <meta property="og:description" content="Request access to Verbum AI downloads and commercial editions." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://verbum-ai.com/request-access/" />
+  <meta name="theme-color" content="#3B82F6" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <style>
+    :root{
+      --blue:#3B82F6;
+      --blueDark:#1E3A8A;
+      --orange:#FF7A00;
+      --bg:#f7f9fc;
+      --text:#111827;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --border:rgba(17,24,39,0.12);
+      --shadow:0 10px 30px rgba(17,24,39,0.08);
+      --radius:18px;
+      --success:#065f46;
+      --successBg:#ecfdf5;
+      --successBorder:#a7f3d0;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin:0;
+      padding:0;
+      background:
+        radial-gradient(1100px 500px at 50% -200px, rgba(59,130,246,0.18), transparent 60%),
+        radial-gradient(900px 450px at 90% 0px, rgba(255,122,0,0.12), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+
+    .topnav{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(247,249,252,0.86);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(17,24,39,0.10);
+    }
+
+    .topnav-inner{
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .topnav-brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:900;
+      color:var(--text);
+      text-decoration:none;
+    }
+
+    .topnav-brand img{
+      width:30px;
+      height:auto;
+    }
+
+    .topnav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:flex-end;
+    }
+
+    .topnav-links a{
+      color:#374151;
+      text-decoration:none;
+      font-weight:800;
+      font-size:0.95em;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+    }
+
+    .topnav-links a:hover{
+      border-color: rgba(17,24,39,0.14);
+      background: rgba(255,255,255,0.65);
+    }
+
+    .topnav-links a.active{
+      background: rgba(59,130,246,0.10);
+      border-color: rgba(59,130,246,0.22);
+      color: var(--blueDark);
+    }
+
+    .container{
+      max-width:1080px;
+      margin:0 auto;
+      padding:0 16px 36px;
+    }
+
+    .hero{
+      text-align:center;
+      padding:48px 0 20px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      padding:6px 12px;
+      border-radius:999px;
+      background:rgba(59,130,246,0.12);
+      color:var(--blueDark);
+      font-weight:800;
+      margin-bottom:16px;
+    }
+
+    .hero h1{
+      font-size:2.5em;
+      margin:0;
+      letter-spacing:-0.02em;
+    }
+
+    .lead{
+      font-size:1.08em;
+      color:#374151;
+      max-width:760px;
+      margin:12px auto 0;
+      line-height:1.65;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+      gap:18px;
+      align-items:start;
+      margin-top:24px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow:var(--shadow);
+    }
+
+    .card h2{
+      margin:0 0 10px;
+      font-size:1.35em;
+      letter-spacing:-0.01em;
+    }
+
+    .card p{
+      margin:0 0 14px;
+      color:#4b5563;
+      line-height:1.65;
+    }
+
+    .mini-note{
+      margin-top:10px;
+      border:1px solid rgba(59,130,246,0.18);
+      background:rgba(59,130,246,0.07);
+      border-radius:14px;
+      padding:10px 12px;
+      color:#1e3a8a;
+      font-size:0.95em;
+      line-height:1.55;
+      font-weight:700;
+    }
+
+    form{
+      margin-top:14px;
+    }
+
+    .field{
+      margin-bottom:14px;
+    }
+
+    .field label{
+      display:block;
+      margin-bottom:7px;
+      font-weight:800;
+      color:#111827;
+      font-size:0.95em;
+    }
+
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      border:1px solid rgba(17,24,39,0.14);
+      background:#fff;
+      border-radius:14px;
+      padding:12px 14px;
+      font-size:0.98em;
+      color:#111827;
+      outline:none;
+      transition:border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus{
+      border-color: rgba(59,130,246,0.55);
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.10);
+    }
+
+    .field textarea{
+      min-height:120px;
+      resize:vertical;
+      line-height:1.55;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      width:100%;
+      background:var(--blueDark);
+      color:#fff;
+      border:none;
+      padding:12px 14px;
+      font-size:0.98em;
+      border-radius:14px;
+      cursor:pointer;
+      transition: transform 0.08s ease, background-color 0.2s ease;
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:0.01em;
+    }
+
+    .btn:hover{
+      background:#2c4fc7;
+      transform:translateY(-1px);
+    }
+
+    .btn.orange{
+      background:var(--orange);
+    }
+
+    .btn.orange:hover{
+      background:#ff8f22;
+    }
+
+    .btn.outline{
+      background:#fff;
+      color:#111827;
+      border:1px solid rgba(17,24,39,0.18);
+    }
+
+    .btn.outline:hover{
+      background:#f9fafb;
+    }
+
+    .stack{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .muted{
+      color:#6b7280;
+      font-size:0.93em;
+      line-height:1.6;
+      margin-top:10px;
+    }
+
+    .status{
+      margin-top:14px;
+      font-size:0.95em;
+      font-weight:700;
+      color:#374151;
+      min-height:24px;
+    }
+
+    .success-box{
+      display:none;
+      margin-top:16px;
+      border:1px solid var(--successBorder);
+      background:var(--successBg);
+      border-radius:16px;
+      padding:16px;
+      color:var(--success);
+    }
+
+    .success-box.show{
+      display:block;
+    }
+
+    .success-box h3{
+      margin:0 0 8px;
+      font-size:1.1em;
+    }
+
+    .success-box p{
+      margin:0 0 12px;
+      color:#065f46;
+      line-height:1.6;
+    }
+
+    .downloads-panel{
+      display:none;
+      margin-top:14px;
+      border-top:1px solid rgba(6,95,70,0.12);
+      padding-top:14px;
+    }
+
+    .downloads-panel.show{
+      display:block;
+    }
+
+    .download-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+    }
+
+    .side-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .side-item{
+      border:1px solid rgba(17,24,39,0.10);
+      border-radius:14px;
+      padding:12px 14px;
+      background:#fff;
+    }
+
+    .side-item strong{
+      display:block;
+      margin-bottom:6px;
+      color:#111827;
+    }
+
+    .side-item span{
+      color:#4b5563;
+      line-height:1.55;
+      font-size:0.95em;
+    }
+
+    .back-link{
+      display:inline-block;
+      margin-top:14px;
+      color:var(--blueDark);
+      text-decoration:none;
+      font-weight:800;
+    }
+
+    .back-link:hover{
+      text-decoration:underline;
+    }
+
+    .tiny{
+      color:#6b7280;
+      font-size:0.9em;
+      line-height:1.55;
+      margin-top:12px;
+    }
+
+    footer{
+      text-align:center;
+      padding:28px 10px 40px;
+      font-size:0.92em;
+      color:#9ca3af;
+    }
+
+    .patent-notice{
+      margin-top:12px;
+      font-size:12px;
+      line-height:1.4;
+      opacity:.85;
+    }
+
+    .patent-notice strong{
+      font-weight:700;
+    }
+
+    @media (max-width: 880px){
+      .layout{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 720px){
+      .topnav-inner{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .topnav-links{
+        justify-content:flex-start;
+      }
+
+      .hero h1{
+        font-size:2.1em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topnav">
+    <div class="topnav-inner">
+      <a class="topnav-brand" href="/">
+        <img src="https://verbum-ai.com/assets/verbum-logo.png" alt="Verbum AI Logo"/>
+        <span>Verbum AI</span>
+      </a>
+      <div class="topnav-links">
+        <a href="/">Home</a>
+        <a href="/offline-document-summarizer/">Offline Summarizer</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/features/">Features</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/download/">Download</a>
+        <a href="/labs/">Labs</a>
+        <a class="active" href="/request-access/">Request Access</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <span class="badge">Request Access • Basic • Pro • Academic</span>
+      <h1>Request Access</h1>
+      <p class="lead">
+        Submit a short request and we’ll guide you to the right Verbum AI option.
+        Basic requests can continue directly to download after submission. Pro and Academic requests will be reviewed and followed up separately.
+      </p>
+    </section>
+
+    <section class="layout">
+      <div class="card">
+        <h2 id="form-title">Verbum AI Access Request</h2>
+        <p id="form-intro">
+          Tell us a little about your use case so we can send or unlock the right option for you.
+        </p>
+
+        <div class="mini-note" id="tier-note">
+          Basic requests can continue directly to the download step after form submission.
+        </div>
+
+        <form id="request-form">
+          <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required />
+          </div>
+
+          <div class="field">
+            <label for="organization">Organization / University / Company (optional)</label>
+            <input id="organization" name="organization" type="text" />
+          </div>
+
+          <div class="field">
+            <label for="interest">Requested tier</label>
+            <select id="interest" name="interest" required>
+              <option value="">Select an option</option>
+              <option value="basic">Basic</option>
+              <option value="pro">Pro</option>
+              <option value="academic">Academic / Institutional</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="platform">Platform</label>
+            <select id="platform" name="platform" required>
+              <option value="">Select a platform</option>
+              <option value="windows">Windows</option>
+              <option value="macos">macOS</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Use case</label>
+            <textarea id="message" name="message" placeholder="Tell us how you plan to use Verbum AI."></textarea>
+          </div>
+
+          <button class="btn" type="submit">Submit Request</button>
+          <div class="status" id="form-status"></div>
+        </form>
+
+        <div class="success-box" id="success-box">
+          <h3 id="success-title">Request received</h3>
+          <p id="success-text">
+            Thank you. Your request has been received successfully.
+          </p>
+
+          <div class="downloads-panel" id="basic-downloads">
+            <div class="download-grid">
+              <a class="btn"
+                 href="https://downloads.verbum-ai.com/downloads/windows/basic/VerbumAI-Setup-x64.exe">
+                ⬇ Download Basic Installer (.exe)
+              </a>
+
+              <a class="btn outline"
+                 href="https://downloads.verbum-ai.com/downloads/windows/basic/VerbumAI-Setup-x64-1.bin">
+                Download BIN 1 (≈ 2.0 GB)
+              </a>
+
+              <a class="btn outline"
+                 href="https://downloads.verbum-ai.com/downloads/windows/basic/VerbumAI-Setup-x64-2.bin">
+                Download BIN 2 (≈ 2.0 GB)
+              </a>
+
+              <a class="btn outline"
+                 href="https://downloads.verbum-ai.com/downloads/windows/basic/VerbumAI-Setup-x64-3.bin">
+                Download BIN 3 (≈ 2.0 GB)
+              </a>
+            </div>
+
+            <div class="tiny">
+              Important: Download the EXE and all BIN files into the same folder, then run the EXE.
+            </div>
+          </div>
+        </div>
+
+        <a class="back-link" href="/download/">← Back to download page</a>
+      </div>
+
+      <div class="card">
+        <h2>How this works</h2>
+
+        <div class="side-list">
+          <div class="side-item">
+            <strong>Basic</strong>
+            <span>Submit the form and continue directly to the Basic download step on this page.</span>
+          </div>
+
+          <div class="side-item">
+            <strong>Pro</strong>
+            <span>Best for users who want higher-quality models and stronger offline summarization for professional workflows.</span>
+          </div>
+
+          <div class="side-item">
+            <strong>Academic / Institutional</strong>
+            <span>Ideal for universities, lecturers, departments, or broader organizational evaluation.</span>
+          </div>
+
+          <div class="side-item">
+            <strong>Advanced</strong>
+            <span>Full offline pack for users who want maximum capability and the largest model bundle.</span>
+          </div>
+        </div>
+
+        <div class="tiny">
+          We recommend including your platform and a short use case so we can respond faster for commercial or institutional requests.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="container footer">
+    <div>© <span id="y"></span> Verbum AI — Privacy-first offline summarization.</div>
+    <div class="patent-notice">
+      <strong>Patent Pending</strong> — Provisional Patent Application Filed (Jan 7, 2026).
+      Unauthorized copying or commercial use prohibited. Verbum AI™. All rights reserved.
+    </div>
+    <div class="small" style="margin-top:6px;">
+      Not affiliated with other products named “Verbum”. All trademarks belong to their respective owners.
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    const WORKER_URL = "https://YOUR-WORKER-URL.workers.dev";
+
+    const params = new URLSearchParams(window.location.search);
+    const tier = (params.get("tier") || "").toLowerCase();
+    const platform = (params.get("platform") || "").toLowerCase();
+
+    const interestField = document.getElementById("interest");
+    const platformField = document.getElementById("platform");
+    const tierNote = document.getElementById("tier-note");
+    const formTitle = document.getElementById("form-title");
+    const formIntro = document.getElementById("form-intro");
+
+    if (tier && ["basic","pro","academic","advanced"].includes(tier)) {
+      interestField.value = tier;
+    }
+
+    if (platform && ["windows","macos"].includes(platform)) {
+      platformField.value = platform;
+    }
+
+    function refreshTierMessaging() {
+      const currentTier = interestField.value;
+
+      if (currentTier === "basic") {
+        formTitle.textContent = "Request Basic Access";
+        formIntro.textContent = "Submit this short form to continue directly to the Basic download step.";
+        tierNote.textContent = "Basic requests can continue directly to the download step after form submission.";
+      } else if (currentTier === "pro") {
+        formTitle.textContent = "Request Pro Access";
+        formIntro.textContent = "Submit your request and we’ll follow up with the appropriate licensing and access details.";
+        tierNote.textContent = "Pro is a commercial edition and is reviewed separately.";
+      } else if (currentTier === "academic") {
+        formTitle.textContent = "Request Academic / Institutional Access";
+        formIntro.textContent = "Submit your request for academic, faculty, department, or institutional use.";
+        tierNote.textContent = "Academic and institutional requests are reviewed separately.";
+      } else if (currentTier === "advanced") {
+        formTitle.textContent = "Request Advanced Access";
+        formIntro.textContent = "Submit your request for the largest offline bundle and maximum capability edition.";
+        tierNote.textContent = "Advanced is a commercial edition and is reviewed separately.";
+      } else {
+        formTitle.textContent = "Verbum AI Access Request";
+        formIntro.textContent = "Tell us a little about your use case so we can send or unlock the right option for you.";
+        tierNote.textContent = "Basic requests can continue directly to the download step after form submission.";
+      }
+    }
+
+    interestField.addEventListener("change", refreshTierMessaging);
+    refreshTierMessaging();
+
+    const form = document.getElementById("request-form");
+    const status = document.getElementById("form-status");
+    const successBox = document.getElementById("success-box");
+    const successTitle = document.getElementById("success-title");
+    const successText = document.getElementById("success-text");
+    const basicDownloads = document.getElementById("basic-downloads");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      status.textContent = "Submitting request...";
+      successBox.classList.remove("show");
+      basicDownloads.classList.remove("show");
+
+      try {
+        const response = await fetch(WORKER_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          status.textContent = result.error || "Submission failed. Please try again.";
+          return;
+        }
+
+        status.textContent = "";
+        successBox.classList.add("show");
+        form.style.display = "none";
+
+        if (payload.interest === "basic") {
+          successTitle.textContent = "Basic request received";
+          successText.textContent = "Thank you. You can continue with the Basic download below.";
+          if (payload.platform === "windows") {
+            basicDownloads.classList.add("show");
+          }
+        } else if (payload.interest === "pro") {
+          successTitle.textContent = "Pro request received";
+          successText.textContent = "Thank you. We’ll review your Pro request and follow up with next steps.";
+        } else if (payload.interest === "academic") {
+          successTitle.textContent = "Academic request received";
+          successText.textContent = "Thank you. We’ll review your academic or institutional request and follow up with next steps.";
+        } else if (payload.interest === "advanced") {
+          successTitle.textContent = "Advanced request received";
+          successText.textContent = "Thank you. We’ll review your Advanced request and follow up with next steps.";
+        } else {
+          successTitle.textContent = "Request received";
+          successText.textContent = "Thank you. Your request has been received successfully.";
+        }
+
+      } catch (err) {
+        status.textContent = "Something went wrong. Please try again.";
+      }
+    });
+  </script>
+</body>
+</html>
