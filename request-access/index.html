@@ -359,7 +359,12 @@
       padding:12px 14px;
       background:#fff;
     }
-
+    .field-error{
+      margin-top:6px;
+      color:#b91c1c;
+      font-size:0.9em;
+      font-weight:700;
+    }
     .side-item strong{
       display:block;
       margin-bottom:6px;
@@ -658,11 +663,103 @@
     const successText = document.getElementById("success-text");
     const basicDownloads = document.getElementById("basic-downloads");
 
+    <script>
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function clearFieldErrors() {
+    document.querySelectorAll(".field-error").forEach(el => el.remove());
+    document.querySelectorAll(".field input, .field select, .field textarea").forEach(el => {
+      el.style.borderColor = "";
+      el.style.boxShadow = "";
+    });
+  }
+
+  function showFieldError(fieldId, message) {
+    const field = document.getElementById(fieldId);
+    if (!field) return;
+
+    field.style.borderColor = "#dc2626";
+    field.style.boxShadow = "0 0 0 4px rgba(220,38,38,0.10)";
+
+    const error = document.createElement("div");
+    error.className = "field-error";
+    error.style.marginTop = "6px";
+    error.style.color = "#b91c1c";
+    error.style.fontSize = "0.9em";
+    error.style.fontWeight = "700";
+    error.textContent = message;
+
+    field.parentElement.appendChild(error);
+  }
+
+  function validateForm(payload) {
+    clearFieldErrors();
+
+    let valid = true;
+
+    const name = (payload.name || "").trim();
+    const email = (payload.email || "").trim();
+    const organization = (payload.organization || "").trim();
+    const interest = (payload.interest || "").trim();
+    const platform = (payload.platform || "").trim();
+    const message = (payload.message || "").trim();
+
+    if (name.length < 2 || name.length > 100) {
+      showFieldError("name", "Please enter a valid name between 2 and 100 characters.");
+      valid = false;
+    }
+
+    if (!isValidEmail(email) || email.length > 150) {
+      showFieldError("email", "Please enter a valid email address.");
+      valid = false;
+    }
+
+    if (organization.length > 150) {
+      showFieldError("organization", "Organization must be 150 characters or less.");
+      valid = false;
+    }
+
+    if (!["basic", "pro", "academic", "advanced"].includes(interest)) {
+      showFieldError("interest", "Please select a valid access option.");
+      valid = false;
+    }
+
+    if (!["windows", "macos"].includes(platform)) {
+      showFieldError("platform", "Please select a valid platform.");
+      valid = false;
+    }
+
+    if (message.length > 2000) {
+      showFieldError("message", "Message must be 2000 characters or less.");
+      valid = false;
+    }
+
+    if (["pro", "academic", "advanced"].includes(interest) && message.length < 10) {
+      showFieldError("message", "Please provide a short use case for this request.");
+      valid = false;
+    }
+
+    return valid;
+  }
+</script>
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const formData = new FormData(form);
       const payload = Object.fromEntries(formData.entries());
+      payload.name = (payload.name || "").trim();
+      payload.email = (payload.email || "").trim();
+      payload.organization = (payload.organization || "").trim();
+      payload.interest = (payload.interest || "").trim().toLowerCase();
+      payload.platform = (payload.platform || "").trim().toLowerCase();
+      payload.message = (payload.message || "").trim();
+      
+      if (!validateForm(payload)) {
+        status.textContent = "Please correct the highlighted fields.";
+        return;
+      }
 
       status.textContent = "Submitting request...";
       successBox.classList.remove("show");
