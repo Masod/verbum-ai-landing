@@ -775,16 +775,27 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify(payload)
     });
 
+    const responseUrl = response.url;
     const contentType = response.headers.get("content-type") || "";
+    const rawText = await response.text();
 
-    if (!contentType.includes("application/json")) {
-      const rawText = await response.text();
-      console.error("Non-JSON response from endpoint:", rawText);
-      status.textContent = "Unexpected server response. Please try again.";
+    console.log("Worker response URL:", responseUrl);
+    console.log("Worker response content-type:", contentType);
+    console.log("Worker raw response:", rawText);
+
+    let result = null;
+
+    if (contentType.includes("application/json")) {
+      try {
+        result = JSON.parse(rawText);
+      } catch (jsonErr) {
+        status.textContent = "Server returned invalid JSON.";
+        return;
+      }
+    } else {
+      status.textContent = "Unexpected server response. Check browser console.";
       return;
     }
-
-    const result = await response.json();
 
     if (!response.ok || !result.success) {
       status.textContent = result.error || "Submission failed. Please try again.";
@@ -814,6 +825,7 @@ form.addEventListener("submit", async (e) => {
       successTitle.textContent = "Request received";
       successText.textContent = "Thank you. Your request has been received successfully.";
     }
+
   } catch (err) {
     console.error("Submit error:", err);
     status.textContent = "Something went wrong. Please try again.";
