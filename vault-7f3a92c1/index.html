@@ -1,1 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Verbum AI — Request Vault</title>
+  <link rel="stylesheet" href="/assets/style.css" />
+  <style>
+    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f7f9fc;color:#111827;margin:0;padding:24px}
+    .wrap{max-width:1200px;margin:0 auto}
+    .card{background:#fff;border:1px solid rgba(17,24,39,.12);border-radius:18px;padding:18px;box-shadow:0 10px 30px rgba(17,24,39,.08)}
+    h1{margin:0 0 16px}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+    select,button{padding:10px 12px;border-radius:12px;border:1px solid rgba(17,24,39,.14);font-size:14px}
+    button{cursor:pointer;background:#1E3A8A;color:#fff;border:none}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px 8px;border-bottom:1px solid rgba(17,24,39,.08);text-align:left;vertical-align:top;font-size:14px}
+    th{background:#f9fafb}
+    .muted{color:#6b7280}
+    .msg{max-width:320px;white-space:pre-wrap}
+    .actions a{display:inline-block;margin-right:8px;color:#1E3A8A;text-decoration:none;font-weight:700}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Request Vault</h1>
 
+      <div class="toolbar">
+        <select id="filter-interest">
+          <option value="">All tiers</option>
+          <option value="basic">Basic</option>
+          <option value="pro">Pro</option>
+          <option value="academic">Academic</option>
+          <option value="advanced">Advanced</option>
+        </select>
+
+        <select id="filter-status">
+          <option value="">All statuses</option>
+          <option value="new">New</option>
+          <option value="reviewed">Reviewed</option>
+          <option value="contacted">Contacted</option>
+          <option value="approved">Approved</option>
+          <option value="converted">Converted</option>
+          <option value="closed">Closed</option>
+        </select>
+
+        <button id="refresh-btn">Refresh</button>
+        <button id="export-btn" type="button">Export CSV</button>
+      </div>
+
+      <div id="status" class="muted">Loading...</div>
+
+      <div style="overflow:auto; margin-top:12px;">
+        <table id="requests-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Org</th>
+              <th>Tier</th>
+              <th>Platform</th>
+              <th>Status</th>
+              <th>Message</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const statusEl = document.getElementById("status");
+    const tbody = document.querySelector("#requests-table tbody");
+    const filterInterest = document.getElementById("filter-interest");
+    const filterStatus = document.getElementById("filter-status");
+    const refreshBtn = document.getElementById("refresh-btn");
+    const exportBtn = document.getElementById("export-btn");
+
+    let currentRows = [];
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function buildMailto(row) {
+      const subject = encodeURIComponent(`Verbum AI ${row.interest} request`);
+      const body = encodeURIComponent(
+`Hi ${row.name},
+
+Thank you for your interest in Verbum AI.
+
+Best regards,
+Masod Samadi
+Founder, Verbum AI`
+      );
+      return `mailto:${encodeURIComponent(row.email)}?subject=${subject}&body=${body}`;
+    }
+
+    function renderRows(rows) {
+      currentRows = rows;
+      tbody.innerHTML = "";
+
+      for (const row of rows) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${escapeHtml(row.submitted_at)}</td>
+          <td>${escapeHtml(row.name)}</td>
+          <td>${escapeHtml(row.email)}</td>
+          <td>${escapeHtml(row.organization || "")}</td>
+          <td>${escapeHtml(row.interest)}</td>
+          <td>${escapeHtml(row.platform)}</td>
+          <td>${escapeHtml(row.status || "")}</td>
+          <td class="msg">${escapeHtml(row.message || "")}</td>
+          <td class="actions">
+            <a href="${buildMailto(row)}">Reply</a>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      }
+    }
+
+    async function loadRequests() {
+      statusEl.textContent = "Loading requests...";
+      tbody.innerHTML = "";
+
+      const params = new URLSearchParams();
+      if (filterInterest.value) params.set("interest", filterInterest.value);
+      if (filterStatus.value) params.set("status", filterStatus.value);
+      params.set("limit", "200");
+
+      try {
+        const res = await fetch(`/admin-api/requests?${params.toString()}`, {
+          credentials: "include"
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+          statusEl.textContent = data.error || "Failed to load requests.";
+          return;
+        }
+
+        renderRows(data.requests || []);
+        statusEl.textContent = `${(data.requests || []).length} request(s) loaded.`;
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = "Something went wrong while loading requests.";
+      }
+    }
+
+    function exportCsv() {
+      const headers = ["submitted_at","name","email","organization","interest","platform","status","message"];
+      const lines = [
+        headers.join(","),
+        ...currentRows.map(row =>
+          headers.map(h => `"${String(row[h] || "").replaceAll('"', '""')}"`).join(",")
+        )
+      ];
+      const blob = new Blob([lines.join("\\n")], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "verbum-ai-requests.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    refreshBtn.addEventListener("click", loadRequests);
+    exportBtn.addEventListener("click", exportCsv);
+
+    loadRequests();
+  </script>
+</body>
+</html>
