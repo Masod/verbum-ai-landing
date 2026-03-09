@@ -144,7 +144,18 @@
       font-weight:800;
       margin-bottom:16px;
     }
-
+    .honeypot-wrap{
+      position:absolute !important;
+      left:-9999px !important;
+      top:auto !important;
+      width:1px !important;
+      height:1px !important;
+      overflow:hidden !important;
+    }
+    
+    .honeypot-wrap input{
+      pointer-events:none;
+    }
     .hero h1{
       font-size:2.5em;
       margin:0;
@@ -479,6 +490,17 @@
         </div>
 
         <form id="request-form">
+
+          <div class="honeypot-wrap" aria-hidden="true">
+            <label for="company_website">Company website</label>
+            <input
+              id="company_website"
+              name="company_website"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
           <div class="field">
             <label for="name">Full name</label>
             <input id="name" name="name" type="text" required />
@@ -751,6 +773,7 @@
     payload.interest = (payload.interest || "").trim().toLowerCase();
     payload.platform = (payload.platform || "").trim().toLowerCase();
     payload.message = (payload.message || "").trim();
+    payload.company_website = (payload.company_website || "").trim();
 
     if (!validateForm(payload)) {
       status.textContent = "Please correct the highlighted fields.";
