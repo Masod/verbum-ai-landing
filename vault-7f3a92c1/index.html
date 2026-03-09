@@ -6,27 +6,219 @@
   <title>Verbum AI — Request Vault</title>
   <link rel="stylesheet" href="/assets/style.css" />
   <style>
-    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f7f9fc;color:#111827;margin:0;padding:24px}
-    .wrap{max-width:1200px;margin:0 auto}
-    .card{background:#fff;border:1px solid rgba(17,24,39,.12);border-radius:18px;padding:18px;box-shadow:0 10px 30px rgba(17,24,39,.08)}
-    h1{margin:0 0 16px}
-    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-    select,button{padding:10px 12px;border-radius:12px;border:1px solid rgba(17,24,39,.14);font-size:14px}
-    button{cursor:pointer;background:#1E3A8A;color:#fff;border:none}
-    table{width:100%;border-collapse:collapse}
-    th,td{padding:10px 8px;border-bottom:1px solid rgba(17,24,39,.08);text-align:left;vertical-align:top;font-size:14px}
-    th{background:#f9fafb}
-    .muted{color:#6b7280}
-    .msg{max-width:320px;white-space:pre-wrap}
-    .actions a{display:inline-block;margin-right:8px;color:#1E3A8A;text-decoration:none;font-weight:700}
+    :root{
+      --blue:#3B82F6;
+      --blueDark:#1E3A8A;
+      --orange:#FF7A00;
+      --bg:#f7f9fc;
+      --text:#111827;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --border:rgba(17,24,39,0.12);
+      --shadow:0 10px 30px rgba(17,24,39,0.08);
+      --radius:18px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+      background:
+        radial-gradient(1100px 500px at 50% -200px, rgba(59,130,246,0.18), transparent 60%),
+        radial-gradient(900px 450px at 90% 0px, rgba(255,122,0,0.12), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      margin:0;
+      padding:24px;
+    }
+
+    .wrap{
+      max-width:1400px;
+      margin:0 auto;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+
+    h1{
+      margin:0 0 8px;
+      font-size:2rem;
+      letter-spacing:-0.02em;
+    }
+
+    .sub{
+      margin:0 0 16px;
+      color:#4b5563;
+      line-height:1.6;
+    }
+
+    .toolbar{
+      display:grid;
+      grid-template-columns: repeat(6, minmax(120px, 1fr));
+      gap:10px;
+      margin-bottom:14px;
+    }
+
+    .toolbar input,
+    .toolbar select,
+    .toolbar button{
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(17,24,39,.14);
+      font-size:14px;
+      min-height:42px;
+    }
+
+    .toolbar button{
+      cursor:pointer;
+      background:var(--blueDark);
+      color:#fff;
+      border:none;
+      font-weight:800;
+    }
+
+    .toolbar button.secondary{
+      background:#fff;
+      color:#111827;
+      border:1px solid rgba(17,24,39,.16);
+    }
+
+    .status-line{
+      margin:8px 0 14px;
+      color:var(--muted);
+      font-size:0.95rem;
+      line-height:1.5;
+      min-height:24px;
+    }
+
+    .table-wrap{
+      overflow:auto;
+      border:1px solid rgba(17,24,39,.08);
+      border-radius:16px;
+      background:#fff;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:1150px;
+    }
+
+    th, td{
+      padding:10px 10px;
+      border-bottom:1px solid rgba(17,24,39,.08);
+      text-align:left;
+      vertical-align:top;
+      font-size:14px;
+    }
+
+    th{
+      background:#f9fafb;
+      position:sticky;
+      top:0;
+      z-index:1;
+    }
+
+    tr:hover td{
+      background:rgba(59,130,246,.03);
+    }
+
+    .muted{ color:#6b7280; }
+
+    .msg{
+      max-width:320px;
+      white-space:pre-wrap;
+      line-height:1.5;
+    }
+
+    .email-cell{
+      word-break:break-word;
+    }
+
+    .actions{
+      white-space:nowrap;
+    }
+
+    .actions a{
+      display:inline-block;
+      margin-right:10px;
+      margin-bottom:6px;
+      color:var(--blueDark);
+      text-decoration:none;
+      font-weight:800;
+    }
+
+    .actions a:hover{
+      text-decoration:underline;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:5px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      border:1px solid rgba(17,24,39,.12);
+      background:#fff;
+      color:#374151;
+    }
+
+    .badge.new{
+      background:rgba(59,130,246,.10);
+      color:#1E3A8A;
+      border-color:rgba(59,130,246,.20);
+    }
+
+    .badge.reviewed{
+      background:rgba(255,122,0,.10);
+      color:#8a3c00;
+      border-color:rgba(255,122,0,.24);
+    }
+
+    .badge.contacted,
+    .badge.approved,
+    .badge.converted{
+      background:rgba(16,185,129,.10);
+      color:#065f46;
+      border-color:rgba(16,185,129,.22);
+    }
+
+    .empty{
+      padding:24px;
+      text-align:center;
+      color:#6b7280;
+    }
+
+    @media (max-width:1100px){
+      .toolbar{
+        grid-template-columns: repeat(2, minmax(140px, 1fr));
+      }
+    }
+
+    @media (max-width:640px){
+      body{ padding:14px; }
+      .toolbar{
+        grid-template-columns:1fr;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="card">
       <h1>Request Vault</h1>
+      <p class="sub">
+        Private Verbum AI request review page. Filter, search, export, and reply directly from here.
+      </p>
 
       <div class="toolbar">
+        <input id="search-box" type="text" placeholder="Search name, email, org, message..." />
+
         <select id="filter-interest">
           <option value="">All tiers</option>
           <option value="basic">Basic</option>
@@ -45,29 +237,40 @@
           <option value="closed">Closed</option>
         </select>
 
-        <button id="refresh-btn">Refresh</button>
-        <button id="export-btn" type="button">Export CSV</button>
+        <select id="filter-platform">
+          <option value="">All platforms</option>
+          <option value="windows">Windows</option>
+          <option value="macos">macOS</option>
+        </select>
+
+        <button id="refresh-btn" type="button">Refresh</button>
+        <button id="export-btn" class="secondary" type="button">Export CSV</button>
       </div>
 
-      <div id="status" class="muted">Loading...</div>
+      <div id="status" class="status-line">Loading requests...</div>
 
-      <div style="overflow:auto; margin-top:12px;">
+      <div class="table-wrap">
         <table id="requests-table">
           <thead>
             <tr>
               <th>Date</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Org</th>
+              <th>Organization</th>
               <th>Tier</th>
               <th>Platform</th>
               <th>Status</th>
+              <th>Source</th>
               <th>Message</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody></tbody>
         </table>
+
+        <div id="empty-state" class="empty" style="display:none;">
+          No requests match the current filters.
+        </div>
       </div>
     </div>
   </div>
@@ -75,11 +278,16 @@
   <script>
     const statusEl = document.getElementById("status");
     const tbody = document.querySelector("#requests-table tbody");
+    const emptyState = document.getElementById("empty-state");
+
+    const searchBox = document.getElementById("search-box");
     const filterInterest = document.getElementById("filter-interest");
     const filterStatus = document.getElementById("filter-status");
+    const filterPlatform = document.getElementById("filter-platform");
     const refreshBtn = document.getElementById("refresh-btn");
     const exportBtn = document.getElementById("export-btn");
 
+    let allRows = [];
     let currentRows = [];
 
     function escapeHtml(value) {
@@ -89,6 +297,18 @@
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#39;");
+    }
+
+    function formatDate(iso) {
+      if (!iso) return "";
+      const d = new Date(iso);
+      if (Number.isNaN(d.getTime())) return iso;
+      return d.toLocaleString();
+    }
+
+    function badgeClass(status) {
+      const s = String(status || "").toLowerCase();
+      return s ? `badge ${s}` : "badge";
     }
 
     function buildMailto(row) {
@@ -105,42 +325,99 @@ Founder, Verbum AI`
       return `mailto:${encodeURIComponent(row.email)}?subject=${subject}&body=${body}`;
     }
 
+    function buildGmailCompose(row) {
+      const subject = encodeURIComponent(`Verbum AI ${row.interest} request`);
+      const body = encodeURIComponent(
+`Hi ${row.name},
+
+Thank you for your interest in Verbum AI.
+
+Best regards,
+Masod Samadi
+Founder, Verbum AI`
+      );
+      return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(row.email)}&su=${subject}&body=${body}`;
+    }
+
+    function applyLocalFilters() {
+      const q = searchBox.value.trim().toLowerCase();
+      const interest = filterInterest.value.trim().toLowerCase();
+      const status = filterStatus.value.trim().toLowerCase();
+      const platform = filterPlatform.value.trim().toLowerCase();
+
+      currentRows = allRows.filter(row => {
+        const rowInterest = String(row.interest || "").toLowerCase();
+        const rowStatus = String(row.status || "").toLowerCase();
+        const rowPlatform = String(row.platform || "").toLowerCase();
+
+        if (interest && rowInterest !== interest) return false;
+        if (status && rowStatus !== status) return false;
+        if (platform && rowPlatform !== platform) return false;
+
+        if (q) {
+          const haystack = [
+            row.name,
+            row.email,
+            row.organization,
+            row.message,
+            row.request_source,
+            row.interest,
+            row.platform,
+            row.status
+          ].join(" ").toLowerCase();
+
+          if (!haystack.includes(q)) return false;
+        }
+
+        return true;
+      });
+
+      renderRows(currentRows);
+    }
+
     function renderRows(rows) {
-      currentRows = rows;
       tbody.innerHTML = "";
+      emptyState.style.display = rows.length ? "none" : "block";
 
       for (const row of rows) {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td>${escapeHtml(row.submitted_at)}</td>
+          <td>${escapeHtml(formatDate(row.submitted_at))}</td>
           <td>${escapeHtml(row.name)}</td>
-          <td>${escapeHtml(row.email)}</td>
+          <td class="email-cell">${escapeHtml(row.email)}</td>
           <td>${escapeHtml(row.organization || "")}</td>
           <td>${escapeHtml(row.interest)}</td>
           <td>${escapeHtml(row.platform)}</td>
-          <td>${escapeHtml(row.status || "")}</td>
+          <td><span class="${badgeClass(row.status)}">${escapeHtml(row.status || "")}</span></td>
+          <td>${escapeHtml(row.request_source || "")}</td>
           <td class="msg">${escapeHtml(row.message || "")}</td>
           <td class="actions">
             <a href="${buildMailto(row)}">Reply</a>
+            <a href="${buildGmailCompose(row)}" target="_blank" rel="noopener noreferrer">Gmail</a>
           </td>
         `;
         tbody.appendChild(tr);
       }
+
+      statusEl.textContent = `${rows.length} request(s) shown.`;
     }
 
     async function loadRequests() {
       statusEl.textContent = "Loading requests...";
       tbody.innerHTML = "";
-
-      const params = new URLSearchParams();
-      if (filterInterest.value) params.set("interest", filterInterest.value);
-      if (filterStatus.value) params.set("status", filterStatus.value);
-      params.set("limit", "200");
+      emptyState.style.display = "none";
 
       try {
-        const res = await fetch(`/admin-api/requests?${params.toString()}`, {
+        const res = await fetch("/admin-api/requests?limit=300", {
           credentials: "include"
         });
+
+        const contentType = res.headers.get("content-type") || "";
+        if (!contentType.includes("application/json")) {
+          statusEl.textContent = "Unexpected server response.";
+          return;
+        }
+
         const data = await res.json();
 
         if (!res.ok || !data.success) {
@@ -148,8 +425,8 @@ Founder, Verbum AI`
           return;
         }
 
-        renderRows(data.requests || []);
-        statusEl.textContent = `${(data.requests || []).length} request(s) loaded.`;
+        allRows = data.requests || [];
+        applyLocalFilters();
       } catch (err) {
         console.error(err);
         statusEl.textContent = "Something went wrong while loading requests.";
@@ -157,14 +434,26 @@ Founder, Verbum AI`
     }
 
     function exportCsv() {
-      const headers = ["submitted_at","name","email","organization","interest","platform","status","message"];
+      const headers = [
+        "submitted_at",
+        "name",
+        "email",
+        "organization",
+        "interest",
+        "platform",
+        "status",
+        "request_source",
+        "message"
+      ];
+
       const lines = [
         headers.join(","),
         ...currentRows.map(row =>
           headers.map(h => `"${String(row[h] || "").replaceAll('"', '""')}"`).join(",")
         )
       ];
-      const blob = new Blob([lines.join("\\n")], { type: "text/csv;charset=utf-8;" });
+
+      const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -173,6 +462,10 @@ Founder, Verbum AI`
       URL.revokeObjectURL(url);
     }
 
+    searchBox.addEventListener("input", applyLocalFilters);
+    filterInterest.addEventListener("change", applyLocalFilters);
+    filterStatus.addEventListener("change", applyLocalFilters);
+    filterPlatform.addEventListener("change", applyLocalFilters);
     refreshBtn.addEventListener("click", loadRequests);
     exportBtn.addEventListener("click", exportCsv);
 
