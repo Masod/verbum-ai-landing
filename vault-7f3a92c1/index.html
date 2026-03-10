@@ -435,27 +435,30 @@ Founder, Verbum AI`
         method: "GET",
         credentials: "include",
         cache: "no-store",
-        headers: {
-          "Accept": "application/json"
-        }
+        headers: { "Accept": "application/json" }
       });
 
       const contentType = res.headers.get("content-type") || "";
       const rawText = await res.text();
 
       if (!contentType.includes("application/json")) {
-        const preview = rawText.slice(0, 160).toLowerCase();
+        const preview = rawText.slice(0, 200).toLowerCase();
 
-        if (preview.includes("cloudflare") || preview.includes("access") || preview.includes("<!doctype html")) {
-          statusEl.textContent = "Login/session issue on this device. Please re-open the protected page and try again.";
+        if (
+          preview.includes("cloudflare") ||
+          preview.includes("access") ||
+          preview.includes("<!doctype html") ||
+          preview.includes("<html")
+        ) {
+          statusEl.textContent = "Cloudflare Access/session issue on this device.";
         } else {
           statusEl.textContent = `Unexpected server response (${res.status}).`;
         }
 
-        console.error("Non-JSON response:", {
+        console.error("Non-JSON response", {
           status: res.status,
           contentType,
-          preview: rawText.slice(0, 300)
+          preview: rawText.slice(0, 400)
         });
         return;
       }
