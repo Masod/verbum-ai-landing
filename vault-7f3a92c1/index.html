@@ -423,6 +423,7 @@ Founder, Verbum AI`
             <a href="${buildGmailCompose(row)}" target="_blank" rel="noopener noreferrer">Gmail</a>
           </td>
         `;
+        console.log("Rendering row:", row);
         tbody.appendChild(tr);
       }
 
@@ -435,7 +436,8 @@ Founder, Verbum AI`
     emptyState.style.display = "none";
 
     try {
-      const res = await fetch("/admin-api/requests?limit=300", {
+      const apiUrl = `${window.location.origin}/admin-api/requests?limit=300&_t=${Date.now()}`;
+      const res = await fetch(apiUrl, {
         method: "GET",
         credentials: "include",
         cache: "no-store",
@@ -468,6 +470,7 @@ Founder, Verbum AI`
       }
 
       const data = JSON.parse(rawText);
+      statusEl.textContent = `Loaded ${data.requests?.length || 0} rows from API.`;
 
       if (!res.ok || !data.success) {
         statusEl.textContent = data.error || `Failed to load requests (${res.status}).`;
