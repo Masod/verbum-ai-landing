@@ -474,7 +474,7 @@ Founder, Verbum AI`
       applyLocalFilters();
     } catch (err) {
       console.error(err);
-      statusEl.textContent = "Something went wrong while loading requests.";
+      statusEl.textContent = `Something went wrong: ${err && err.message ? err.message : err}`;
     }
   }
 
