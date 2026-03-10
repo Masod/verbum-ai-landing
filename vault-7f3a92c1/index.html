@@ -430,60 +430,69 @@ Founder, Verbum AI`
       statusEl.textContent = `${rows.length} request(s) shown.`;
     }
 
-  async function loadRequests() {
-    statusEl.textContent = "Loading requests...";
-    tbody.innerHTML = "";
-    emptyState.style.display = "none";
+async function loadRequests() {
+  statusEl.textContent = "Loading requests...";
+  tbody.innerHTML = "";
+  emptyState.style.display = "none";
 
-    try {
-      const apiUrl = `${window.location.origin}/admin-api/requests?limit=300&_t=${Date.now()}`;
-      const res = await fetch(apiUrl, {
-        method: "GET",
-        credentials: "include",
-        cache: "no-store",
-        headers: { "Accept": "application/json" }
+  let data;
+
+  try {
+    const apiUrl = `${window.location.origin}/admin-api/requests?limit=300&_t=${Date.now()}`;
+    const res = await fetch(apiUrl, {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+      headers: { "Accept": "application/json" }
+    });
+
+    const contentType = res.headers.get("content-type") || "";
+    const rawText = await res.text();
+
+    if (!contentType.includes("application/json")) {
+      const preview = rawText.slice(0, 200).toLowerCase();
+
+      if (
+        preview.includes("cloudflare") ||
+        preview.includes("access") ||
+        preview.includes("<!doctype html") ||
+        preview.includes("<html")
+      ) {
+        statusEl.textContent = "Cloudflare Access/session issue on this device.";
+      } else {
+        statusEl.textContent = `Unexpected server response (${res.status}).`;
+      }
+
+      console.error("Non-JSON response", {
+        status: res.status,
+        contentType,
+        preview: rawText.slice(0, 400)
       });
-
-      const contentType = res.headers.get("content-type") || "";
-      const rawText = await res.text();
-
-      if (!contentType.includes("application/json")) {
-        const preview = rawText.slice(0, 200).toLowerCase();
-
-        if (
-          preview.includes("cloudflare") ||
-          preview.includes("access") ||
-          preview.includes("<!doctype html") ||
-          preview.includes("<html")
-        ) {
-          statusEl.textContent = "Cloudflare Access/session issue on this device.";
-        } else {
-          statusEl.textContent = `Unexpected server response (${res.status}).`;
-        }
-
-        console.error("Non-JSON response", {
-          status: res.status,
-          contentType,
-          preview: rawText.slice(0, 400)
-        });
-        return;
-      }
-
-      const data = JSON.parse(rawText);
-      statusEl.textContent = `Loaded ${data.requests?.length || 0} rows from API.`;
-
-      if (!res.ok || !data.success) {
-        statusEl.textContent = data.error || `Failed to load requests (${res.status}).`;
-        return;
-      }
-
-      allRows = data.requests || [];
-      applyLocalFilters();
-    } catch (err) {
-      console.error(err);
-      statusEl.textContent = `Something went wrong: ${err && err.message ? err.message : err}`;
+      return;
     }
+
+    data = JSON.parse(rawText);
+    statusEl.textContent = `Loaded ${data.requests?.length || 0} rows from API.`;
+
+    if (!res.ok || !data.success) {
+      statusEl.textContent = data.error || `Failed to load requests (${res.status}).`;
+      return;
+    }
+  } catch (err) {
+    console.error("FETCH/PARSE ERROR:", err);
+    statusEl.textContent = `Fetch failed: ${err && err.message ? err.message : err}`;
+    return;
   }
+
+  try {
+    allRows = data.requests || [];
+    statusEl.textContent = `Rendering ${allRows.length} rows...`;
+    applyLocalFilters();
+  } catch (err) {
+    console.error("RENDER ERROR:", err);
+    statusEl.textContent = `Render failed: ${err && err.message ? err.message : err}`;
+  }
+}
 
 
     function exportCsv() {
