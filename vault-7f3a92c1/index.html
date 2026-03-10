@@ -3,8 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Verbum AI — Request Vault DEBUG 2</title>
+  <title>Verbum AI — Request Vault</title>
   <link rel="stylesheet" href="/assets/style.css" />
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
   <style>
     :root{
       --blue:#3B82F6;
@@ -18,10 +22,6 @@
       --shadow:0 10px 30px rgba(17,24,39,0.08);
       --radius:18px;
     }
-
-    <script>
-      console.log("VAULT_VERSION = 2026-03-09-01");
-    </script>
 
     *{ box-sizing:border-box; }
 
@@ -101,7 +101,9 @@
     }
 
     .table-wrap{
-      overflow:auto;
+      overflow-x:auto;
+      overflow-y:visible;
+      -webkit-overflow-scrolling:touch;
       border:1px solid rgba(17,24,39,.08);
       border-radius:16px;
       background:#fff;
@@ -160,30 +162,7 @@
     .actions a:hover{
       text-decoration:underline;
     }
-    .table-wrap{
-      overflow:auto;
-      -webkit-overflow-scrolling: touch;
-      border:1px solid rgba(17,24,39,.08);
-      border-radius:16px;
-      background:#fff;
-    }
 
-    @media (max-width:640px){
-  body{ padding:14px; }
-
-  .toolbar{
-    grid-template-columns:1fr;
-  }
-
-  th, td{
-    font-size:13px;
-    padding:9px 8px;
-  }
-
-  .msg{
-    max-width:220px;
-  }
-}
     .badge{
       display:inline-block;
       padding:5px 10px;
@@ -227,10 +206,30 @@
       }
     }
 
+    @media (max-width:768px){
+      th{
+        position:static;
+      }
+
+      table{
+        min-width:980px;
+      }
+    }
+
     @media (max-width:640px){
       body{ padding:14px; }
+
       .toolbar{
         grid-template-columns:1fr;
+      }
+
+      th, td{
+        font-size:13px;
+        padding:9px 8px;
+      }
+
+      .msg{
+        max-width:220px;
       }
     }
   </style>
@@ -366,9 +365,34 @@ Founder, Verbum AI`
       return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(row.email)}&su=${subject}&body=${body}`;
     }
 
+    function renderRows(rows) {
+      tbody.innerHTML = "";
+      emptyState.style.display = rows.length ? "none" : "block";
+
+      for (const row of rows) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${escapeHtml(formatDate(row.submitted_at))}</td>
+          <td>${escapeHtml(row.name)}</td>
+          <td class="email-cell">${escapeHtml(row.email)}</td>
+          <td>${escapeHtml(row.organization || "")}</td>
+          <td>${escapeHtml(row.interest)}</td>
+          <td>${escapeHtml(row.platform)}</td>
+          <td><span class="${badgeClass(row.status)}">${escapeHtml(row.status || "")}</span></td>
+          <td>${escapeHtml(row.request_source || "")}</td>
+          <td class="msg">${escapeHtml(row.message || "")}</td>
+          <td class="actions">
+            <a href="${buildMailto(row)}">Reply</a>
+            <a href="${buildGmailCompose(row)}" target="_blank" rel="noopener noreferrer">Gmail</a>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      }
+
+      statusEl.textContent = `${rows.length} request(s) shown.`;
+    }
+
     function applyLocalFilters() {
-      console.log("applyLocalFilters called");
-      statusEl.textContent = "applyLocalFilters called";
       const q = searchBox.value.trim().toLowerCase();
       const interest = filterInterest.value.trim().toLowerCase();
       const status = filterStatus.value.trim().toLowerCase();
@@ -404,94 +428,45 @@ Founder, Verbum AI`
       renderRows(currentRows);
     }
 
-    function renderRows(rows) {
-      console.log("renderRows called with", rows.length, "rows");
-      statusEl.textContent = `renderRows called with ${rows.length} rows`;
+    async function loadRequests() {
+      statusEl.textContent = "Loading requests...";
       tbody.innerHTML = "";
-      emptyState.style.display = rows.length ? "none" : "block";
+      emptyState.style.display = "none";
 
-      for (const row of rows) {
-        console.log("Rendering row email:", row.email);
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${escapeHtml(formatDate(row.submitted_at))}</td>
-          <td>${escapeHtml(row.name)}</td>
-          <td class="email-cell">${escapeHtml(row.email)}</td>
-          <td>${escapeHtml(row.organization || "")}</td>
-          <td>${escapeHtml(row.interest)}</td>
-          <td>${escapeHtml(row.platform)}</td>
-          <td><span class="${badgeClass(row.status)}">${escapeHtml(row.status || "")}</span></td>
-          <td>${escapeHtml(row.request_source || "")}</td>
-          <td class="msg">${escapeHtml(row.message || "")}</td>
-          <td class="actions">
-            <a href="${buildMailto(row)}">Reply</a>
-            <a href="${buildGmailCompose(row)}" target="_blank" rel="noopener noreferrer">Gmail</a>
-          </td>
+      try {
+        const apiUrl = `/admin-api/requests?limit=300&_t=${Date.now()}`;
+        const res = await fetch(apiUrl, {
+          method: "GET",
+          credentials: "include",
+          cache: "no-store",
+          headers: { "Accept": "application/json" }
+        });
+
+        const contentType = res.headers.get("content-type") || "";
+        const rawText = await res.text();
+
+        if (!contentType.includes("application/json")) {
+          statusEl.textContent = `Unexpected server response (${res.status}).`;
+          return;
+        }
+
+        const data = JSON.parse(rawText);
+
+        if (!res.ok || !data.success) {
+          statusEl.textContent = data.error || `Failed to load requests (${res.status}).`;
+          return;
+        }
+
+        allRows = data.requests || [];
+        applyLocalFilters();
+      } catch (err) {
+        console.error("Vault fetch failed:", err);
+        statusEl.innerHTML = `
+          Could not load requests on this device.<br>
+          <a href="/admin-api/requests?limit=20" target="_blank" rel="noopener noreferrer">Open raw JSON</a>
         `;
-        console.log("Rendering row:", row);
-        tbody.appendChild(tr);
       }
-
-      statusEl.textContent = `${rows.length} request(s) shown.`;
     }
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.getRegistrations().then(registrations => {
-    registrations.forEach(reg => {
-      console.log("Unregistering service worker:", reg.scope);
-      reg.unregister();
-    });
-  });
-}
-async function loadRequests() {
-  statusEl.textContent = "Loading requests...";
-  tbody.innerHTML = "";
-  emptyState.style.display = "none";
-
-  let data;
-
-  try {
-  const apiUrl = "https://verbum-ai.com/admin-api/requests?limit=300&_t=" + Date.now();
-  statusEl.textContent = "Calling API...";
-
-  const res = await fetch(apiUrl);
-
-  statusEl.textContent = `Fetch returned HTTP ${res.status}`;
-
-  const contentType = res.headers.get("content-type") || "";
-  const rawText = await res.text();
-
-  if (!contentType.includes("application/json")) {
-    statusEl.textContent = `Non-JSON response (${res.status})`;
-    console.error("Non-JSON response", {
-      status: res.status,
-      contentType,
-      preview: rawText.slice(0, 400)
-    });
-    return;
-  }
-
-  data = JSON.parse(rawText);
-  statusEl.textContent = `Loaded ${data.requests?.length || 0} rows from API.`;
-
-  if (!res.ok || !data.success) {
-    statusEl.textContent = data.error || `Failed to load requests (${res.status}).`;
-    return;
-  }
-} catch (err) {
-  console.error("FETCH/PARSE ERROR:", err);
-  statusEl.textContent = `Fetch failed: ${err && err.message ? err.message : err}`;
-  return;
-}
-
-  try {
-    allRows = data.requests || [];
-    statusEl.textContent = `Rendering ${allRows.length} rows...`;
-    applyLocalFilters();
-  } catch (err) {
-    console.error("RENDER ERROR:", err);
-    statusEl.textContent = `Render failed: ${err && err.message ? err.message : err}`;
-  }
-}
 
     function exportCsv() {
       const headers = [
