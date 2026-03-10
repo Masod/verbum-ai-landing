@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Verbum AI — Request Vault v2026-03-09-01</title>
+  <title>Verbum AI — Request Vault DEBUG 2</title>
   <link rel="stylesheet" href="/assets/style.css" />
   <style>
     :root{
@@ -367,6 +367,8 @@ Founder, Verbum AI`
     }
 
     function applyLocalFilters() {
+      console.log("applyLocalFilters called");
+      statusEl.textContent = "applyLocalFilters called";
       const q = searchBox.value.trim().toLowerCase();
       const interest = filterInterest.value.trim().toLowerCase();
       const status = filterStatus.value.trim().toLowerCase();
@@ -403,10 +405,13 @@ Founder, Verbum AI`
     }
 
     function renderRows(rows) {
+      console.log("renderRows called with", rows.length, "rows");
+      statusEl.textContent = `renderRows called with ${rows.length} rows`;
       tbody.innerHTML = "";
       emptyState.style.display = rows.length ? "none" : "block";
 
       for (const row of rows) {
+        console.log("Rendering row email:", row.email);
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td>${escapeHtml(formatDate(row.submitted_at))}</td>
