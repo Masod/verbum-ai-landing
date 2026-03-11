@@ -14,7 +14,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Request Access — Verbum AI</title>
+  <title>Request Access to Verbum AI</title>
   <meta name="description" content="Request access to Verbum AI downloads, including Basic, Pro, and Academic/Institutional options." />
   <link rel="canonical" href="https://verbum-ai.com/request-access/" />
 
@@ -473,9 +473,9 @@
       <span class="badge">Request Access • Basic • Pro • Academic</span>
       <h1>Request Access</h1>
       <p class="lead">
-        Submit a short request and we’ll guide you to the right Verbum AI option.
-        Basic requests can continue directly to download after submission. Pro and Academic requests will be reviewed and followed up separately.
-      </p>
+       Verbum AI is offered through a controlled access process to support responsible use, protect product integrity, and reduce unauthorized redistribution.
+
+        We request only limited information at this stage to help route you to the appropriate access path. Basic access can continue directly after submission, while Pro, Academic, Institutional, and Advanced requests may be reviewed separately.
     </section>
 
     <section class="layout">
@@ -501,13 +501,18 @@
               autocomplete="off"
             />
           </div>
+           <div class="field">
+            <label for="name">Company website</label>
+            <input id="name" name="name" type="text" required />
+          </div>
+          
           <div class="field">
-            <label for="name">Full name</label>
+            <label for="name">Name or Alias</label>
             <input id="name" name="name" type="text" required />
           </div>
 
           <div class="field">
-            <label for="email">Email</label>
+            <label for="email">Email address</label>
             <input id="email" name="email" type="email" required />
           </div>
 
@@ -517,7 +522,7 @@
           </div>
 
           <div class="field">
-            <label for="interest">Requested tier</label>
+            <label for="interest">Requested access level</label>
             <select id="interest" name="interest" required>
               <option value="">Select an option</option>
               <option value="basic">Basic</option>
@@ -537,8 +542,8 @@
           </div>
 
           <div class="field">
-            <label for="message">Use case</label>
-            <textarea id="message" name="message" placeholder="Tell us how you plan to use Verbum AI."></textarea>
+            <label for="message">Intended use</label>
+            <textarea id="message" name="message" placeholder="A short use case helps us route requests more effectively."></textarea>
           </div>
 
           <button class="btn" type="submit">Submit Request</button>
@@ -580,36 +585,46 @@
           </div>
         </div>
 
-        <a class="back-link" href="/download/">← Back to download page</a>
+        <a class="back-link" href="/download/">← Back to Download Page</a>
       </div>
 
       <div class="card">
-        <h2>How this works</h2>
+        <h2>How Access Works</h2>
 
         <div class="side-list">
           <div class="side-item">
             <strong>Basic</strong>
-            <span>Submit the form and continue directly to the Basic download step on this page.</span>
+            <span>
+              Designed for users who want to begin with the standard Verbum AI entry path. 
+              After submitting the request form, Basic access can continue directly to the next step.
+            </span>
           </div>
 
           <div class="side-item">
             <strong>Pro</strong>
-            <span>Best for users who want higher-quality models and stronger offline summarization for professional workflows.</span>
+            <span>
+              Recommended for users who want higher-quality models, stronger summarization, 
+              and a more capable offline experience for professional workflows.
+            </span>
           </div>
 
           <div class="side-item">
             <strong>Academic / Institutional</strong>
-            <span>Ideal for universities, lecturers, departments, or broader organizational evaluation.</span>
+            <span>ntended for universities, lecturers, departments, research groups, and broader organizational evaluation.</span>
           </div>
 
           <div class="side-item">
             <strong>Advanced</strong>
-            <span>Full offline pack for users who want maximum capability and the largest model bundle.</span>
+            <span>
+              The full offline package for users who want maximum capability and the largest model bundle available within Verbum AI.
+            </span>
           </div>
         </div>
 
         <div class="tiny">
-          We recommend including your platform and a short use case so we can respond faster for commercial or institutional requests.
+         We recommend including your platform and a short intended use so requests for professional, academic, or institutional access can be reviewed more efficiently.
+
+          Privacy-first. Information submitted here is used only to review and manage access requests.
         </div>
       </div>
     </section>
@@ -654,8 +669,8 @@
 
     if (currentTier === "basic") {
       formTitle.textContent = "Request Basic Access";
-      formIntro.textContent = "Submit this short form to continue directly to the Basic download step.";
-      tierNote.textContent = "Basic requests can continue directly to the download step after form submission.";
+      formIntro.textContent = "Submit a short request to continue to the Basic download step.";
+      tierNote.textContent = "Basic requests can proceed directly after form submission.";
     } else if (currentTier === "pro") {
       formTitle.textContent = "Request Pro Access";
       formIntro.textContent = "Submit your request and we’ll follow up with the appropriate licensing and access details.";
