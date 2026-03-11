@@ -1,1 +1,738 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q7XW2FW7W8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Q7XW2FW7W8');
+    gtag('config', 'G-MYZ36TRY04');
+  </script>
 
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Verbum AI Guide — Product, Access, Privacy, and Support Help</title>
+  <meta name="description" content="Ask about Verbum AI access, privacy, offline AI, supported platforms, and product guidance." />
+  <link rel="canonical" href="https://verbum-ai.com/guide/" />
+
+  <link rel="stylesheet" href="/assets/style.css" />
+
+  <meta property="og:title" content="Verbum AI Guide" />
+  <meta property="og:description" content="Get guided help with Verbum AI access, privacy, offline AI, and supported platforms." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://verbum-ai.com/guide/" />
+
+  <meta name="theme-color" content="#3B82F6" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <style>
+    :root{
+      --blue:#3B82F6;
+      --blueDark:#1E3A8A;
+      --orange:#FF7A00;
+      --bg:#f7f9fc;
+      --text:#111827;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --border:rgba(17,24,39,0.12);
+      --shadow:0 10px 30px rgba(17,24,39,0.08);
+      --radius:18px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin:0;
+      padding:0;
+      background:
+        radial-gradient(1100px 500px at 50% -200px, rgba(59,130,246,0.18), transparent 60%),
+        radial-gradient(900px 450px at 90% 0px, rgba(255,122,0,0.12), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+
+    .container{
+      max-width:1080px;
+      margin:0 auto;
+      padding:0 16px 30px;
+    }
+
+    /* Top navigation */
+    .topnav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(247,249,252,0.86);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(17,24,39,0.10);
+    }
+
+    .topnav-inner{
+      max-width:1080px;
+      margin:0 auto;
+      padding:10px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .topnav-brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:900;
+      color:var(--text);
+      text-decoration:none;
+    }
+
+    .topnav-brand img{
+      width:30px;
+      height:auto;
+      margin:0;
+      filter:none;
+    }
+
+    .topnav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:flex-end;
+    }
+
+    .topnav-links a{
+      color:#374151;
+      text-decoration:none;
+      font-weight:800;
+      font-size:0.95em;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+    }
+
+    .topnav-links a:hover{
+      border-color:rgba(17,24,39,0.14);
+      background:rgba(255,255,255,0.65);
+    }
+
+    .topnav-links a.active{
+      background:rgba(59,130,246,0.10);
+      border-color:rgba(59,130,246,0.22);
+      color:var(--blueDark);
+    }
+
+    /* Hero */
+    .hero{
+      text-align:center;
+      padding:56px 0 18px;
+      max-width:920px;
+      margin:0 auto;
+    }
+
+    .hero h1{
+      font-size:2.55em;
+      margin:0;
+      letter-spacing:-0.02em;
+    }
+
+    .hero .lead{
+      font-size:1.08em;
+      color:#374151;
+      margin:14px auto 0;
+      line-height:1.7;
+      max-width:800px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      padding:6px 12px;
+      border-radius:999px;
+      background:rgba(59,130,246,0.12);
+      color:var(--blueDark);
+      white-space:nowrap;
+      font-weight:800;
+      margin-bottom:14px;
+    }
+
+    .btns{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      margin-top:20px;
+      align-items:stretch;
+      max-width:460px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      width:100%;
+      background:var(--blueDark);
+      color:#fff;
+      border:none;
+      padding:12px 14px;
+      font-size:0.98em;
+      border-radius:14px;
+      cursor:pointer;
+      transition:transform 0.08s ease, background-color 0.2s ease;
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:0.01em;
+    }
+
+    .btn:hover{
+      background:#2c4fc7;
+      transform:translateY(-1px);
+    }
+
+    .btn.orange{
+      background:var(--orange);
+    }
+
+    .btn.orange:hover{
+      background:#ff8f22;
+    }
+
+    .btn.outline{
+      background:#fff;
+      color:#111827;
+      border:1px solid rgba(17,24,39,0.18);
+      font-weight:800;
+    }
+
+    .btn.outline:hover{
+      background:#f9fafb;
+      transform:translateY(-1px);
+    }
+
+    .info-banner{
+      background:linear-gradient(180deg, #ffffff, #fbfdff);
+      border:1px solid var(--border);
+      border-left:6px solid var(--blueDark);
+      padding:16px 16px;
+      margin:20px auto 20px;
+      border-radius:14px;
+      max-width:980px;
+      box-shadow:0 8px 26px rgba(17,24,39,0.06);
+      text-align:center;
+      font-size:0.98em;
+      color:#374151;
+    }
+
+    .info-banner p{
+      margin:0.55em 0;
+      line-height:1.6;
+    }
+
+    .info-banner strong{
+      color:var(--blueDark);
+    }
+
+    .section-title{
+      margin:0 0 10px;
+      font-size:0.95em;
+      color:#111827;
+      font-weight:800;
+    }
+
+    .guide-shell{
+      max-width:980px;
+      margin:22px auto 0;
+    }
+
+    .guide-card{
+      background:#fff;
+      border:1px solid rgba(17,24,39,0.12);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 10px 30px rgba(17,24,39,0.08);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .guide-card::before{
+      content:"";
+      position:absolute;
+      top:-80px;
+      right:-80px;
+      width:220px;
+      height:220px;
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(59,130,246,0.16), transparent 60%);
+      pointer-events:none;
+    }
+
+    .guide-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:10px 0 16px;
+      position:relative;
+      z-index:1;
+    }
+
+    .topic-pill{
+      border:1px solid rgba(59,130,246,0.24);
+      background:rgba(59,130,246,0.08);
+      color:#1e3a8a;
+      padding:9px 12px;
+      border-radius:999px;
+      font-size:0.94em;
+      font-weight:700;
+      cursor:pointer;
+      transition:background-color 0.15s ease, transform 0.08s ease;
+    }
+
+    .topic-pill:hover{
+      background:rgba(59,130,246,0.12);
+      transform:translateY(-1px);
+    }
+
+    .topic-pill.orange{
+      border:1px solid rgba(255,122,0,0.28);
+      background:rgba(255,122,0,0.10);
+      color:#8a3c00;
+    }
+
+    .chat-panel{
+      margin-top:10px;
+      border:1px solid rgba(17,24,39,0.10);
+      border-radius:16px;
+      background:#f8fafc;
+      min-height:360px;
+      max-height:520px;
+      overflow-y:auto;
+      padding:14px;
+      position:relative;
+      z-index:1;
+    }
+
+    .chat-messages{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .message-row{
+      display:flex;
+    }
+
+    .message-row.assistant{
+      justify-content:flex-start;
+    }
+
+    .message-row.user{
+      justify-content:flex-end;
+    }
+
+    .message-bubble{
+      max-width:78%;
+      padding:12px 14px;
+      border-radius:16px;
+      line-height:1.6;
+      font-size:0.97em;
+      white-space:pre-wrap;
+    }
+
+    .message-row.assistant .message-bubble{
+      background:#fff;
+      border:1px solid rgba(17,24,39,0.08);
+      color:#111827;
+    }
+
+    .message-row.user .message-bubble{
+      background:rgba(59,130,246,0.10);
+      border:1px solid rgba(59,130,246,0.18);
+      color:#111827;
+    }
+
+    .assistant-label{
+      display:block;
+      margin-bottom:6px;
+      font-size:0.76em;
+      font-weight:900;
+      letter-spacing:0.03em;
+      color:#1e3a8a;
+      text-transform:uppercase;
+    }
+
+    .chat-input-wrap{
+      display:flex;
+      gap:10px;
+      margin-top:14px;
+      position:relative;
+      z-index:1;
+    }
+
+    .chat-input{
+      flex:1;
+      min-height:50px;
+      padding:0 14px;
+      border:1px solid rgba(17,24,39,0.14);
+      border-radius:14px;
+      font-size:0.98em;
+      background:#fff;
+      color:#111827;
+    }
+
+    .chat-input:focus{
+      outline:none;
+      border-color:rgba(59,130,246,0.45);
+      box-shadow:0 0 0 4px rgba(59,130,246,0.10);
+    }
+
+    .guide-note{
+      margin-top:12px;
+      color:#6b7280;
+      font-size:0.92em;
+      line-height:1.55;
+      position:relative;
+      z-index:1;
+    }
+
+    .guide-links{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .mini-card{
+      background:#fff;
+      border:1px solid rgba(17,24,39,0.12);
+      border-radius:16px;
+      padding:16px;
+      box-shadow:0 10px 26px rgba(17,24,39,0.06);
+    }
+
+    .mini-card h3{
+      margin:0 0 8px;
+      font-size:1.05em;
+      letter-spacing:-0.01em;
+    }
+
+    .mini-card p{
+      margin:0 0 12px;
+      color:#4b5563;
+      line-height:1.6;
+      font-size:0.95em;
+    }
+
+    .footer{
+      text-align:center;
+      padding:28px 10px 40px;
+      font-size:0.92em;
+      color:#9ca3af;
+    }
+
+    .patent-notice{
+      margin-top:12px;
+      font-size:12px;
+      line-height:1.4;
+      opacity:.85;
+    }
+
+    .patent-notice strong{
+      font-weight:700;
+    }
+
+    @media (max-width:720px){
+      .topnav-inner{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .topnav-links{
+        justify-content:flex-start;
+      }
+
+      .chat-input-wrap{
+        flex-direction:column;
+      }
+
+      .message-bubble{
+        max-width:100%;
+      }
+    }
+
+    @media (max-width:520px){
+      .hero h1{
+        font-size:2.15em;
+      }
+
+      .btn,
+      .chat-input{
+        border-radius:12px;
+      }
+
+      .guide-card,
+      .mini-card{
+        border-radius:16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topnav">
+    <div class="topnav-inner">
+      <a class="topnav-brand" href="/">
+        <img src="https://verbum-ai.com/assets/verbum-logo.png" alt="Verbum AI Logo"/>
+        <span>Verbum AI</span>
+      </a>
+
+      <div class="topnav-links">
+        <a href="/">Home</a>
+        <a href="/offline-document-summarizer/">Offline Summarizer</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/features/">Features</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/download/">Download</a>
+        <a class="active" href="/guide/">Guide</a>
+        <a href="/labs/">Labs</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <span class="badge">Guide • Access • Privacy • Support</span>
+      <h1>Verbum AI Guide</h1>
+      <p class="lead">
+        Ask about access paths, privacy, offline AI, supported platforms, and which Verbum AI option fits your needs.
+        This guide is limited to Verbum AI topics only.
+      </p>
+
+      <div class="btns">
+        <button class="btn quick-action" data-topic="what-is-verbum">What is Verbum AI?</button>
+        <button class="btn outline quick-action" data-topic="compare-access">Compare Access Levels</button>
+        <button class="btn orange quick-action" data-topic="privacy-offline">Privacy &amp; Offline AI</button>
+      </div>
+    </section>
+
+    <div class="info-banner">
+      <p>
+        <strong>Verbum AI Guide</strong> helps with product questions, access paths, supported platforms,
+        privacy-first design, and how to get started.
+      </p>
+      <p>
+        This first version is intentionally focused and limited to Verbum AI topics.
+      </p>
+    </div>
+
+    <section class="guide-shell">
+      <div class="guide-card">
+        <div class="section-title">Quick topics</div>
+
+        <div class="guide-actions">
+          <button class="topic-pill" data-topic="what-is-verbum">What is Verbum AI?</button>
+          <button class="topic-pill" data-topic="compare-access">Compare Access Levels</button>
+          <button class="topic-pill" data-topic="privacy-offline">Privacy &amp; Offline AI</button>
+          <button class="topic-pill" data-topic="platforms">Supported Platforms</button>
+          <button class="topic-pill" data-topic="request-access">Request Access</button>
+          <button class="topic-pill orange" data-topic="download-help">Download Help</button>
+        </div>
+
+        <div class="chat-panel" id="chatPanel">
+          <div class="chat-messages" id="chatMessages">
+            <div class="message-row assistant">
+              <div class="message-bubble">
+                <span class="assistant-label">Verbum AI Guide</span>
+                Welcome. I can help with Verbum AI access paths, privacy-first design, offline AI questions,
+                supported platforms, and how to get started.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-input-wrap">
+          <input
+            id="chatInput"
+            class="chat-input"
+            type="text"
+            placeholder="Ask about Verbum AI..."
+            aria-label="Ask about Verbum AI"
+          />
+          <button id="sendBtn" class="btn">Send</button>
+        </div>
+
+        <div class="guide-note">
+          <strong>Scope:</strong> This guide is limited to Verbum AI product, access, privacy, download,
+          and support-related topics.
+        </div>
+      </div>
+
+      <div class="guide-links">
+        <div class="mini-card">
+          <h3>Need Downloads?</h3>
+          <p>
+            Go directly to the download page for macOS and Windows installers, access paths,
+            and installation notes.
+          </p>
+          <a class="btn outline" href="/download/">Go to Downloads</a>
+        </div>
+
+        <div class="mini-card">
+          <h3>Need Access?</h3>
+          <p>
+            Request access for Basic, Pro, or Advanced paths. Some Verbum AI versions
+            are distributed through a controlled access process.
+          </p>
+          <a class="btn outline" href="/request-access/">Request Access</a>
+        </div>
+
+        <div class="mini-card">
+          <h3>Need More Answers?</h3>
+          <p>
+            Check the FAQ for installation guidance, platform notes, and other common questions
+            about Verbum AI.
+          </p>
+          <a class="btn outline" href="/faq/">Open FAQ</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="container footer">
+    <div>© <span id="y"></span> Verbum AI — Privacy-first offline summarization.</div>
+
+    <div class="patent-notice">
+      <strong>Patent Pending</strong> — Provisional Patent Application Filed (Jan 7, 2026).
+      Unauthorized copying or commercial use prohibited. Verbum AI™. All rights reserved.
+    </div>
+
+    <div class="small" style="margin-top:6px;">
+      Not affiliated with other products named “Verbum”. All trademarks belong to their respective owners.
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+
+  <script>
+    (function () {
+      const messages = document.getElementById("chatMessages");
+      const input = document.getElementById("chatInput");
+      const sendBtn = document.getElementById("sendBtn");
+
+      const cannedReplies = {
+        "what-is-verbum":
+          "Verbum AI is a privacy-first offline document summarizer designed for local use. It focuses on controlled access, offline-first workflows, and keeping sensitive content out of the cloud for core usage.",
+        "compare-access":
+          "Basic is the standard entry path. Pro is designed for stronger summarization and more demanding professional use. Advanced provides the largest offline model package and maximum capability.",
+        "privacy-offline":
+          "Verbum AI is designed around privacy-first and offline-first principles. Core usage is intended to avoid unnecessary cloud upload dependency for document summarization workflows.",
+        "platforms":
+          "Verbum AI currently supports macOS and Windows. The available access path may vary depending on platform and selected edition.",
+        "request-access":
+          "You can request access through the Request Access page. Basic requests can continue more directly, while Pro and Advanced requests may require review or approval.",
+        "download-help":
+          "For download help, start on the Download page. Windows installers require the .exe and matching .bin files in the same folder. On macOS, if the app is blocked on first launch, right-click and choose Open."
+      };
+
+      const topicLabels = {
+        "what-is-verbum": "What is Verbum AI?",
+        "compare-access": "Compare Access Levels",
+        "privacy-offline": "Privacy & Offline AI",
+        "platforms": "Supported Platforms",
+        "request-access": "Request Access",
+        "download-help": "Download Help"
+      };
+
+      function addMessage(role, text) {
+        const row = document.createElement("div");
+        row.className = "message-row " + role;
+
+        const bubble = document.createElement("div");
+        bubble.className = "message-bubble";
+
+        if (role === "assistant") {
+          const label = document.createElement("span");
+          label.className = "assistant-label";
+          label.textContent = "Verbum AI Guide";
+          bubble.appendChild(label);
+        }
+
+        bubble.appendChild(document.createTextNode(text));
+        row.appendChild(bubble);
+        messages.appendChild(row);
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      function handleTopic(topic) {
+        addMessage("user", topicLabels[topic] || topic);
+        addMessage(
+          "assistant",
+          cannedReplies[topic] ||
+          "I can help with Verbum AI product, access, privacy, and download-related questions."
+        );
+      }
+
+      document.querySelectorAll("[data-topic]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          handleTopic(btn.getAttribute("data-topic"));
+        });
+      });
+
+      function handleFreeText() {
+        const text = input.value.trim();
+        if (!text) return;
+
+        addMessage("user", text);
+
+        const lower = text.toLowerCase();
+        let reply = "I’m here to help with Verbum AI product, access, privacy, download, and support-related questions.";
+
+        if (lower.includes("privacy") || lower.includes("offline")) {
+          reply = cannedReplies["privacy-offline"];
+        } else if (lower.includes("pro") || lower.includes("advanced") || lower.includes("basic") || lower.includes("tier")) {
+          reply = cannedReplies["compare-access"];
+        } else if (lower.includes("download") || lower.includes("install") || lower.includes("bin") || lower.includes("exe")) {
+          reply = cannedReplies["download-help"];
+        } else if (lower.includes("mac") || lower.includes("windows") || lower.includes("platform")) {
+          reply = cannedReplies["platforms"];
+        } else if (lower.includes("access") || lower.includes("request")) {
+          reply = cannedReplies["request-access"];
+        } else if (lower.includes("what is") || lower.includes("what's") || lower.includes("verbum")) {
+          reply = cannedReplies["what-is-verbum"];
+        } else if (
+          lower.includes("weather") ||
+          lower.includes("stocks") ||
+          lower.includes("politics") ||
+          lower.includes("recipe") ||
+          lower.includes("dating")
+        ) {
+          reply = "This guide is limited to Verbum AI product, access, privacy, download, and support-related topics.";
+        }
+
+        addMessage("assistant", reply);
+        input.value = "";
+      }
+
+      sendBtn.addEventListener("click", handleFreeText);
+
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          handleFreeText();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
