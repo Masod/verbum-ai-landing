@@ -761,6 +761,19 @@
         handleFreeText();
       }
     });
+    function getPreloadedQuestion() {
+  const params = new URLSearchParams(window.location.search);
+  return (params.get("q") || "").trim();
+}
+
+async function runPreloadedQuestionIfPresent() {
+  const preloaded = getPreloadedQuestion();
+  if (!preloaded) return;
+
+  addMessage("user", preloaded);
+  await sendGuideMessage(preloaded);
+}
+    runPreloadedQuestionIfPresent();
   })();
   </script>
 </body>
