@@ -623,115 +623,145 @@
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
   </script>
-
+  
   <script>
-    (function () {
-      const messages = document.getElementById("chatMessages");
-      const input = document.getElementById("chatInput");
-      const sendBtn = document.getElementById("sendBtn");
+  (function () {
+    const messages = document.getElementById("chatMessages");
+    const input = document.getElementById("chatInput");
+    const sendBtn = document.getElementById("sendBtn");
 
-      const cannedReplies = {
-        "what-is-verbum":
-          "Verbum AI is a privacy-first offline document summarizer designed for local use. It focuses on controlled access, offline-first workflows, and keeping sensitive content out of the cloud for core usage.",
-        "compare-access":
-          "Basic is the standard entry path. Pro is designed for stronger summarization and more demanding professional use. Advanced provides the largest offline model package and maximum capability.",
-        "privacy-offline":
-          "Verbum AI is designed around privacy-first and offline-first principles. Core usage is intended to avoid unnecessary cloud upload dependency for document summarization workflows.",
-        "platforms":
-          "Verbum AI currently supports macOS and Windows. The available access path may vary depending on platform and selected edition.",
-        "request-access":
-          "You can request access through the Request Access page. Basic requests can continue more directly, while Pro and Advanced requests may require review or approval.",
-        "download-help":
-          "For download help, start on the Download page. Windows installers require the .exe and matching .bin files in the same folder. On macOS, if the app is blocked on first launch, right-click and choose Open."
-      };
+    const topicLabels = {
+      "what-is-verbum": "What is Verbum AI?",
+      "compare-access": "Compare Access Levels",
+      "privacy-offline": "Privacy & Offline AI",
+      "platforms": "Supported Platforms",
+      "request-access": "Request Access",
+      "download-help": "Download Help"
+    };
 
-      const topicLabels = {
-        "what-is-verbum": "What is Verbum AI?",
-        "compare-access": "Compare Access Levels",
-        "privacy-offline": "Privacy & Offline AI",
-        "platforms": "Supported Platforms",
-        "request-access": "Request Access",
-        "download-help": "Download Help"
-      };
+    function getOrCreateSessionId() {
+      const key = "verbumGuideSessionId";
+      let id = localStorage.getItem(key);
 
-      function addMessage(role, text) {
-        const row = document.createElement("div");
-        row.className = "message-row " + role;
-
-        const bubble = document.createElement("div");
-        bubble.className = "message-bubble";
-
-        if (role === "assistant") {
-          const label = document.createElement("span");
-          label.className = "assistant-label";
-          label.textContent = "Verbum AI Guide";
-          bubble.appendChild(label);
-        }
-
-        bubble.appendChild(document.createTextNode(text));
-        row.appendChild(bubble);
-        messages.appendChild(row);
-        messages.scrollTop = messages.scrollHeight;
+      if (!id) {
+        id = "vg_" + crypto.randomUUID();
+        localStorage.setItem(key, id);
       }
 
-      function handleTopic(topic) {
-        addMessage("user", topicLabels[topic] || topic);
+      return id;
+    }
+
+    function addMessage(role, text) {
+      const row = document.createElement("div");
+      row.className = "message-row " + role;
+
+      const bubble = document.createElement("div");
+      bubble.className = "message-bubble";
+
+      if (role === "assistant") {
+        const label = document.createElement("span");
+        label.className = "assistant-label";
+        label.textContent = "Verbum AI Guide";
+        bubble.appendChild(label);
+      }
+
+      bubble.appendChild(document.createTextNode(text));
+      row.appendChild(bubble);
+      messages.appendChild(row);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function addTypingIndicator() {
+      const row = document.createElement("div");
+      row.className = "message-row assistant";
+      row.id = "typing-indicator";
+
+      const bubble = document.createElement("div");
+      bubble.className = "message-bubble";
+
+      const label = document.createElement("span");
+      label.className = "assistant-label";
+      label.textContent = "Verbum AI Guide";
+
+      bubble.appendChild(label);
+      bubble.appendChild(document.createTextNode("Typing..."));
+      row.appendChild(bubble);
+      messages.appendChild(row);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+      const el = document.getElementById("typing-indicator");
+      if (el) el.remove();
+    }
+
+    async function sendGuideMessage(text) {
+      addTypingIndicator();
+
+      try {
+        const response = await fetch("/api/guide-chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            sessionId: getOrCreateSessionId(),
+            message: text,
+            mode: "guide",
+            page: "guide"
+          })
+        });
+
+        const data = await response.json();
+        removeTypingIndicator();
+
+        if (!response.ok || !data.ok) {
+          addMessage(
+            "assistant",
+            "I’m having trouble responding right now. Please try again in a moment."
+          );
+          return;
+        }
+
+        addMessage("assistant", data.reply);
+      } catch (err) {
+        removeTypingIndicator();
         addMessage(
           "assistant",
-          cannedReplies[topic] ||
-          "I can help with Verbum AI product, access, privacy, and download-related questions."
+          "I’m unable to connect right now. Please try again in a moment."
         );
       }
+    }
 
-      document.querySelectorAll("[data-topic]").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          handleTopic(btn.getAttribute("data-topic"));
-        });
+    async function handleTopic(topic) {
+      const label = topicLabels[topic] || topic;
+      addMessage("user", label);
+      await sendGuideMessage(label);
+    }
+
+    async function handleFreeText() {
+      const text = input.value.trim();
+      if (!text) return;
+
+      addMessage("user", text);
+      input.value = "";
+      await sendGuideMessage(text);
+    }
+
+    document.querySelectorAll("[data-topic]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        handleTopic(btn.getAttribute("data-topic"));
       });
+    });
 
-      function handleFreeText() {
-        const text = input.value.trim();
-        if (!text) return;
+    sendBtn.addEventListener("click", handleFreeText);
 
-        addMessage("user", text);
-
-        const lower = text.toLowerCase();
-        let reply = "I’m here to help with Verbum AI product, access, privacy, download, and support-related questions.";
-
-        if (lower.includes("privacy") || lower.includes("offline")) {
-          reply = cannedReplies["privacy-offline"];
-        } else if (lower.includes("pro") || lower.includes("advanced") || lower.includes("basic") || lower.includes("tier")) {
-          reply = cannedReplies["compare-access"];
-        } else if (lower.includes("download") || lower.includes("install") || lower.includes("bin") || lower.includes("exe")) {
-          reply = cannedReplies["download-help"];
-        } else if (lower.includes("mac") || lower.includes("windows") || lower.includes("platform")) {
-          reply = cannedReplies["platforms"];
-        } else if (lower.includes("access") || lower.includes("request")) {
-          reply = cannedReplies["request-access"];
-        } else if (lower.includes("what is") || lower.includes("what's") || lower.includes("verbum")) {
-          reply = cannedReplies["what-is-verbum"];
-        } else if (
-          lower.includes("weather") ||
-          lower.includes("stocks") ||
-          lower.includes("politics") ||
-          lower.includes("recipe") ||
-          lower.includes("dating")
-        ) {
-          reply = "This guide is limited to Verbum AI product, access, privacy, download, and support-related topics.";
-        }
-
-        addMessage("assistant", reply);
-        input.value = "";
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        handleFreeText();
       }
-
-      sendBtn.addEventListener("click", handleFreeText);
-
-      input.addEventListener("keydown", function (e) {
-        if (e.key === "Enter") {
-          handleFreeText();
-        }
-      });
-    })();
+    });
+  })();
   </script>
 </body>
 </html>
