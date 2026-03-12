@@ -627,6 +627,7 @@
   <script>
   (function () {
     const messages = document.getElementById("chatMessages");
+    const chatPanel = document.getElementById("chatPanel");
     const input = document.getElementById("chatInput");
     const sendBtn = document.getElementById("sendBtn");
 
@@ -668,7 +669,12 @@
       bubble.appendChild(document.createTextNode(text));
       row.appendChild(bubble);
       messages.appendChild(row);
-      messages.scrollTop = messages.scrollHeight;
+      requestAnimationFrame(() => {
+        chatPanel.scrollTo({
+          top: chatPanel.scrollHeight,
+          behavior: "smooth"
+        });
+      });
     }
 
     function addTypingIndicator() {
@@ -687,7 +693,12 @@
       bubble.appendChild(document.createTextNode("Typing..."));
       row.appendChild(bubble);
       messages.appendChild(row);
-      messages.scrollTop = messages.scrollHeight;
+      requestAnimationFrame(() => {
+        chatPanel.scrollTo({
+          top: chatPanel.scrollHeight,
+          behavior: "smooth"
+        });
+      });
     }
 
     function removeTypingIndicator() {
