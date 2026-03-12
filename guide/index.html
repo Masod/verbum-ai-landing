@@ -827,13 +827,27 @@
   const params = new URLSearchParams(window.location.search);
   return (params.get("q") || "").trim();
 }
+function scrollToChat() {
+  requestAnimationFrame(() => {
+    const chatPanel = document.getElementById("chatPanel");
+    if (!chatPanel) return;
 
-async function runPreloadedQuestionIfPresent() {
+    chatPanel.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  });
+}
+function runPreloadedQuestionIfPresent() {
   const preloaded = getPreloadedQuestion();
   if (!preloaded) return;
 
-  addMessage("user", preloaded);
-  await sendGuideMessage(preloaded);
+  scrollToChat();
+  input.value = preloaded;
+
+  requestAnimationFrame(() => {
+    input.focus();
+  });
 }
     runPreloadedQuestionIfPresent();
   })();
