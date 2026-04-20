@@ -512,7 +512,6 @@
           </div>
 
           <input type="hidden" id="machine_id" name="machine_id">
-          <input type="hidden" id="source" name="source">
           <div class="field">
             <label for="name">Name or Alias</label>
             <input id="name" name="name" type="text" required />
@@ -677,15 +676,6 @@
     const machineIdField = document.getElementById("machine_id");
 
     const machineId = params.get("machine_id");
-    
-    if (machineId) {
-      document.getElementById("machine_id").value = machineId;
-    }
-    
-    if (source) {
-      document.getElementById("source").value = source;
-    }
-
     
     if (tier && ["basic", "pro", "academic", "advanced"].includes(tier)) {
       interestField.value = tier;
