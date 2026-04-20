@@ -144,6 +144,7 @@
       font-weight:800;
       margin-bottom:16px;
     }
+
     .honeypot-wrap{
       position:absolute !important;
       left:-9999px !important;
@@ -152,10 +153,11 @@
       height:1px !important;
       overflow:hidden !important;
     }
-    
+
     .honeypot-wrap input{
       pointer-events:none;
     }
+
     .hero h1{
       font-size:2.5em;
       margin:0;
@@ -370,12 +372,14 @@
       padding:12px 14px;
       background:#fff;
     }
+
     .field-error{
       margin-top:6px;
       color:#b91c1c;
       font-size:0.9em;
       font-weight:700;
     }
+
     .side-item strong{
       display:block;
       margin-bottom:6px;
@@ -474,11 +478,11 @@
       <span class="badge">Request Access • Basic • Pro • Academic</span>
       <h1>Request Access</h1>
       <p class="lead">
-       Verbum AI is offered through a controlled access process to support responsible use, protect product integrity, 
+        Verbum AI is offered through a controlled access process to support responsible use, protect product integrity,
         and reduce unauthorized redistribution.
 
-        We request only limited information at this stage to help route you to the appropriate access path. 
-        Basic access can continue directly after submission, while Pro, Academic, Institutional, 
+        We request only limited information at this stage to help route you to the appropriate access path.
+        Basic access can continue directly after submission, while Pro, Academic, Institutional,
         and Advanced requests may be reviewed separately.
       </p>
     </section>
@@ -506,11 +510,7 @@
               autocomplete="off"
             />
           </div>
-           <div class="field">
-            <label for="name">Company website</label>
-            <input id="name" name="name" type="text" required />
-          </div>
-          
+
           <div class="field">
             <label for="name">Name or Alias</label>
             <input id="name" name="name" type="text" required />
@@ -519,6 +519,11 @@
           <div class="field">
             <label for="email">Email address</label>
             <input id="email" name="email" type="email" required />
+          </div>
+
+          <div class="field" id="machine-id-field" style="display:none;">
+            <label for="machine_id">Device ID</label>
+            <input id="machine_id" name="machine_id" type="text" />
           </div>
 
           <div class="field">
@@ -600,7 +605,7 @@
           <div class="side-item">
             <strong>Basic</strong>
             <span>
-              Designed for users who want to begin with the standard Verbum AI entry path. 
+              Designed for users who want to begin with the standard Verbum AI entry path.
               After submitting the request form, Basic access can continue directly to the next step.
             </span>
           </div>
@@ -608,14 +613,14 @@
           <div class="side-item">
             <strong>Pro</strong>
             <span>
-              Recommended for users who want higher-quality models, stronger summarization, 
+              Recommended for users who want higher-quality models, stronger summarization,
               and a more capable offline experience for professional workflows.
             </span>
           </div>
 
           <div class="side-item">
             <strong>Academic / Institutional</strong>
-            <span>ntended for universities, lecturers, departments, research groups, and broader organizational evaluation.</span>
+            <span>Intended for universities, lecturers, departments, research groups, and broader organizational evaluation.</span>
           </div>
 
           <div class="side-item">
@@ -627,14 +632,15 @@
         </div>
 
         <div class="tiny">
-         We recommend including your platform and a short intended use so requests for professional, academic, or institutional access can be reviewed more efficiently.
+          We recommend including your platform and a short intended use so requests for professional, academic, or institutional access can be reviewed more efficiently.
 
           Privacy-first. Information submitted here is used only to review and manage access requests.
         </div>
       </div>
     </section>
   </main>
- <p class="lead">We collect only the information needed to review and manage access requests.</p><br><br>
+
+  <p class="lead">We collect only the information needed to review and manage access requests.</p><br><br>
 
   <div class="container footer">
     <div>© <span id="y"></span> Verbum AI — Privacy-first offline summarization.</div>
@@ -647,228 +653,270 @@
     </div>
   </div>
 
- <script>
-  document.getElementById("y").textContent = new Date().getFullYear();
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
 
-  const WORKER_URL = "https://plain-morning-b4bb.masod-samadi.workers.dev/";
+    const WORKER_URL = "https://plain-morning-b4bb.masod-samadi.workers.dev/";
 
-  const params = new URLSearchParams(window.location.search);
-  const tier = (params.get("tier") || "").toLowerCase();
-  const platform = (params.get("platform") || "").toLowerCase();
+    const params = new URLSearchParams(window.location.search);
+    const tier = (params.get("tier") || "").toLowerCase();
+    const platform = (params.get("platform") || "").toLowerCase();
+    const emailParam = (params.get("email") || "").trim();
+    const machineIdParam = (params.get("machine_id") || "").trim();
+    const source = (params.get("source") || "").toLowerCase();
 
-  const interestField = document.getElementById("interest");
-  const platformField = document.getElementById("platform");
-  const tierNote = document.getElementById("tier-note");
-  const formTitle = document.getElementById("form-title");
-  const formIntro = document.getElementById("form-intro");
+    const interestField = document.getElementById("interest");
+    const platformField = document.getElementById("platform");
+    const tierNote = document.getElementById("tier-note");
+    const formTitle = document.getElementById("form-title");
+    const formIntro = document.getElementById("form-intro");
+    const emailField = document.getElementById("email");
+    const machineIdFieldWrap = document.getElementById("machine-id-field");
+    const machineIdField = document.getElementById("machine_id");
 
-  if (tier && ["basic", "pro", "academic", "advanced"].includes(tier)) {
-    interestField.value = tier;
-  }
-
-  if (platform && ["windows", "macos"].includes(platform)) {
-    platformField.value = platform;
-  }
-
-  function refreshTierMessaging() {
-    const currentTier = interestField.value;
-
-    if (currentTier === "basic") {
-      formTitle.textContent = "Request Basic Access";
-      formIntro.textContent = "Submit a short request to continue to the Basic download step.";
-      tierNote.textContent = "Basic requests can proceed directly after form submission.";
-    } else if (currentTier === "pro") {
-      formTitle.textContent = "Request Pro Access";
-      formIntro.textContent = "Submit your request and we’ll follow up with the appropriate licensing and access details.";
-      tierNote.textContent = "Pro is a commercial edition and is reviewed separately.";
-    } else if (currentTier === "academic") {
-      formTitle.textContent = "Request Academic / Institutional Access";
-      formIntro.textContent = "Submit your request for academic, faculty, department, or institutional use.";
-      tierNote.textContent = "Academic and institutional requests are reviewed separately.";
-    } else if (currentTier === "advanced") {
-      formTitle.textContent = "Request Advanced Access";
-      formIntro.textContent = "Submit your request for the largest offline bundle and maximum capability edition.";
-      tierNote.textContent = "Advanced is a commercial edition and is reviewed separately.";
-    } else {
-      formTitle.textContent = "Verbum AI Access Request";
-      formIntro.textContent = "Tell us a little about your use case so we can send or unlock the right option for you.";
-      tierNote.textContent = "Basic requests can continue directly to the download step after form submission.";
-    }
-  }
-
-  function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  function clearFieldErrors() {
-    document.querySelectorAll(".field-error").forEach(el => el.remove());
-    document.querySelectorAll(".field input, .field select, .field textarea").forEach(el => {
-      el.style.borderColor = "";
-      el.style.boxShadow = "";
-    });
-  }
-
-  function showFieldError(fieldId, message) {
-    const field = document.getElementById(fieldId);
-    if (!field) return;
-
-    field.style.borderColor = "#dc2626";
-    field.style.boxShadow = "0 0 0 4px rgba(220,38,38,0.10)";
-
-    const error = document.createElement("div");
-    error.className = "field-error";
-    error.textContent = message;
-
-    field.parentElement.appendChild(error);
-  }
-
-  function validateForm(payload) {
-    clearFieldErrors();
-
-    let valid = true;
-
-    const name = (payload.name || "").trim();
-    const email = (payload.email || "").trim();
-    const organization = (payload.organization || "").trim();
-    const interest = (payload.interest || "").trim();
-    const platform = (payload.platform || "").trim();
-    const message = (payload.message || "").trim();
-
-    if (name.length < 2 || name.length > 100) {
-      showFieldError("name", "Please enter a valid name between 2 and 100 characters.");
-      valid = false;
+    if (tier && ["basic", "pro", "academic", "advanced"].includes(tier)) {
+      interestField.value = tier;
     }
 
-    if (!isValidEmail(email) || email.length > 150) {
-      showFieldError("email", "Please enter a valid email address.");
-      valid = false;
+    if (platform && ["windows", "macos"].includes(platform)) {
+      platformField.value = platform;
     }
 
-    if (organization.length > 150) {
-      showFieldError("organization", "Organization must be 150 characters or less.");
-      valid = false;
+    if (emailParam) {
+      emailField.value = emailParam;
     }
 
-    if (!["basic", "pro", "academic", "advanced"].includes(interest)) {
-      showFieldError("interest", "Please select a valid access option.");
-      valid = false;
+    if (machineIdParam) {
+      machineIdFieldWrap.style.display = "block";
+      machineIdField.value = machineIdParam;
     }
 
-    if (!["windows", "macos"].includes(platform)) {
-      showFieldError("platform", "Please select a valid platform.");
-      valid = false;
+    if (source === "macos_app") {
+      formTitle.textContent = "Request Verbum AI License";
+      formIntro.textContent = "Review your email address and device ID, then submit your request. Once approved, your license file will be sent to your email.";
+      tierNote.textContent = "This request was started from the Verbum AI macOS app.";
     }
 
-    if (message.length > 2000) {
-      showFieldError("message", "Message must be 2000 characters or less.");
-      valid = false;
+    function refreshTierMessaging() {
+      const currentTier = interestField.value;
+
+      if (source === "macos_app") {
+        formTitle.textContent = "Request Verbum AI License";
+        formIntro.textContent = "Review your email address and device ID, then submit your request. Once approved, your license file will be sent to your email.";
+        tierNote.textContent = "This request was started from the Verbum AI macOS app.";
+        return;
+      }
+
+      if (currentTier === "basic") {
+        formTitle.textContent = "Request Basic Access";
+        formIntro.textContent = "Submit a short request to continue to the Basic download step.";
+        tierNote.textContent = "Basic requests can proceed directly after form submission.";
+      } else if (currentTier === "pro") {
+        formTitle.textContent = "Request Pro Access";
+        formIntro.textContent = "Submit your request and we’ll follow up with the appropriate licensing and access details.";
+        tierNote.textContent = "Pro is a commercial edition and is reviewed separately.";
+      } else if (currentTier === "academic") {
+        formTitle.textContent = "Request Academic / Institutional Access";
+        formIntro.textContent = "Submit your request for academic, faculty, department, or institutional use.";
+        tierNote.textContent = "Academic and institutional requests are reviewed separately.";
+      } else if (currentTier === "advanced") {
+        formTitle.textContent = "Request Advanced Access";
+        formIntro.textContent = "Submit your request for the largest offline bundle and maximum capability edition.";
+        tierNote.textContent = "Advanced is a commercial edition and is reviewed separately.";
+      } else {
+        formTitle.textContent = "Verbum AI Access Request";
+        formIntro.textContent = "Tell us a little about your use case so we can send or unlock the right option for you.";
+        tierNote.textContent = "Basic requests can continue directly to the download step after form submission.";
+      }
     }
 
-    if (["pro", "academic", "advanced"].includes(interest) && message.length < 10) {
-      showFieldError("message", "Please provide a short use case for this request.");
-      valid = false;
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    return valid;
-  }
-
-  interestField.addEventListener("change", refreshTierMessaging);
-  refreshTierMessaging();
-
-  const form = document.getElementById("request-form");
-  const status = document.getElementById("form-status");
-  const successBox = document.getElementById("success-box");
-  const successTitle = document.getElementById("success-title");
-  const successText = document.getElementById("success-text");
-  const basicDownloads = document.getElementById("basic-downloads");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(form);
-    const payload = Object.fromEntries(formData.entries());
-
-    payload.name = (payload.name || "").trim();
-    payload.email = (payload.email || "").trim();
-    payload.organization = (payload.organization || "").trim();
-    payload.interest = (payload.interest || "").trim().toLowerCase();
-    payload.platform = (payload.platform || "").trim().toLowerCase();
-    payload.message = (payload.message || "").trim();
-    payload.company_website = (payload.company_website || "").trim();
-
-    if (!validateForm(payload)) {
-      status.textContent = "Please correct the highlighted fields.";
-      return;
-    }
-
-    status.textContent = "Submitting request...";
-    successBox.classList.remove("show");
-    basicDownloads.classList.remove("show");
-
-    try {
-      const response = await fetch(WORKER_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
+    function clearFieldErrors() {
+      document.querySelectorAll(".field-error").forEach(el => el.remove());
+      document.querySelectorAll(".field input, .field select, .field textarea").forEach(el => {
+        el.style.borderColor = "";
+        el.style.boxShadow = "";
       });
+    }
 
-      const contentType = response.headers.get("content-type") || "";
-      const rawText = await response.text();
+    function showFieldError(fieldId, message) {
+      const field = document.getElementById(fieldId);
+      if (!field) return;
 
-      console.log("Worker response URL:", response.url);
-      console.log("Worker response content-type:", contentType);
-      console.log("Worker raw response:", rawText);
+      field.style.borderColor = "#dc2626";
+      field.style.boxShadow = "0 0 0 4px rgba(220,38,38,0.10)";
 
-      let result = null;
+      const error = document.createElement("div");
+      error.className = "field-error";
+      error.textContent = message;
 
-      if (contentType.includes("application/json")) {
-        try {
-          result = JSON.parse(rawText);
-        } catch (jsonErr) {
-          status.textContent = "Server returned invalid JSON.";
+      field.parentElement.appendChild(error);
+    }
+
+    function validateForm(payload) {
+      clearFieldErrors();
+
+      let valid = true;
+
+      const name = (payload.name || "").trim();
+      const email = (payload.email || "").trim();
+      const organization = (payload.organization || "").trim();
+      const interest = (payload.interest || "").trim();
+      const platform = (payload.platform || "").trim();
+      const message = (payload.message || "").trim();
+      const machineId = (payload.machine_id || "").trim();
+
+      if (name.length < 2 || name.length > 100) {
+        showFieldError("name", "Please enter a valid name between 2 and 100 characters.");
+        valid = false;
+      }
+
+      if (!isValidEmail(email) || email.length > 150) {
+        showFieldError("email", "Please enter a valid email address.");
+        valid = false;
+      }
+
+      if (machineIdFieldWrap.style.display !== "none") {
+        if (machineId.length < 8 || machineId.length > 120) {
+          showFieldError("machine_id", "Please provide a valid device ID.");
+          valid = false;
+        }
+      }
+
+      if (organization.length > 150) {
+        showFieldError("organization", "Organization must be 150 characters or less.");
+        valid = false;
+      }
+
+      if (!["basic", "pro", "academic", "advanced"].includes(interest)) {
+        showFieldError("interest", "Please select a valid access option.");
+        valid = false;
+      }
+
+      if (!["windows", "macos"].includes(platform)) {
+        showFieldError("platform", "Please select a valid platform.");
+        valid = false;
+      }
+
+      if (message.length > 2000) {
+        showFieldError("message", "Message must be 2000 characters or less.");
+        valid = false;
+      }
+
+      if (["pro", "academic", "advanced"].includes(interest) && message.length < 10 && source !== "macos_app") {
+        showFieldError("message", "Please provide a short use case for this request.");
+        valid = false;
+      }
+
+      return valid;
+    }
+
+    interestField.addEventListener("change", refreshTierMessaging);
+    refreshTierMessaging();
+
+    const form = document.getElementById("request-form");
+    const status = document.getElementById("form-status");
+    const successBox = document.getElementById("success-box");
+    const successTitle = document.getElementById("success-title");
+    const successText = document.getElementById("success-text");
+    const basicDownloads = document.getElementById("basic-downloads");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      payload.name = (payload.name || "").trim();
+      payload.email = (payload.email || "").trim();
+      payload.organization = (payload.organization || "").trim();
+      payload.interest = (payload.interest || "").trim().toLowerCase();
+      payload.platform = (payload.platform || "").trim().toLowerCase();
+      payload.message = (payload.message || "").trim();
+      payload.machine_id = (payload.machine_id || "").trim();
+      payload.company_website = (payload.company_website || "").trim();
+      payload.source = source || "portal";
+
+      if (!validateForm(payload)) {
+        status.textContent = "Please correct the highlighted fields.";
+        return;
+      }
+
+      status.textContent = "Submitting request...";
+      successBox.classList.remove("show");
+      basicDownloads.classList.remove("show");
+
+      try {
+        const response = await fetch(WORKER_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const contentType = response.headers.get("content-type") || "";
+        const rawText = await response.text();
+
+        console.log("Worker response URL:", response.url);
+        console.log("Worker response content-type:", contentType);
+        console.log("Worker raw response:", rawText);
+
+        let result = null;
+
+        if (contentType.includes("application/json")) {
+          try {
+            result = JSON.parse(rawText);
+          } catch (jsonErr) {
+            status.textContent = "Server returned invalid JSON.";
+            return;
+          }
+        } else {
+          status.textContent = "Unexpected server response. Check browser console.";
           return;
         }
-      } else {
-        status.textContent = "Unexpected server response. Check browser console.";
-        return;
-      }
 
-      if (!response.ok || !result.success) {
-        status.textContent = result.error || "Submission failed. Please try again.";
-        return;
-      }
-
-      status.textContent = "";
-      successBox.classList.add("show");
-      form.style.display = "none";
-
-      if (payload.interest === "basic") {
-        successTitle.textContent = "Basic request received";
-        successText.textContent = "Thank you. You can continue with the Basic download below.";
-        if (payload.platform === "windows") {
-          basicDownloads.classList.add("show");
+        if (!response.ok || !result.success) {
+          status.textContent = result.error || "Submission failed. Please try again.";
+          return;
         }
-      } else if (payload.interest === "pro") {
-        successTitle.textContent = "Pro request received";
-        successText.textContent = "Thank you. We’ll review your Pro request and follow up with next steps.";
-      } else if (payload.interest === "academic") {
-        successTitle.textContent = "Academic request received";
-        successText.textContent = "Thank you. We’ll review your academic or institutional request and follow up with next steps.";
-      } else if (payload.interest === "advanced") {
-        successTitle.textContent = "Advanced request received";
-        successText.textContent = "Thank you. We’ll review your Advanced request and follow up with next steps.";
-      } else {
-        successTitle.textContent = "Request received";
-        successText.textContent = "Thank you. Your request has been received successfully.";
-      }
 
-    } catch (err) {
-      console.error("Submit error:", err);
-      status.textContent = "Something went wrong. Please try again.";
-    }
-  });
-</script>
+        status.textContent = "";
+        successBox.classList.add("show");
+        form.style.display = "none";
+
+        const fromMacApp = payload.source === "macos_app";
+
+        if (payload.interest === "basic") {
+          successTitle.textContent = "Basic request received";
+          successText.textContent = "Thank you. You can continue with the Basic download below.";
+          if (payload.platform === "windows") {
+            basicDownloads.classList.add("show");
+          }
+        } else if (payload.interest === "pro") {
+          successTitle.textContent = fromMacApp ? "License request received" : "Pro request received";
+          successText.textContent = fromMacApp
+            ? "Thank you. Your license request has been received. Once approved, your license file will be sent to your email."
+            : "Thank you. We’ll review your Pro request and follow up with next steps.";
+        } else if (payload.interest === "academic") {
+          successTitle.textContent = "Academic request received";
+          successText.textContent = "Thank you. We’ll review your academic or institutional request and follow up with next steps.";
+        } else if (payload.interest === "advanced") {
+          successTitle.textContent = "Advanced request received";
+          successText.textContent = "Thank you. We’ll review your Advanced request and follow up with next steps.";
+        } else {
+          successTitle.textContent = "Request received";
+          successText.textContent = "Thank you. Your request has been received successfully.";
+        }
+
+      } catch (err) {
+        console.error("Submit error:", err);
+        status.textContent = "Something went wrong. Please try again.";
+      }
+    });
+  </script>
 </body>
 </html>
