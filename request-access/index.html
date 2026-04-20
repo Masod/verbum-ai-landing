@@ -511,6 +511,8 @@
             />
           </div>
 
+          <input type="hidden" id="machine_id" name="machine_id">
+          <input type="hidden" id="source" name="source">
           <div class="field">
             <label for="name">Name or Alias</label>
             <input id="name" name="name" type="text" required />
@@ -674,6 +676,20 @@
     const machineIdFieldWrap = document.getElementById("machine-id-field");
     const machineIdField = document.getElementById("machine_id");
 
+    const params = new URLSearchParams(window.location.search);
+
+    const machineId = params.get("machine_id");
+    const source = params.get("source");
+    
+    if (machineId) {
+      document.getElementById("machine_id").value = machineId;
+    }
+    
+    if (source) {
+      document.getElementById("source").value = source;
+    }
+
+    
     if (tier && ["basic", "pro", "academic", "advanced"].includes(tier)) {
       interestField.value = tier;
     }
@@ -823,100 +839,102 @@
     const successTitle = document.getElementById("success-title");
     const successText = document.getElementById("success-text");
     const basicDownloads = document.getElementById("basic-downloads");
+    
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+  const formData = new FormData(form);
+  const payload = Object.fromEntries(formData.entries());
 
-      const formData = new FormData(form);
-      const payload = Object.fromEntries(formData.entries());
+  payload.name = (payload.name || "").trim();
+  payload.email = (payload.email || "").trim();
+  payload.organization = (payload.organization || "").trim();
+  payload.interest = (payload.interest || "").trim().toLowerCase();
+  payload.platform = (payload.platform || "").trim().toLowerCase();
+  payload.message = (payload.message || "").trim();
+  payload.machine_id = (payload.machine_id || machineIdParam || "").trim();
+  payload.company_website = (payload.company_website || "").trim();
+  payload.source = (payload.source || source || "request-access-page").trim();
 
-      payload.name = (payload.name || "").trim();
-      payload.email = (payload.email || "").trim();
-      payload.organization = (payload.organization || "").trim();
-      payload.interest = (payload.interest || "").trim().toLowerCase();
-      payload.platform = (payload.platform || "").trim().toLowerCase();
-      payload.message = (payload.message || "").trim();
-      payload.machine_id = (payload.machine_id || "").trim();
-      payload.company_website = (payload.company_website || "").trim();
-      payload.source = source || "portal";
+  console.log("Submitting payload:", payload);
 
-      if (!validateForm(payload)) {
-        status.textContent = "Please correct the highlighted fields.";
+  if (!validateForm(payload)) {
+    status.textContent = "Please correct the highlighted fields.";
+    return;
+  }
+
+  status.textContent = "Submitting request...";
+  successBox.classList.remove("show");
+  basicDownloads.classList.remove("show");
+
+  try {
+    const response = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const contentType = response.headers.get("content-type") || "";
+    const rawText = await response.text();
+
+    console.log("Worker response URL:", response.url);
+    console.log("Worker response content-type:", contentType);
+    console.log("Worker raw response:", rawText);
+
+    let result = null;
+
+    if (contentType.includes("application/json")) {
+      try {
+        result = JSON.parse(rawText);
+      } catch (jsonErr) {
+        status.textContent = "Server returned invalid JSON.";
         return;
       }
+    } else {
+      status.textContent = "Unexpected server response. Check browser console.";
+      return;
+    }
 
-      status.textContent = "Submitting request...";
-      successBox.classList.remove("show");
-      basicDownloads.classList.remove("show");
+    if (!response.ok || !result.success) {
+      status.textContent = result.error || "Submission failed. Please try again.";
+      return;
+    }
 
-      try {
-        const response = await fetch(WORKER_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(payload)
-        });
+    status.textContent = "";
+    successBox.classList.add("show");
+    form.style.display = "none";
 
-        const contentType = response.headers.get("content-type") || "";
-        const rawText = await response.text();
+    const fromMacApp = payload.source === "macos_app";
 
-        console.log("Worker response URL:", response.url);
-        console.log("Worker response content-type:", contentType);
-        console.log("Worker raw response:", rawText);
-
-        let result = null;
-
-        if (contentType.includes("application/json")) {
-          try {
-            result = JSON.parse(rawText);
-          } catch (jsonErr) {
-            status.textContent = "Server returned invalid JSON.";
-            return;
-          }
-        } else {
-          status.textContent = "Unexpected server response. Check browser console.";
-          return;
-        }
-
-        if (!response.ok || !result.success) {
-          status.textContent = result.error || "Submission failed. Please try again.";
-          return;
-        }
-
-        status.textContent = "";
-        successBox.classList.add("show");
-        form.style.display = "none";
-
-        const fromMacApp = payload.source === "macos_app";
-
-        if (payload.interest === "basic") {
-          successTitle.textContent = "Basic request received";
-          successText.textContent = "Thank you. You can continue with the Basic download below.";
-          if (payload.platform === "windows") {
-            basicDownloads.classList.add("show");
-          }
-        } else if (payload.interest === "pro") {
-          successTitle.textContent = fromMacApp ? "License request received" : "Pro request received";
-          successText.textContent = fromMacApp
-            ? "Thank you. Your license request has been received. Once approved, your license file will be sent to your email."
-            : "Thank you. We’ll review your Pro request and follow up with next steps.";
-        } else if (payload.interest === "academic") {
-          successTitle.textContent = "Academic request received";
-          successText.textContent = "Thank you. We’ll review your academic or institutional request and follow up with next steps.";
-        } else if (payload.interest === "advanced") {
-          successTitle.textContent = "Advanced request received";
-          successText.textContent = "Thank you. We’ll review your Advanced request and follow up with next steps.";
-        } else {
-          successTitle.textContent = "Request received";
-          successText.textContent = "Thank you. Your request has been received successfully.";
-        }
-
-      } catch (err) {
-        console.error("Submit error:", err);
-        status.textContent = "Something went wrong. Please try again.";
+    if (payload.interest === "basic") {
+      successTitle.textContent = "Basic request received";
+      successText.textContent = "Thank you. You can continue with the Basic download below.";
+      if (payload.platform === "windows") {
+        basicDownloads.classList.add("show");
       }
-    });
+    } else if (payload.interest === "pro") {
+      successTitle.textContent = fromMacApp ? "License request received" : "Pro request received";
+      successText.textContent = fromMacApp
+        ? "Thank you. Your license request has been received. Once approved, your license file will be sent to your email."
+        : "Thank you. We’ll review your Pro request and follow up with next steps.";
+    } else if (payload.interest === "academic") {
+      successTitle.textContent = "Academic request received";
+      successText.textContent = "Thank you. We’ll review your academic or institutional request and follow up with next steps.";
+    } else if (payload.interest === "advanced") {
+      successTitle.textContent = "Advanced request received";
+      successText.textContent = "Thank you. We’ll review your Advanced request and follow up with next steps.";
+    } else {
+      successTitle.textContent = "Request received";
+      successText.textContent = "Thank you. Your request has been received successfully.";
+    }
+
+  } catch (err) {
+    console.error("Submit error:", err);
+    status.textContent = "Something went wrong. Please try again.";
+  }
+});
   </script>
 </body>
 </html>
