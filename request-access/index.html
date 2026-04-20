@@ -694,6 +694,11 @@
       machineIdField.value = machineIdParam;
     }
 
+    console.log("emailParam:", emailParam);
+    console.log("machineIdParam:", machineIdParam);
+    console.log("machineIdField exists:", !!machineIdField);
+    console.log("machineIdFieldWrap exists:", !!machineIdFieldWrap);
+    
     if (source === "macos_app") {
       formTitle.textContent = "Request Verbum AI License";
       formIntro.textContent = "Review your email address and device ID, then submit your request. Once approved, your license file will be sent to your email.";
