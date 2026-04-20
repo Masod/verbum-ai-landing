@@ -37,7 +37,7 @@
     }
 
     .wrap{
-      max-width:1400px;
+      max-width:1500px;
       margin:0 auto;
     }
 
@@ -112,7 +112,7 @@
     table{
       width:100%;
       border-collapse:collapse;
-      min-width:1150px;
+      min-width:1320px;
     }
 
     th, td{
@@ -144,6 +144,13 @@
 
     .email-cell{
       word-break:break-word;
+    }
+
+    .machine-cell{
+      max-width:180px;
+      word-break:break-all;
+      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:13px;
     }
 
     .actions{
@@ -212,7 +219,7 @@
       }
 
       table{
-        min-width:980px;
+        min-width:1120px;
       }
     }
 
@@ -243,7 +250,7 @@
       </p>
 
       <div class="toolbar">
-        <input id="search-box" type="text" placeholder="Search name, email, org, message..." />
+        <input id="search-box" type="text" placeholder="Search name, email, org, message, device ID..." />
 
         <select id="filter-interest">
           <option value="">All tiers</option>
@@ -282,6 +289,7 @@
               <th>Date</th>
               <th>Name</th>
               <th>Email</th>
+              <th>Device ID</th>
               <th>Organization</th>
               <th>Tier</th>
               <th>Platform</th>
@@ -344,6 +352,11 @@
 
 Thank you for your interest in Verbum AI.
 
+Email: ${row.email || ""}
+Device ID: ${row.machine_id || ""}
+Platform: ${row.platform || ""}
+Source: ${row.request_source || ""}
+
 Best regards,
 Masod Samadi
 Founder, Verbum AI`
@@ -357,6 +370,11 @@ Founder, Verbum AI`
 `Hi ${row.name},
 
 Thank you for your interest in Verbum AI.
+
+Email: ${row.email || ""}
+Device ID: ${row.machine_id || ""}
+Platform: ${row.platform || ""}
+Source: ${row.request_source || ""}
 
 Best regards,
 Masod Samadi
@@ -375,6 +393,7 @@ Founder, Verbum AI`
           <td>${escapeHtml(formatDate(row.submitted_at))}</td>
           <td>${escapeHtml(row.name)}</td>
           <td class="email-cell">${escapeHtml(row.email)}</td>
+          <td class="machine-cell">${escapeHtml(row.machine_id || "")}</td>
           <td>${escapeHtml(row.organization || "")}</td>
           <td>${escapeHtml(row.interest)}</td>
           <td>${escapeHtml(row.platform)}</td>
@@ -416,7 +435,8 @@ Founder, Verbum AI`
             row.request_source,
             row.interest,
             row.platform,
-            row.status
+            row.status,
+            row.machine_id
           ].join(" ").toLowerCase();
 
           if (!haystack.includes(q)) return false;
@@ -473,6 +493,7 @@ Founder, Verbum AI`
         "submitted_at",
         "name",
         "email",
+        "machine_id",
         "organization",
         "interest",
         "platform",
