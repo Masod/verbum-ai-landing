@@ -587,207 +587,167 @@
     </div>
   </div>
 
-  <main class="container">
-    <section class="hero">
-      <span class="badge">Download • macOS • Windows</span>
-      <h1>Download Verbum AI</h1>
-      <p class="lead">
-        Verbum AI is distributed through a controlled access process to support responsible use, protect product integrity, and reduce unauthorized redistribution.
-        Choose your platform and access path below. If you are unsure where to begin, start with the Basic option. For installation questions or setup guidance, 
-        refer to the support information provided on this page.
-        For setup questions, check the <a href="/faq/">FAQ</a>.
+<main class="container">
+  <section class="hero">
+    <span class="badge">Download • macOS • Windows</span>
+    <h1>Download Verbum AI</h1>
+    <p class="lead">
+      Verbum AI is a privacy-first offline AI tool for document summarization, search, and analysis.
+      Install the app for your platform, open it to copy your Machine ID, then request a license for activation.
+    </p>
+
+    <div class="btns">
+      <a class="btn primary" href="#macos-apple-silicon">macOS Apple Silicon</a>
+      <a class="btn" href="#windows">Windows</a>
+      <a class="btn orange" href="/request-access/">Request License</a>
+    </div>
+  </section>
+
+  <div class="downloads-head">
+    <h2>Downloads</h2>
+    <p>Verbum AI installers are license-based. Choose your platform below.</p>
+  </div>
+
+  <div class="howto">
+    <details open>
+      <summary>
+        How activation works
+        <span class="chev">▾</span>
+      </summary>
+      <div class="content">
+        <div><strong>1.</strong> Download and install Verbum AI.</div>
+        <div><strong>2.</strong> Open the app and copy your Machine ID.</div>
+        <div><strong>3.</strong> Submit a license request.</div>
+        <div><strong>4.</strong> Receive your license file.</div>
+        <div><strong>5.</strong> Import the license file inside Verbum AI.</div>
+        <div class="pill-row">
+          <span class="pill">Offline AI</span>
+          <span class="pill">Local document processing</span>
+          <span class="pill orange">License required</span>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        Windows installation note
+        <span class="chev">▾</span>
+      </summary>
+      <div class="content">
+        If your Windows installer includes <code>.bin</code> files, keep the installer <code>.exe</code>
+        and all matching <code>.bin</code> files in the same folder before running the installer.
+        If the installer asks for another disk or file, select that same folder.
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        macOS first launch note
+        <span class="chev">▾</span>
+      </summary>
+      <div class="content">
+        If macOS blocks the app on first launch, right-click the app → <strong>Open</strong> → confirm.
+      </div>
+    </details>
+  </div>
+
+  <div class="cards">
+
+    <!-- macOS Apple Silicon -->
+    <div class="card" id="macos-apple-silicon">
+      <div class="card-top">
+        <h3>macOS — Apple Silicon</h3>
+        <span class="badge">M1/M2/M3/M4</span>
+      </div>
+
+      <p class="sub">
+        Download Verbum AI for Apple Silicon Macs. This version supports M1, M2, M3, and M4 Mac devices.
       </p>
 
-      <div class="btns">
-        <!-- FIXED: now points to the correct download anchors on this page -->
-        <a class="btn primary" href="#windows-basic">Windows Basic</a>
-        <a class="btn" href="#macos">macOS</a>
-        <a class="btn orange" href="/faq/">FAQ</a>
-      </div>
-    </section>
+      <a class="btn"
+         href="https://downloads.verbum-ai.com/downloads/macos/VerbumAI.dmg"
+         onclick="return verbumTrackAndGo('download_click','mac','macos_apple_silicon_dmg',this.href,220);">
+        ⬇ Download Verbum AI for macOS Apple Silicon
+      </a>
 
-    <div class="downloads-head">
-      <h2>Downloads</h2>
-      <p>macOS and Windows installers for Basic, Pro, and Advanced access paths</p>
+      <div class="important">
+        License required for activation.
+        <small>Open the app after installation to copy your Machine ID, then submit a license request.</small>
+      </div>
+
+      <div class="tiny">
+        First launch note: If macOS blocks the application, right-click the app and choose <strong>Open</strong>.
+      </div>
     </div>
 
-    <div class="howto">
-      <details open>
-        <summary>
-          Windows installation note: 
-          To avoid the “Setup needs the next disk” message, place the installer .exe file and all matching .bin files in the same folder before running the installer.
-          <span class="chev">▾</span>
-        </summary>
-        <div class="content">
-          <div><strong>Rule:</strong> Put the <code>.exe</code> and <strong>all matching</strong> <code>.bin</code> files into the <strong>same folder</strong>, then run the <code>.exe</code>.</div>
-          <div style="margin-top:8px;">
-            Recommended example folders:
-            <code>Downloads\VerbumAI\basic\</code>,
-            <code>Downloads\VerbumAI\pro\</code>,
-            <code>Downloads\VerbumAI\advanced\</code>
-          </div>
-          <div class="pill-row">
-            Before starting installation
-            <span class="pill">Keep the EXE and all BIN files in the same folder</span>
-            <span class="pill">Launch the EXE from that folder</span>
-            <span class="pill orange">If the installer asks for “Disk 1,” select that same folder</span>
-          </div>
-          <div style="margin-top:10px; color:#4b5563;">
-            A browser warning such as “isn’t commonly downloaded” may appear until the installer is code-signed.
-          </div>
-        </div>
-      </details>
+    <!-- Windows -->
+    <div class="card basic" id="windows">
+      <div class="card-top">
+        <h3>Windows</h3>
+        <span class="badge">License Required</span>
+      </div>
 
-      <details>
-        <summary>
-          macOS first launch note
-          <span class="chev">▾</span>
-        </summary>
-        <div class="content">
-          If macOS blocks the app on first launch: right-click the app → <strong>Open</strong> → confirm.
-        </div>
-      </details>
+      <p class="sub">
+        Verbum AI for Windows is available through licensed access. The installer may include an EXE and matching BIN files.
+      </p>
+
+      <a class="btn"
+         href="/request-access/?platform=windows"
+         onclick="return verbumTrackAndGo('request_access','windows','windows_request',this.href,180);">
+        Request Windows Access
+      </a>
+
+      <div class="hint">
+        After approval, you will receive the correct Windows installer package and license file.
+      </div>
     </div>
 
-    <div class="cards">
-
-      <!-- macOS -->
-      <div class="card" id="macos">
-        <div class="card-top">
-          <h3>macOS</h3>
-          <span class="badge">DMG</span>
-        </div>
-        <p class="sub">macOS
-          DMG
-    
-          Offline installer for macOS.
-          
-          Download Verbum AI for macOS
-          </p>
-
-        <a class="btn"
-           href="https://downloads.verbum-ai.com/downloads/macos/VerbumAI.dmg"
-           onclick="return verbumTrackAndGo('download_click','mac','macos_dmg',this.href,220);">
-          ⬇ Download Verbum AI (macOS)
-        </a>
-
-        <div class="tiny">
-          First launch note:
-          If macOS blocks the application on first launch, right-click the app and choose Open. <strong>Open</strong>.
-        </div>
+    <!-- macOS Intel -->
+    <div class="card" id="macos-intel">
+      <div class="card-top">
+        <h3>macOS — Intel</h3>
+        <span class="badge orange">Early Access</span>
       </div>
 
-      <!-- Windows Basic -->
-      <div class="card basic" id="windows-basic">
-        <div class="card-top">
-          <h3>Windows — Basic</h3>
-          <span class="badge">Basic</span>
-        </div>
-      
-        <p class="sub">
-          Basic is the entry point for Windows users who want to start with Verbum AI in a simpler access path.
-          A short access request is required before the Basic download is shown.
-        </p>
-      
-        <a class="btn"
-           href="/request-access/?tier=basic&platform=windows"
-           onclick="return verbumTrackAndGo('request_access','windows','windows_basic_request',this.href,180);">
-          Continue to Basic Download
-        </a>
-      
-        <div class="hint">
-          After submitting the access request form, the Basic download step will be made available directly on the access page.
-        </div>
+      <p class="sub">
+        Intel Mac support is available by request while we prepare and validate the dedicated Intel package.
+      </p>
+
+      <a class="btn orange"
+         href="/request-access/?platform=mac_intel"
+         onclick="return verbumTrackAndGo('request_access','mac','mac_intel_request',this.href,180);">
+        Request Intel Mac Access
+      </a>
+
+      <div class="hint">
+        Apple Silicon and Intel Mac packages are separate. Intel users should request access before downloading.
       </div>
-      
-      <!-- Windows Pro (GATED — NO LINKS) -->
-      <div class="card pro" id="windows-pro">
-        <div class="card-top">
-          <h3>Windows — Pro</h3>
-          <span class="badge orange">Pro</span>
-        </div>
-
-        <p class="sub">Pro includes stronger model quality and improved summarization performance, making it a good fit for serious users and more demanding workflows.</p>
-
-        <div class="btn disabled" aria-disabled="true">
-          🔒 Pro is licensed access
-        </div>
-
-        <div class="gate">
-         Pro is available only to approved and licensed users.
-          <small>Request access and, after approval, a private download link will be provided.</small>
-        </div>
-
-        <a class="btn orange"
-           href="/request-access/?tier=pro&platform=windows"
-           onclick="return verbumTrackAndGo('request_access','windows','windows_pro_request',this.href,180);">
-          Request Pro Access
-        </a>
-
-          <div class="contact-line">
-            Access: <a href="mailto:access@verbum-ai.com">access@verbum-ai.com</a>
-          </div>
-
-        <div class="hint">
-          Note:
-            After approval, you will receive the correct EXE and BIN bundle for your licensed version.
-        </div>
-      </div>
-
-      <!-- Windows Advanced (GATED — NO LINKS) -->
-      <div class="card advanced" id="windows-advanced">
-        <div class="card-top">
-          <h3>Windows — Advanced</h3>
-          <span class="badge orange">Advanced</span>
-        </div>
-
-        <p class="sub">Advanced provides the largest offline model package, highest summary quality, and maximum capability for the full Verbum AI experience.</p>
-
-        <div class="btn disabled" aria-disabled="true">
-          🔒 Advanced is licensed access
-        </div>
-
-        <div class="gate">
-          Advanced is available only to approved and licensed users.
-          <small>Request access and, after approval, a private download link will be provided.</small>
-        </div>
-
-        <a class="btn orange"
-           href="/request-access/?tier=advanced&platform=windows"
-           onclick="return verbumTrackAndGo('request_access','windows','windows_adv_request',this.href,180);">
-          Request Advanced Access
-        </a>
-        <div class="contact-line">
-          Access: <a href="mailto:access@verbum-ai.com">access@verbum-ai.com</a>
-        </div>
-
-        <div class="hint">
-          Note:
-          Advanced includes the largest offline model bundle. After approval, the correct EXE and BIN package will be provided for your licensed version.
-        </div>
-      </div>
-
     </div>
-    <!-- Contact -->
-<div class="contact-section" id="contact">
-  <h3>Need Pro / Advanced access or have questions?</h3>
+
+  </div>
+
+  <div class="contact-section" id="contact">
+    <h3>Need access or have questions?</h3>
+    <p>
+      Verbum AI is currently distributed through a controlled license process.
+      If you need help with installation, activation, or platform selection, contact us.
+    </p>
+
+    <div class="email">
+      ✉️ <a href="mailto:access@verbum-ai.com">access@verbum-ai.com</a>
+    </div>
+
+    <div class="micro">
+      Tip: Include your platform, Machine ID if available, and your use case so we can respond faster.
+    </div>
+  </div>
+
+  <br>
   <p>
-    Pro and Advanced are commercial editions. If you’d like access, licensing info, or help with installation,
-    contact us and we’ll respond with next steps.
+    Some Verbum AI versions are distributed through a controlled access path and require license approval before activation.
   </p>
-
-  <div class="email">
-    ✉️ <a href="mailto:access@verbum-ai.com">access@verbum-ai.com</a>
-  </div>
-
-  <div class="micro">
-    Tip: Include your platform (Windows/macOS) and your use case so we can respond faster.
-  </div>
-</div><br>
-<p>
-  Some Verbum AI versions are distributed through a controlled access path and may require approval before download.
-</p><br>
-  </main>
+  <br>
+</main>
 
   <div class="container footer">
     <div>© <span id="y"></span> Verbum AI — Privacy-first offline summarization.</div>
