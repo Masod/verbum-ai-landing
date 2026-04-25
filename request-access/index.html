@@ -475,15 +475,11 @@
 
   <main class="container">
     <section class="hero">
-      <span class="badge">Request Access • Basic • Pro • Academic</span>
+      <span class="badge">Request License • macOS • Windows</span>
       <h1>Request Access</h1>
       <p class="lead">
-        Verbum AI is offered through a controlled access process to support responsible use, protect product integrity,
-        and reduce unauthorized redistribution.
-
-        We request only limited information at this stage to help route you to the appropriate access path.
-        Basic access can continue directly after submission, while Pro, Academic, Institutional,
-        and Advanced requests may be reviewed separately.
+        Request a Verbum AI license for offline document summarization, search, and analysis.
+        Submit your platform, email address, Machine ID, and use case. Once approved, your license file will be sent to your email.
       </p>
     </section>
 
@@ -521,7 +517,7 @@
             <input id="email" name="email" type="email" required />
           </div>
 
-          <div class="field" id="machine-id-field" style="display:none;">
+          <div class="field" id="machine-id-field">
             <label for="machine_id">Device ID</label>
             <input id="machine_id" name="machine_id" type="text" />
           </div>
@@ -532,13 +528,12 @@
           </div>
 
           <div class="field">
-            <label for="interest">Requested access level</label>
-            <select id="interest" name="interest" required>
-              <option value="">Select an option</option>
-              <option value="basic">Basic</option>
-              <option value="pro">Pro</option>
-              <option value="academic">Academic / Institutional</option>
-              <option value="advanced">Advanced</option>
+            <label for="platform">Platform</label>
+            <select id="platform" name="platform" required>
+              <option value="">Select a platform</option>
+              <option value="mac_arm64">macOS Apple Silicon (M1/M2/M3/M4)</option>
+              <option value="mac_intel">macOS Intel</option>
+              <option value="windows">Windows</option>
             </select>
           </div>
 
@@ -565,30 +560,6 @@
           <p id="success-text">
             Thank you. Your request has been received successfully.
           </p>
-
-          <div class="downloads-panel" id="basic-downloads">
-            <div class="download-grid">
-              <a class="btn"
-                 href="https://downloads.verbum-ai.com/archive/windows/known-good/2026-03-15/basic/VerbumAI-Basic-Setup-x64.exe">
-                ⬇ Download Basic Installer (.exe)
-              </a>
-
-              <a class="btn outline"
-                 href="https://downloads.verbum-ai.com/archive/windows/known-good/2026-03-15/basic/VerbumAI-Basic-Setup-x64-1.bin">
-                Download BIN 1 (≈ 2.0 GB)
-              </a>
-
-              <a class="btn outline"
-                 href="https://downloads.verbum-ai.com/archive/windows/known-good/2026-03-15/basic/VerbumAI-Basic-Setup-x64-2.bin">
-                Download BIN 2 (≈ 2.0 GB)
-              </a>
-
-              <a class="btn outline"
-                 href="https://downloads.verbum-ai.com/archive/windows/known-good/2026-03-15/basic/VerbumAI-Basic-Setup-x64-3.bin">
-                Download BIN 3 (≈ 2.0 GB)
-              </a>
-            </div>
-
             <div class="tiny">
               Important: Download the EXE and all BIN files into the same folder, then run the EXE.
             </div>
@@ -601,33 +572,25 @@
       <div class="card">
         <h2>How Access Works</h2>
 
-        <div class="side-list">
+        <div class="side-list">   
           <div class="side-item">
-            <strong>Basic</strong>
-            <span>
-              Designed for users who want to begin with the standard Verbum AI entry path.
-              After submitting the request form, Basic access can continue directly to the next step.
-            </span>
+            <strong>Install Verbum AI</strong>
+            <span>Download the correct package for your platform and open the app.</span>
           </div>
 
           <div class="side-item">
-            <strong>Pro</strong>
-            <span>
-              Recommended for users who want higher-quality models, stronger summarization,
-              and a more capable offline experience for professional workflows.
-            </span>
+            <strong>Copy Machine ID</strong>
+            <span>Use the Machine ID shown inside the app. This ID is required for license generation.</span>
           </div>
 
           <div class="side-item">
-            <strong>Academic / Institutional</strong>
-            <span>Intended for universities, lecturers, departments, research groups, and broader organizational evaluation.</span>
+            <strong>Submit License Request</strong>
+            <span>Send your email, platform, Machine ID, and intended use through this form.</span>
           </div>
-
+          
           <div class="side-item">
-            <strong>Advanced</strong>
-            <span>
-              The full offline package for users who want maximum capability and the largest model bundle available within Verbum AI.
-            </span>
+            <strong>Import License</strong>
+            <span>After approval, import the license file sent to your email and start using Verbum AI.</span>
           </div>
         </div>
 
@@ -796,12 +759,12 @@
         valid = false;
       }
 
-      if (!["basic", "pro", "academic", "advanced"].includes(interest)) {
+      if (!["individual", "organization", "academic"].includes(interest)) {
         showFieldError("interest", "Please select a valid access option.");
         valid = false;
       }
 
-      if (!["windows", "macos"].includes(platform)) {
+      if (!["windows", "mac_arm64", "mac_intel"].includes(platform)) {
         showFieldError("platform", "Please select a valid platform.");
         valid = false;
       }
@@ -897,27 +860,9 @@ form.addEventListener("submit", async (e) => {
 
     const fromMacApp = payload.source === "macos_app";
 
-    if (payload.interest === "basic") {
-      successTitle.textContent = "Basic request received";
-      successText.textContent = "Thank you. You can continue with the Basic download below.";
-      if (payload.platform === "windows") {
-        basicDownloads.classList.add("show");
-      }
-    } else if (payload.interest === "pro") {
-      successTitle.textContent = fromMacApp ? "License request received" : "Pro request received";
-      successText.textContent = fromMacApp
-        ? "Thank you. Your license request has been received. Once approved, your license file will be sent to your email."
-        : "Thank you. We’ll review your Pro request and follow up with next steps.";
-    } else if (payload.interest === "academic") {
-      successTitle.textContent = "Academic request received";
-      successText.textContent = "Thank you. We’ll review your academic or institutional request and follow up with next steps.";
-    } else if (payload.interest === "advanced") {
-      successTitle.textContent = "Advanced request received";
-      successText.textContent = "Thank you. We’ll review your Advanced request and follow up with next steps.";
-    } else {
-      successTitle.textContent = "Request received";
-      successText.textContent = "Thank you. Your request has been received successfully.";
-    }
+successTitle.textContent = "License request received";
+successText.textContent =
+  "Thank you. Your request has been received. Once approved, your license file and next steps will be sent to your email.";
 
   } catch (err) {
     console.error("Submit error:", err);
