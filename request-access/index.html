@@ -503,7 +503,7 @@
           Basic requests can continue directly to the download step after form submission.
         </div>
 
-        <form id="request-form">
+        <form id="request-form" method="post" action="" novalidate>
 
           <div class="honeypot-wrap" aria-hidden="true">
             <label for="company_website">Company website</label>
@@ -537,12 +537,12 @@
           </div>
 
           <div class="field">
-            <label for="platform">Platform</label>
-            <select id="platform" name="platform" required>
-              <option value="">Select a platform</option>
-              <option value="mac_arm64">macOS Apple Silicon (M1/M2/M3/M4)</option>
-              <option value="mac_intel">macOS Intel</option>
-              <option value="windows">Windows</option>
+            <label for="interest">Access option</label>
+            <select id="interest" name="interest" required>
+              <option value="basic">Basic / Individual</option>
+              <option value="pro">Pro / Commercial</option>
+              <option value="academic">Academic / Institutional</option>
+              <option value="advanced">Advanced</option>
             </select>
           </div>
 
@@ -550,8 +550,9 @@
             <label for="platform">Platform</label>
             <select id="platform" name="platform" required>
               <option value="">Select a platform</option>
+              <option value="mac_arm64">macOS Apple Silicon (M1/M2/M3/M4)</option>
+              <option value="mac_intel">macOS Intel</option>
               <option value="windows">Windows</option>
-              <option value="macos">macOS</option>
             </select>
           </div>
 
@@ -648,8 +649,12 @@
       interestField.value = tier;
     }
 
-    if (platform && ["windows", "macos"].includes(platform)) {
-      platformField.value = platform;
+    if (platform) {
+      if (platform === "macos" || platform === "mac") {
+        platformField.value = "mac_arm64";
+      } else if (["windows", "mac_arm64", "mac_intel"].includes(platform)) {
+        platformField.value = platform;
+      }
     }
 
     if (emailParam) {
@@ -673,7 +678,7 @@
     }
 
     function refreshTierMessaging() {
-      const currentTier = interestField.value;
+      const currentTier = interestField ? interestField.value : "basic";
 
       if (source === "macos_app") {
         formTitle.textContent = "Request Verbum AI License";
@@ -766,7 +771,7 @@
         valid = false;
       }
 
-      if (!["individual", "organization", "academic"].includes(interest)) {
+      if (!["basic", "pro", "academic", "advanced"].includes(interest)) {
         showFieldError("interest", "Please select a valid access option.");
         valid = false;
       }
@@ -789,7 +794,9 @@
       return valid;
     }
 
-    interestField.addEventListener("change", refreshTierMessaging);
+    if (interestField) {
+      interestField.addEventListener("change", refreshTierMessaging);
+    }
     refreshTierMessaging();
 
     const form = document.getElementById("request-form");
@@ -808,7 +815,7 @@ form.addEventListener("submit", async (e) => {
   payload.name = (payload.name || "").trim();
   payload.email = (payload.email || "").trim();
   payload.organization = (payload.organization || "").trim();
-  payload.interest = (payload.interest || "").trim().toLowerCase();
+  payload.interest = (payload.interest || "basic").trim().toLowerCase();
   payload.platform = (payload.platform || "").trim().toLowerCase();
   payload.message = (payload.message || "").trim();
   payload.machine_id = (payload.machine_id || machineIdParam || "").trim();
@@ -824,7 +831,9 @@ form.addEventListener("submit", async (e) => {
 
   status.textContent = "Submitting request...";
   successBox.classList.remove("show");
-  basicDownloads.classList.remove("show");
+  if (basicDownloads) {
+    basicDownloads.classList.remove("show");
+  }
 
   try {
     const response = await fetch(WORKER_URL, {
