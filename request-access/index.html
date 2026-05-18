@@ -880,7 +880,12 @@ form.addEventListener("submit", async (e) => {
 successTitle.textContent = "License request received";
 successText.textContent =
   "Thank you. Your request has been received. Once approved, your license file and next steps will be sent to your email.";
-
+  
+    gtag("event", "access_request_submitted", {
+    platform: payload.platform,
+    source: payload.source
+  });
+    
   } catch (err) {
     console.error("Submit error:", err);
     status.textContent = "Something went wrong. Please try again.";
