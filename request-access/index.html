@@ -759,8 +759,9 @@
         valid = false;
       }
 
-      if (machineIdFieldWrap.style.display !== "none") {
-        if (machineId.length < 8 || machineId.length > 120) {
+      // Device ID validation
+      if (payload.platform === "mac_arm64" || payload.platform === "mac_intel") {
+        if (!machineId || machineId.length < 8 || machineId.length > 120) {
           showFieldError("machine_id", "Please provide a valid device ID.");
           valid = false;
         }
