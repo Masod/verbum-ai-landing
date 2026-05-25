@@ -805,7 +805,7 @@ form.addEventListener("submit", async (e) => {
   payload.interest = (payload.interest || "basic").trim().toLowerCase();
   payload.platform = (payload.platform || "").trim().toLowerCase();
   payload.message = (payload.message || "").trim();
-  payload.machine_id = (payload.machine_id || machineIdParam || "").trim();
+ // payload.machine_id = (payload.machine_id || machineIdParam || "").trim();
   payload.company_website = (payload.company_website || "").trim();
   payload.source = (payload.source || source || "request-access-page").trim();
 
