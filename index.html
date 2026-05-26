@@ -57,6 +57,11 @@
     }
 
     *{ box-sizing:border-box; }
+    img,
+video{
+  max-width:100%;
+}
+    
     body{
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin:0;
@@ -72,12 +77,13 @@
       text-align:center;
       padding:56px 18px 18px;
     }
-    header img{
-      width:116px;
-      height:auto;
-      margin-bottom:16px;
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.10));
-    }
+header img{
+  width:116px;
+  max-width:100%;
+  height:auto;
+  margin-bottom:16px;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.10));
+}
     header h1{
       font-size:2.55em;
       margin:0;
@@ -248,11 +254,12 @@
     }
 
 .cards{
-  max-width: 1180px;
+  width: min(100% - 32px, 1180px);
   margin: 14px auto 0;
-  display: grid;
+
+  display:grid;
   grid-template-columns: repeat(3, minmax(280px, 1fr));
-  gap: 14px;
+  gap:14px;
 }
 
     .card{
@@ -279,13 +286,14 @@
       background: radial-gradient(circle, rgba(255,122,0,0.16), transparent 62%);
     }
 
-    .card-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:10px;
-    }
+.card-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
     .card h3{
       margin:0;
       font-size:18px;
@@ -395,11 +403,72 @@
     }
 
     /* Small screens */
-    @media (max-width:520px){
-      header h1{ font-size:2.15em; }
-      .btn{ border-radius:12px; }
-      .card{ border-radius:16px; }
-    }
+@media (max-width:720px){
+
+  header{
+    padding:38px 16px 16px;
+  }
+
+  header img{
+    width:88px;
+  }
+
+  header h1{
+    font-size:2rem;
+    line-height:1.15;
+  }
+
+  header p{
+    font-size:1rem;
+    line-height:1.55;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .labs-video-row{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    border-radius:16px;
+    padding:14px;
+  }
+
+  .btn{
+    border-radius:12px;
+    min-height:44px;
+  }
+
+  .topnav-inner{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .topnav-links{
+    justify-content:flex-start;
+    width:100%;
+    gap:6px;
+  }
+
+  .topnav-links a{
+    font-size:0.86em;
+    padding:7px 8px;
+  }
+}
+
+@media (max-width:420px){
+
+  header h1{
+    font-size:1.8rem;
+  }
+
+  .topnav-links a{
+    font-size:0.82em;
+    padding:6px 7px;
+  }
+}
 
     /* Top navigation */
 .topnav{
