@@ -429,6 +429,24 @@
       font-weight:700;
     }
 
+    .terms-check{
+  display:block;
+  margin-top:16px;
+  font-size:0.95em;
+  color:#374151;
+  line-height:1.6;
+}
+
+.terms-check input{
+  margin-right:8px;
+}
+
+.terms-check a{
+  color:#1E3A8A;
+  font-weight:700;
+  text-decoration:none;
+}
+    
     @media (max-width: 720px){
       .layout{
         grid-template-columns:1fr;
@@ -554,7 +572,14 @@
             <label for="message">Intended use</label>
             <textarea id="message" name="message" placeholder="A short use case helps us route requests more effectively."></textarea>
           </div>
-
+          <label class="terms-check">
+            <input type="checkbox" required>
+          
+            I agree to the
+            <a href="/terms/" target="_blank">Terms</a>
+            and
+            <a href="/privacy/" target="_blank">Privacy Policy</a>
+          </label>
           <button class="btn" type="submit">Submit Request</button>
           <div class="status" id="form-status"></div>
         </form>
