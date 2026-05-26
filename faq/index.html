@@ -319,6 +319,9 @@
       padding:28px 10px 40px;
       font-size:0.92em;
       color:#9ca3af;
+
+      margin-top:48px;
+      border-top:1px solid rgba(17,24,39,0.16);
     }
 
     /* Small screens */
@@ -410,12 +413,10 @@
         <span>Verbum AI</span>
       </a>
       <div class="topnav-links">
-        <a href="/">Home</a>
+        <a class="active" href="/">Home</a>
         <a href="/offline-document-summarizer/">Offline Summarizer</a>
-        <a href="/about/">About</a>
-        <a href="/privacy/">Privacy</a>
         <a href="/features/">Features</a>
-        <a class="active" href="/faq/">FAQ</a>
+        <a href="/faq/">FAQ</a>
         <a href="/download/">Download</a>
         <a href="/labs/">Labs</a>
       </div>
@@ -496,17 +497,36 @@
     </div>
   </main>
 
-  <div class="container footer">
-    <div>© <span id="y"></span> Verbum AI — FAQ.</div>
-    <div class="patent-notice" style="margin-top:12px;font-size:12px;line-height:1.4;opacity:0.85;">
-      <strong>Patent Pending</strong> — Provisional Patent Application Filed (Jan 7, 2026).
-      Unauthorized copying or commercial use prohibited. Verbum AI™. All rights reserved.
-    </div>
-    <div class="small" style="margin-top:6px;">
-      Not affiliated with other products named “Verbum”. All trademarks belong to their respective owners.
-    </div>
-     <a href="/guide/">Guide</a>
+<footer>
+  Created by Masod — 2025 © Verbum AI Technologies<br/>
+
+  <span style="color:#9ca3af;">
+    Local-first by default • No cloud uploads unless you choose
+  </span>
+
+  <br/><br/>
+
+  <span>
+    <a href="/about/">About</a> •
+    <a href="/privacy/">Privacy</a> •
+    <a href="/terms/">Terms</a> •
+    <a href="/download/">Contact</a>
+  </span>
+
+  <br/><br/>
+
+  <span style="color:#9ca3af;">
+    Labs:
+    <a href="/labs/">Overview</a> •
+    <a href="/labs/realestate-ai/">RealEstate AI</a> •
+    <a href="/labs/shieldscope/">ShieldScope</a>
+  </span>
+
+  <div class="patent-notice">
+    <strong>Patent Pending</strong> — Provisional Patent Application Filed (Jan 7, 2026).
+    Unauthorized copying or commercial use prohibited. Verbum AI™. All rights reserved.
   </div>
+</footer>
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
