@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q7XW2FW7W8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-Q7XW2FW7W8');
+    gtag('config', 'G-MYZ36TRY04');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Contact Verbum AI</title>
+
+  <meta name="description"
+        content="Contact Verbum AI for access requests, licensing questions, enterprise inquiries, or installation support." />
+
+  <link rel="canonical" href="https://verbum-ai.com/contact/" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+
+  <style>
+    :root{
+      --blue:#3B82F6;
+      --blueDark:#1E3A8A;
+      --orange:#FF7A00;
+      --bg:#f7f9fc;
+      --text:#111827;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --border:rgba(17,24,39,0.12);
+      --shadow:0 10px 30px rgba(17,24,39,0.08);
+      --radius:18px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    img,
+    video{
+      max-width:100%;
+    }
+
+    body{
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin:0;
+      padding:0;
+
+      background:
+        radial-gradient(1100px 500px at 50% -200px,
+        rgba(59,130,246,0.18), transparent 60%),
+        radial-gradient(900px 450px at 90% 0px,
+        rgba(255,122,0,0.12), transparent 55%),
+        var(--bg);
+
+      color:var(--text);
+    }
+
+    /* NAV */
+
+    .topnav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(247,249,252,0.86);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(17,24,39,0.10);
+    }
+
+    .topnav-inner{
+      max-width:1080px;
+      margin:0 auto;
+      padding:10px 16px;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .topnav-brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+
+      font-weight:900;
+      color:var(--text);
+      text-decoration:none;
+    }
+
+    .topnav-brand img{
+      width:30px;
+      height:auto;
+      margin:0;
+      filter:none;
+    }
+
+    .topnav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:flex-end;
+    }
+
+    .topnav-links a{
+      color:#374151;
+      text-decoration:none;
+      font-weight:800;
+      font-size:0.95em;
+
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+    }
+
+    .topnav-links a:hover{
+      border-color:rgba(17,24,39,0.14);
+      background:rgba(255,255,255,0.65);
+    }
+
+    .topnav-links a.active{
+      background:rgba(59,130,246,0.10);
+      border-color:rgba(59,130,246,0.22);
+      color:var(--blueDark);
+    }
+
+    /* HERO */
+
+    header{
+      text-align:center;
+      padding:56px 18px 18px;
+    }
+
+    header img{
+      width:116px;
+      max-width:100%;
+      height:auto;
+      margin-bottom:16px;
+
+      filter:drop-shadow(0 8px 18px rgba(0,0,0,0.10));
+    }
+
+    header h1{
+      font-size:2.55em;
+      margin:0;
+      letter-spacing:-0.02em;
+    }
+
+    header p{
+      font-size:1.08em;
+      color:#374151;
+
+      margin-top:12px;
+      margin-bottom:0;
+
+      line-height:1.7;
+    }
+
+    /* MAIN */
+
+    .container{
+      max-width:980px;
+      margin:0 auto;
+      padding:18px;
+    }
+
+    .contact-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+
+      padding:22px;
+      margin-bottom:16px;
+
+      box-shadow:var(--shadow);
+    }
+
+    .contact-card h2{
+      margin-top:0;
+      margin-bottom:12px;
+
+      font-size:1.4em;
+      letter-spacing:-0.01em;
+    }
+
+    .contact-card p,
+    .contact-card li{
+      line-height:1.75;
+      color:#374151;
+    }
+
+    .contact-card ul{
+      padding-left:20px;
+      margin-bottom:0;
+    }
+
+    .contact-card a{
+      color:var(--blueDark);
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    .contact-card a:hover{
+      text-decoration:underline;
+    }
+
+    .info-banner{
+      background:linear-gradient(180deg,#ffffff,#fbfdff);
+      border:1px solid var(--border);
+      border-left:6px solid var(--blueDark);
+
+      padding:16px;
+      margin-bottom:18px;
+
+      border-radius:14px;
+      box-shadow:0 8px 26px rgba(17,24,39,0.06);
+
+      color:#374151;
+      line-height:1.7;
+    }
+
+    /* FOOTER */
+
+    footer{
+      text-align:center;
+      padding:28px 10px 40px;
+      font-size:0.92em;
+      color:#9ca3af;
+
+      margin-top:48px;
+      border-top:1px solid rgba(17,24,39,0.16);
+    }
+
+    footer a{
+      color:#6b7280;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    footer a:hover{
+      color:#374151;
+    }
+
+    .patent-notice{
+      margin-top:12px;
+      font-size:12px;
+      line-height:1.4;
+      opacity:.85;
+    }
+
+    .patent-notice strong{
+      font-weight:700;
+    }
+
+    /* MOBILE */
+
+    @media (max-width:720px){
+
+      header{
+        padding:38px 16px 16px;
+      }
+
+      header img{
+        width:88px;
+      }
+
+      header h1{
+        font-size:2rem;
+        line-height:1.15;
+      }
+
+      header p{
+        font-size:1rem;
+        line-height:1.55;
+      }
+
+      .topnav-inner{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .topnav-links{
+        justify-content:flex-start;
+        width:100%;
+        gap:6px;
+      }
+
+      .topnav-links a{
+        font-size:0.86em;
+        padding:7px 8px;
+      }
+
+      .contact-card{
+        padding:18px;
+      }
+    }
+
+    @media (max-width:420px){
+
+      header h1{
+        font-size:1.8rem;
+      }
+
+      .topnav-links a{
+        font-size:0.82em;
+        padding:6px 7px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- TOP NAV -->
+
+  <div class="topnav">
+    <div class="topnav-inner">
+
+      <a class="topnav-brand" href="/">
+        <img src="/assets/verbum-logo.png" alt="Verbum AI Logo"/>
+        <span>Verbum AI</span>
+      </a>
+
+      <div class="topnav-links">
+        <a href="/">Home</a>
+        <a href="/offline-document-summarizer/">Offline Summarizer</a>
+        <a href="/features/">Features</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/download/">Download</a>
+        <a href="/labs/">Labs</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HERO -->
+
+  <header>
+
+    <img src="/assets/verbum-logo.png" alt="Verbum AI Logo"/>
+
+    <h1>Contact Verbum AI</h1>
+
+    <p>
+      Questions about access, installation, licensing,
+      enterprise workflows, or privacy-first AI usage?
+    </p>
+
+  </header>
+
+  <!-- CONTENT -->
+
+  <div class="container">
+
+    <div class="info-banner">
+      Verbum AI is currently distributed through a controlled access
+      and licensing process for some editions and environments.
+    </div>
+
+    <div class="contact-card">
+
+      <h2>Email</h2>
+
+      <p>
+        Contact:
+        <a href="mailto:access@verbum-ai.com">
+          access@verbum-ai.com
+        </a>
+      </p>
+
+    </div>
+
+    <div class="contact-card">
+
+      <h2>What to Include</h2>
+
+      <ul>
+        <li>Your platform (macOS or Windows)</li>
+        <li>Your use case or workflow</li>
+        <li>Whether this is personal, professional, or institutional use</li>
+        <li>Any installation or access issues you encountered</li>
+      </ul>
+
+    </div>
+
+    <div class="contact-card">
+
+      <h2>Enterprise & Institutional Use</h2>
+
+      <p>
+        Verbum AI supports privacy-first and offline-ready workflows
+        suitable for secure or restricted environments.
+      </p>
+
+      <p>
+        Institutional and enterprise inquiries are welcome.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    Created by Masod — 2025 © Verbum AI Technologies<br/>
+
+    <span style="color:#9ca3af;">
+      Local-first by default • No cloud uploads unless you choose
+    </span>
+
+    <br/><br/>
+
+    <span>
+      <a href="/about/">About</a> •
+      <a href="/privacy/">Privacy</a> •
+      <a href="/terms/">Terms</a> •
+      <a href="/contact/">Contact</a> •
+      <a href="/guide/">Guide</a>
+    </span>
+
+    <br/><br/>
+
+    <span style="color:#9ca3af;">
+      Labs:
+      <a href="/labs/">Overview</a> •
+      <a href="/labs/realestate-ai/">RealEstate AI</a> •
+      <a href="/labs/shieldscope/">ShieldScope</a>
+    </span>
+
+    <div class="patent-notice">
+      <strong>Patent Pending</strong> — Provisional Patent Application Filed (Jan 7, 2026).
+      Unauthorized copying or commercial use prohibited. Verbum AI™. All rights reserved.
+    </div>
+
+  </footer>
+
+</body>
+</html>
