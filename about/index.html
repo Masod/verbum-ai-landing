@@ -1,1 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q7XW2FW7W8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
 
+    gtag('config', 'G-Q7XW2FW7W8');
+    gtag('config', 'G-MYZ36TRY04');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>About Verbum AI — Privacy-First Offline AI</title>
+
+  <meta name="description"
+        content="Learn about Verbum AI — a privacy-first, offline AI platform designed for local document summarization and secure workflows." />
+
+  <link rel="canonical" href="https://verbum-ai.com/about/" />
+
+  <meta property="og:title" content="About Verbum AI" />
+  <meta property="og:description"
+        content="Privacy-first offline AI built for secure document summarization and local workflows." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://verbum-ai.com/about/" />
+  <meta property="og:image" content="https://verbum-ai.com/assets/verbum-logo.png" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+
+  <style>
+    :root{
+      --blue:#3B82F6;
+      --blueDark:#1E3A8A;
+      --orange:#FF7A00;
+      --bg:#f7f9fc;
+      --text:#111827;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --border:rgba(17,24,39,0.12);
+      --shadow:0 10px 30px rgba(17,24,39,0.08);
+      --radius:18px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    body{
+      margin:0;
+      padding:0;
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background:
+        radial-gradient(1100px 500px at 50% -200px,
+        rgba(59,130,246,0.18), transparent 60%),
+        radial-gradient(900px 450px at 90% 0px,
+        rgba(255,122,0,0.12), transparent 55%),
+        var(--bg);
+
+      color:var(--text);
+    }
+
+    /* NAV */
+
+    .topnav{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(247,249,252,0.86);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(17,24,39,0.10);
+    }
+
+    .topnav-inner{
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 10px 16px;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .topnav-brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:var(--text);
+      font-weight:900;
+    }
+
+    .topnav-brand img{
+      width:30px;
+      height:auto;
+    }
+
+    .topnav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .topnav-links a{
+      text-decoration:none;
+      color:#374151;
+      font-weight:800;
+      font-size:0.95em;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+    }
+
+    .topnav-links a:hover{
+      border-color:rgba(17,24,39,0.14);
+      background:rgba(255,255,255,0.65);
+    }
+
+    .topnav-links a.active{
+      background:rgba(59,130,246,0.10);
+      border-color:rgba(59,130,246,0.22);
+      color:var(--blueDark);
+    }
+
+    /* HERO */
+
+    header{
+      text-align:center;
+      padding:60px 20px 24px;
+    }
+
+    header img{
+      width:116px;
+      margin-bottom:18px;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.10));
+    }
+
+    header h1{
+      margin:0;
+      font-size:2.7rem;
+      letter-spacing:-0.02em;
+    }
+
+    header p{
+      margin-top:14px;
+      color:#374151;
+      font-size:1.1rem;
+      max-width:760px;
+      margin-left:auto;
+      margin-right:auto;
+      line-height:1.7;
+    }
+
+    /* MAIN */
+
+    .container{
+      max-width:980px;
+      margin:0 auto;
+      padding:0 18px 50px;
+    }
+
+    .about-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:34px;
+      box-shadow: var(--shadow);
+    }
+
+    .about-card h2{
+      margin-top:38px;
+      margin-bottom:14px;
+      font-size:1.75rem;
+      letter-spacing:-0.02em;
+    }
+
+    .about-card h2:first-child{
+      margin-top:0;
+    }
+
+    .about-card p{
+      line-height:1.9;
+      color:#374151;
+      margin-bottom:16px;
+      font-size:1.02rem;
+    }
+
+    .about-card ul{
+      padding-left:20px;
+      color:#374151;
+      line-height:1.9;
+    }
+
+    .about-card li{
+      margin-bottom:8px;
+    }
+
+    .highlight{
+      color:var(--blueDark);
+      font-weight:700;
+    }
+
+    .callout{
+      margin-top:28px;
+      padding:18px;
+      border-radius:16px;
+      background:rgba(59,130,246,0.06);
+      border:1px solid rgba(59,130,246,0.14);
+    }
+
+    .callout strong{
+      color:var(--blueDark);
+    }
+
+    .contact-box{
+      margin-top:24px;
+      padding:18px;
+      border-radius:16px;
+      background:#fff;
+      border:1px solid rgba(17,24,39,0.10);
+    }
+
+    .contact-box a{
+      color:var(--blueDark);
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    footer{
+      text-align:center;
+      padding:30px 16px 50px;
+      color:#9ca3af;
+      font-size:0.92rem;
+      line-height:1.7;
+    }
+
+    @media (max-width:900px){
+
+      .topnav-inner{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      header h1{
+        font-size:2.2rem;
+      }
+
+      .about-card{
+        padding:24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+
+  <div class="topnav">
+    <div class="topnav-inner">
+
+      <a class="topnav-brand" href="/">
+        <img src="/assets/verbum-logo.png" alt="Verbum AI Logo"/>
+        <span>Verbum AI</span>
+      </a>
+
+      <div class="topnav-links">
+        <a href="/">Home</a>
+        <a href="/offline-document-summarizer/">Offline Summarizer</a>
+        <a class="active" href="/about/">About</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/features/">Features</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/download/">Download</a>
+        <a href="/labs/">Labs</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HERO -->
+
+  <header>
+    <img src="/assets/verbum-logo.png" alt="Verbum AI Logo"/>
+
+    <h1>About Verbum AI</h1>
+
+    <p>
+      Privacy-first offline AI built for people and organizations
+      that want intelligent document workflows without unnecessary
+      cloud exposure.
+    </p>
+  </header>
+
+  <!-- CONTENT -->
+
+  <div class="container">
+
+    <div class="about-card">
+
+      <h2>Our Mission</h2>
+
+      <p>
+        Verbum AI was created with a simple goal:
+        help people summarize and work with documents
+        while keeping sensitive information under their control.
+      </p>
+
+      <p>
+        We believe privacy should not be treated as a premium feature.
+        Local processing, transparency, and operational simplicity
+        should be part of the default experience.
+      </p>
+
+      <h2>What We Build</h2>
+
+      <p>
+        Verbum AI focuses on <span class="highlight">offline-first AI workflows</span>
+        designed for professionals, researchers, analysts,
+        legal review, healthcare-adjacent environments,
+        and anyone handling sensitive documents.
+      </p>
+
+      <ul>
+        <li>Offline document summarization</li>
+        <li>On-device processing workflows</li>
+        <li>Privacy-first AI tooling</li>
+        <li>Local-first productivity systems</li>
+      </ul>
+
+      <h2>Our Philosophy</h2>
+
+      <ul>
+        <li><strong>Privacy-first:</strong> local processing by default</li>
+        <li><strong>Offline-ready:</strong> no cloud dependency for core workflows</li>
+        <li><strong>Minimal friction:</strong> simple onboarding and clean UX</li>
+        <li><strong>Transparency:</strong> clear operational and privacy principles</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Local-first by design.</strong><br/><br/>
+
+        Verbum AI is designed to reduce unnecessary data exposure
+        and support workflows where keeping information on-device matters.
+      </div>
+
+      <h2>Founder-Led Development</h2>
+
+      <p>
+        Verbum AI is being built independently with a strong focus on
+        privacy, product quality, and long-term control over the platform.
+      </p>
+
+      <p>
+        The project combines practical engineering experience,
+        offline AI workflows, and real-world operational thinking
+        instead of trend-driven cloud dependency.
+      </p>
+
+      <h2>Contact</h2>
+
+      <div class="contact-box">
+
+        <p>
+          Questions about access, partnerships, licensing,
+          or enterprise workflows?
+        </p>
+
+        <p>
+          <a href="mailto:access@verbum-ai.com">
+            access@verbum-ai.com
+          </a>
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    Created by Masod — 2025 © Verbum AI Technologies<br/>
+    Local-first by default • No cloud uploads unless you choose
+  </footer>
+
+</body>
+</html>
