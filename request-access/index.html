@@ -588,9 +588,6 @@
           <p id="success-text">
             Thank you. Your request has been received successfully.
           </p>
-            <div class="tiny">
-              Important: Download the EXE and all BIN files into the same folder, then run the EXE.
-            </div>
           </div>
         </div>
       </div>
@@ -879,9 +876,10 @@ form.addEventListener("submit", async (e) => {
 
     const fromMacApp = payload.source === "macos_app";
 
-successTitle.textContent = "License request received";
+successTitle.textContent = "Request received successfully";
+
 successText.textContent =
-  "Thank you. Your request has been received. Once approved, your license file and next steps will be sent to your email.";
+  "Thank you for your interest in Verbum AI. Your request has been recorded, and we’ll contact you with relevant availability and next steps.";
   
     gtag("event", "access_request_submitted", {
     platform: payload.platform,
