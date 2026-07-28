@@ -696,9 +696,11 @@
 
       if (currentTier === "basic") {
         formTitle.textContent = "Request Basic Access";
-        formIntro.textContent = "Submit a short request to continue to the Basic download step.";
-        tierNote.textContent = "Basic requests can proceed directly after form submission.";
-      } else if (currentTier === "pro") {
+        formIntro.textContent =
+          "Submit a short request for the Basic edition of Verbum AI.";
+        tierNote.textContent =
+          "Basic is the recommended starting point for individual users.";
+      }else if (currentTier === "pro") {
         formTitle.textContent = "Request Pro Access";
         formIntro.textContent = "Submit your request and we’ll follow up with the appropriate licensing and access details.";
         tierNote.textContent = "Pro is a commercial edition and is reviewed separately.";
