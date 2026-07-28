@@ -519,7 +519,7 @@
           Basic requests can continue directly to the download step after form submission.
         </div>
 
-        <form id="request-form" method="post" action="" novalidate>
+        <form id="request-form" novalidate>
 
           <div class="honeypot-wrap" aria-hidden="true">
             <label for="company_website">Company website</label>
@@ -632,7 +632,10 @@
   <p class="lead">We collect only the information needed to review and manage access requests.</p><br><br>
 
   <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
+    const yearEl = document.getElementById("y");
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
 
     const WORKER_URL = "https://plain-morning-b4bb.masod-samadi.workers.dev/";
 
@@ -668,7 +671,7 @@
       emailField.value = emailParam;
     }
 
-    if (machineIdParam) {
+    if (machineIdParam && machineIdFieldWrap && machineIdField) {
       machineIdFieldWrap.style.display = "block";
       machineIdField.value = machineIdParam;
     }
@@ -893,7 +896,7 @@ successText.textContent =
   </script>
 
   <footer>
-  Created by Masod — 2025 © Verbum AI Technologies<br/>
+  Created by Masod — <span id="y"></span> © Verbum AI Technologies<br/>
 
   <span style="color:#9ca3af;">
     Local-first by default • No cloud uploads unless you choose
