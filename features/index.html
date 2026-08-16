@@ -182,6 +182,10 @@
       margin-top:14px;
     }
 
+    .card.full-width{
+      grid-column: 1 / -1;
+    }
+    
     .card{
       background:var(--card);
       border:1px solid var(--border);
@@ -459,12 +463,15 @@
           If you have an edge case, check the <a href="/faq/">FAQ</a>.
         </div>
       </div>
-      <div class="grid" style="margin-top:14px;">
-  <div class="card col12">
+<div class="cards">
+
+  <div class="card full-width">
     <h2 style="margin:0 0 8px;">Legal Document Intelligence</h2>
+
     <p>
       Analyze legal briefs and motions locally on your Mac without uploading documents to a cloud AI service.
     </p>
+
     <ul>
       <li>Identify legal document structure and major sections</li>
       <li>Generate a Table of Contents from detected headings</li>
@@ -473,14 +480,16 @@
       <li>Review the original brief alongside extracted legal intelligence</li>
       <li>Export generated legal reports to PDF or Microsoft Word</li>
     </ul>
+
     <div class="small" style="margin-top:10px;">
       Legal Document Intelligence and legal report export are currently available in Verbum AI for macOS.
     </div>
   </div>
-</div>
-      <div class="grid" style="margin-top:14px;">
-  <div class="card col6">
+
+
+  <div class="card">
     <h2 style="margin:0 0 8px;">Privacy Intelligence</h2>
+
     <ul>
       <li>Detect Personally Identifiable Information (PII)</li>
       <li>Identify sensitive information and privacy signals</li>
@@ -489,8 +498,10 @@
     </ul>
   </div>
 
-  <div class="card col6">
+
+  <div class="card">
     <h2 style="margin:0 0 8px;">Knowledge Extraction</h2>
+
     <ul>
       <li>Extract evidence and key findings</li>
       <li>Identify references and source material</li>
@@ -498,6 +509,7 @@
       <li>Navigate important information in large documents faster</li>
     </ul>
   </div>
+
 </div>
     </div>
 
