@@ -1,1 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+<title>Windows Features — Offline Document Summarization | Verbum AI</title>
+<meta name="description" content="Verbum AI for Windows offers private, offline document summarization for text-based documents. OCR, scanned PDFs, and advanced intelligence panels are macOS-only." />
+  <link rel="canonical" href="https://verbum-ai.com/features/windows/" />
+  
+  <link rel="stylesheet" href="/assets/style.css" />
+  <meta property="og:title" content="Windows Features — Offline Document Summarization | Verbum AI" />
+  <meta property="og:description" content="Verbum AI for Windows offers private, offline document summarization for text-based documents. OCR, scanned PDFs, and advanced intelligence panels are macOS-only." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://verbum-ai.com/features/windows/" />
+  <meta name="theme-color" content="#0b1220" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#3B82F6">
+  <style>
+    :root{
+      --blue:#3B82F6;
+      --blueDark:#1E3A8A;
+      --orange:#FF7A00;
+      --bg:#f7f9fc;
+      --text:#111827;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --border:rgba(17,24,39,0.12);
+      --shadow:0 10px 30px rgba(17,24,39,0.08);
+      --radius:18px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin:0;
+      padding:0;
+      background:
+        radial-gradient(1100px 500px at 50% -200px, rgba(59,130,246,0.18), transparent 60%),
+        radial-gradient(900px 450px at 90% 0px, rgba(255,122,0,0.12), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+
+    header{
+      text-align:center;
+      padding:56px 18px 18px;
+    }
+    header img{
+      width:116px;
+      height:auto;
+      margin-bottom:16px;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.10));
+    }
+    header h1{
+      font-size:2.55em;
+      margin:0;
+      letter-spacing:-0.02em;
+    }
+    header p{
+      font-size:1.12em;
+      color:#374151;
+      margin-top:10px;
+      margin-bottom:0;
+    }
+
+    .container{
+      max-width:1080px;
+      margin:0 auto;
+      padding:0 16px 30px;
+    }
+
+    .info-banner{
+      background:linear-gradient(180deg, #ffffff, #fbfdff);
+      border:1px solid var(--border);
+      border-left:6px solid var(--blueDark);
+      padding:16px 16px;
+      margin:20px auto 18px;
+      border-radius:14px;
+      max-width:980px;
+      box-shadow: 0 8px 26px rgba(17,24,39,0.06);
+      text-align:center;
+      font-size:0.98em;
+      color:#374151;
+    }
+    .info-banner p{
+      margin:0.55em 0;
+      line-height:1.6;
+    }
+    .info-banner strong{ color:var(--blueDark); }
+
+    .downloads-head{
+      text-align:center;
+      margin:22px 0 14px;
+    }
+    .downloads-head h2{
+      margin:0;
+      font-size:1.65em;
+      letter-spacing:-0.01em;
+    }
+    .downloads-head p{
+      margin:8px 0 0;
+      color:#4b5563;
+    }
+
+    .howto{
+      max-width:980px;
+      margin:14px auto 18px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:16px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .howto details{
+      border-top:1px solid rgba(17,24,39,0.08);
+      padding:0;
+    }
+    .howto details:first-child{ border-top:none; }
+    .howto summary{
+      list-style:none;
+      cursor:pointer;
+      padding:14px 16px;
+      font-weight:700;
+      color:#111827;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .howto summary::-webkit-details-marker{ display:none; }
+    .howto .chev{
+      color:#6b7280;
+      font-weight:700;
+      transform: rotate(0deg);
+      transition: transform 0.15s ease;
+      user-select:none;
+    }
+    details[open] .chev{ transform: rotate(180deg); }
+
+    .howto .content{
+      padding:0 16px 14px;
+      color:#374151;
+      line-height:1.65;
+    }
+    .howto .content code{
+      background:#f3f4f6;
+      padding:2px 7px;
+      border-radius:8px;
+      font-size:0.95em;
+    }
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      border:1px solid rgba(59,130,246,0.24);
+      background:rgba(59,130,246,0.08);
+      color:#1e3a8a;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:0.92em;
+      font-weight:600;
+    }
+    .pill.orange{
+      border:1px solid rgba(255,122,0,0.28);
+      background:rgba(255,122,0,0.10);
+      color:#8a3c00;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+
+.intelligence-grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:14px;
+  margin-top:14px;
+}
+
+.intelligence-grid .legal-card{
+  grid-column:1 / -1;
+}
+
+@media (max-width:720px){
+  .intelligence-grid{
+    grid-template-columns:1fr;
+  }
+
+  .intelligence-grid .legal-card{
+    grid-column:auto;
+  }
+}
+    
+    @media (max-width:720px){
+      .intelligence-grid{
+        grid-template-columns:1fr;
+      }
+    
+      .intelligence-grid .legal-card{
+        grid-column:auto;
+      }
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute;
+      top:-80px;
+      right:-80px;
+      width:220px;
+      height:220px;
+      border-radius:999px;
+      background: radial-gradient(circle, rgba(59,130,246,0.18), transparent 60%);
+      pointer-events:none;
+    }
+    .card.pro::before, .card.advanced::before{
+      background: radial-gradient(circle, rgba(255,122,0,0.16), transparent 62%);
+    }
+
+    .card-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+    }
+    .card h3{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-0.01em;
+    }
+    .badge{
+      font-size:12px;
+      padding:5px 10px;
+      border-radius:999px;
+      background:rgba(59,130,246,0.12);
+      color:var(--blueDark);
+      white-space:nowrap;
+      font-weight:700;
+    }
+    .badge.orange{
+      background:rgba(255,122,0,0.14);
+      color:#8a3c00;
+    }
+    .sub{
+      margin:0 0 12px;
+      color:#4b5563;
+      line-height:1.55;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      width:100%;
+      background:var(--blueDark);
+      color:#fff;
+      border:none;
+      padding:12px 14px;
+      font-size:0.98em;
+      border-radius:14px;
+      cursor:pointer;
+      transition: transform 0.08s ease, background-color 0.2s ease;
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:0.01em;
+    }
+    .btn:hover{ background:#2c4fc7; transform: translateY(-1px); }
+    .btn.orange{ background:var(--orange); }
+    .btn.orange:hover{ background:#ff8f22; }
+    .btn.outline{
+      background:#fff;
+      color:#111827;
+      border:1px solid rgba(17,24,39,0.18);
+      font-weight:800;
+    }
+    .btn.outline:hover{
+      background:#f9fafb;
+      transform: translateY(-1px);
+    }
+
+    .section-title{
+      margin:14px 0 8px;
+      font-size:0.95em;
+      color:#111827;
+      font-weight:800;
+    }
+
+    .bin-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:8px;
+    }
+
+    .hint{
+      margin-top:10px;
+      color:#6b7280;
+      font-size:0.92em;
+      line-height:1.55;
+    }
+    .hint code{
+      background:#f3f4f6;
+      padding:2px 7px;
+      border-radius:8px;
+      font-size:0.95em;
+    }
+
+    .important{
+      margin-top:12px;
+      border:1px solid rgba(255,122,0,0.35);
+      background:rgba(255,122,0,0.08);
+      border-radius:14px;
+      padding:10px 12px;
+      color:#7a3500;
+      line-height:1.55;
+      font-size:0.95em;
+      font-weight:700;
+    }
+
+    .tiny{
+      margin-top:10px;
+      color:#6b7280;
+      font-size:0.9em;
+      line-height:1.55;
+    }
+
+    footer{
+      text-align:center;
+      padding:28px 10px 40px;
+      font-size:0.92em;
+      color:#9ca3af;
+
+      margin-top:48px;
+      border-top:1px solid rgba(17,24,39,0.16);
+    }
+
+    /* Small screens */
+    @media (max-width:520px){
+      header h1{ font-size:2.15em; }
+      .btn{ border-radius:12px; }
+      .card{ border-radius:16px; }
+    }
+
+    /* Top navigation */
+.topnav{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(247,249,252,0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(17,24,39,0.10);
+}
+.topnav-inner{
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.topnav-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight: 900;
+  color: var(--text);
+  text-decoration:none;
+}
+.topnav-brand img{
+  width: 30px;
+  height:auto;
+  margin:0;
+  filter: none;
+}
+.topnav-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 10px;
+  justify-content:flex-end;
+}
+.topnav-links a{
+  color:#374151;
+  text-decoration:none;
+  font-weight: 800;
+  font-size: 0.95em;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+}
+.topnav-links a:hover{
+  border-color: rgba(17,24,39,0.14);
+  background: rgba(255,255,255,0.65);
+}
+.topnav-links a.active{
+  background: rgba(59,130,246,0.10);
+  border-color: rgba(59,130,246,0.22);
+  color: var(--blueDark);
+}
+
+@media (max-width: 720px){
+  .topnav-inner{ align-items:flex-start; flex-direction:column; }
+  .topnav-links{ justify-content:flex-start; }
+}
+
+
+    /* Platform-specific feature navigation */
+    .platform-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:22px 0;}
+    .platform-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:25px;box-shadow:var(--shadow);}
+    .platform-card h2{margin:0 0 12px;color:var(--blueDark);font-size:1.55rem;}
+    .platform-card p{line-height:1.65;color:#374151;}
+    .platform-card ul{line-height:1.8;padding-left:22px;}
+    .platform-card .btn{margin-top:14px;}
+    .platform-note{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 20px;line-height:1.65;margin:16px 0;color:#374151;}
+    .platform-nav{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0;}
+    .platform-nav a{display:inline-block;padding:10px 15px;border:1px solid rgba(30,58,138,.22);border-radius:12px;background:#fff;color:var(--blueDark);text-decoration:none;font-weight:700;}
+    .platform-nav a[aria-current="page"]{background:var(--blueDark);color:white;}
+    .feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px;}
+    .feature-grid .card{min-width:0;}
+    .feature-grid .wide{grid-column:1 / -1;}
+    .feature-grid li{margin:5px 0;line-height:1.55;}
+    @media(max-width:720px){.platform-choices,.feature-grid{grid-template-columns:1fr;}.feature-grid .wide{grid-column:auto;}}
+  
+  </style>
+</head>
+<body>
+  <div class="topnav">
+    <div class="topnav-inner">
+      <a class="topnav-brand" href="/">
+        <img src="/assets/verbum-logo.png" alt="Verbum AI Logo"/>
+        <span>Verbum AI</span>
+      </a>
+      <div class="topnav-links">
+        <a href="/">Home</a>
+        <a href="/offline-document-summarizer/">Offline Summarizer</a>
+        <a class="active" href="/features/">Features</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/download/">Download</a>
+        <a href="/labs/">Labs</a>
+      </div>
+    </div>
+  </div>
+
+
+  <main class="container">
+
+    <section class="hero">
+      <span class="badge">Windows • Offline • On-device</span>
+      <h1>Verbum AI for Windows</h1>
+      <p class="lead">Private, on-device document summarization for Windows. Work with text-based documents through the Summary workspace without uploading your documents to a cloud AI service.</p>
+      <div class="platform-nav"><a href="/features/">All platforms</a><a href="/features/macos/">macOS</a><a href="/features/windows/" aria-current="page">Windows</a><a href="/download/">Download</a></div>
+    </section>
+    <div class="feature-grid">
+      <section class="card"><h2>Current Windows features</h2><ul>
+        <li>Offline document summarization</li>
+        <li>Summary workspace for reviewing generated summaries</li>
+        <li>Local, privacy-first document processing</li>
+        <li>Text-based documents, including PDFs with extractable text</li></ul></section>
+      <section class="card"><h2>Important document requirements</h2>
+        <p>The current Windows edition requires documents containing extractable text. It does not include OCR and cannot directly process scanned PDFs or image-based documents.</p>
+        <p>Scanned documents need to be converted to searchable, text-based files using another tool before they can be processed in Verbum AI for Windows.</p></section>
+      <section class="card wide"><h2>Capabilities currently exclusive to macOS</h2>
+        <p>The Windows edition does not currently include the following macOS capabilities:</p><ul>
+        <li>OCR and scanned or image-based document processing</li>
+        <li>Evidence, reference, and URL extraction panels</li>
+        <li>Privacy and PII analysis panels and redacted output</li>
+        <li>Advanced Document Intelligence and Legal Document Intelligence workflows</li>
+        <li>Other macOS-specific analysis and search tools</li></ul>
+        <p class="small">Explore the <a href="/features/macos/">macOS feature list</a> for the full set of capabilities.</p></section>
+      <section class="card wide"><h2>Windows workflow</h2><ol>
+        <li>Open a supported text-based document.</li>
+        <li>Generate a summary in the Summary workspace.</li>
+        <li>Review the summarized text locally on your device.</li></ol>
+        <p class="small">For release-specific details and supported file types, visit the <a href="/download/">Download page</a> or <a href="/faq/">FAQ</a>.</p></section>
+    </div>
+
+  </main>
+  <footer>
+  Created by Masod — <span id="y">2025</span> © Verbum AI Technologies<br/>
+
+  <span style="color:#9ca3af;">
+    Local-first by default • No cloud uploads unless you choose
+  </span>
+
+  <br/><br/>
+
+  <span>
+    <a href="/about/">About</a> •
+    <a href="/privacy/">Privacy</a> •
+    <a href="/terms/">Terms</a> •
+    <a href="/contact/">Contact</a> •
+    <a href="/guide/">Guide</a>
+  </span>
+
+  <br/><br/>
+
+  <span style="color:#9ca3af;">
+    Labs:
+    <a href="/labs/">Overview</a> •
+    <a href="/labs/realestate-ai/">RealEstate AI</a> •
+    <a href="/labs/shieldscope/">ShieldScope</a>
+  </span>
+
+  <div class="patent-notice">
+    <strong>Patent Pending</strong> — Provisional Patent Application Filed (Jan 7, 2026).
+    Unauthorized copying or commercial use prohibited. Verbum AI™. All rights reserved.
+  </div>
+</footer>
+
+<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>
 
