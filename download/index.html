@@ -9,7 +9,7 @@
     gtag('js', new Date());
     /* Keep both GA properties */
     gtag('config', 'G-Q7XW2FW7W8');
-    gtag('config', 'G-MYZ36TRY04');f
+    gtag('config', 'G-MYZ36TRY04');
   </script>
 
   
@@ -22,7 +22,7 @@
 
   <link rel="stylesheet" href="/assets/style.css" />
   <meta property="og:title" content="Download — Verbum AI" />
-  <meta property="og:description" content="Get the latest Verbum AI installers for macOS & Windows." />
+  <meta property="og:description" content="Find Verbum AI for macOS and Windows, with platform-specific access instructions and features." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://verbum-ai.com/download/" />
 
@@ -595,7 +595,7 @@
     <h1>Download Verbum AI</h1>
     <p class="lead">
       Verbum AI is a privacy-first offline AI solution for document summarization, search, and analysis.
-      Install the app for your platform, open it to copy your Machine ID, then request a license for activation.
+      The Mac App Store edition is available separately. For direct macOS or Windows distribution, request access to the appropriate installer and licensing instructions.
     </p>
 <a href="https://apps.apple.com/us/app/verbum-offline-ai-by-masod/id6759232160?mt=12"
    target="_blank"
@@ -613,21 +613,20 @@
 
   <div class="downloads-head">
     <h2>Downloads</h2>
-    <p>Verbum AI installers are license-based. Choose your platform below.</p>
+    <p>Direct-download editions are available by request. Choose your platform below.</p>
   </div>
 
   <div class="howto">
     <details open>
       <summary>
-        How activation works
+        How direct-download access works
         <span class="chev">▾</span>
       </summary>
       <div class="content">
-        <div><strong>1.</strong> Download and install Verbum AI.</div>
-        <div><strong>2.</strong> Open the app and copy your Machine ID.</div>
-        <div><strong>3.</strong> Submit a license request.</div>
-        <div><strong>4.</strong> Receive your license file.</div>
-        <div><strong>5.</strong> Import the license file inside Verbum AI.</div>
+        <div><strong>1.</strong> Choose your platform and submit an access request.</div>
+        <div><strong>2.</strong> After review, receive instructions for the appropriate installer.</div>
+        <div><strong>3.</strong> Install and open Verbum AI to obtain your Machine ID if requested.</div>
+        <div><strong>4.</strong> Receive and import your license file to activate the direct-download edition.</div>
         <div class="pill-row">
           <span class="pill">Offline AI</span>
           <span class="pill">Local document processing</span>
@@ -669,18 +668,18 @@
       </div>
 
       <p class="sub">
-        Download Verbum AI for Apple Silicon Macs. This version supports M1, M2, M3, and M4 Mac devices.
+        Request access to the direct-download Verbum AI edition for Apple Silicon Macs (M1, M2, M3, and M4).
       </p>
 
         <a class="btn"
-           href="https://downloads.verbum-ai.com/downloads/macos/VerbumAI-AppleSilicon.pkg"
-           onclick="return verbumTrackAndGo('download_click','mac','macos_apple_silicon_pkg',this.href,220);">
-          ⬇ Download Verbum AI for macOS Apple Silicon
+           href="/request-access/?platform=mac_arm64"
+           onclick="return verbumTrackAndGo('request_access','mac','mac_arm64_request',this.href,180);">
+          Request macOS Apple Silicon Access
         </a>
 
       <div class="important">
-        License required for activation.
-        <small>Open the app after installation to copy your Machine ID, then submit a license request.</small>
+        Request required before download.
+        <small>The direct-download edition requires license activation. Instructions for obtaining the installer and providing a Machine ID, if needed, will follow your request.</small>
       </div>
 
       <div class="tiny">
@@ -706,7 +705,7 @@
       </a>
 
       <div class="hint">
-        After approval, you will receive the correct Windows installer package and license file.
+        After approval, you will receive access instructions for the Windows package and licensing. Windows currently supports the Summary workspace, but not OCR, scanned or image-based PDFs, Evidence panels, or PII panels. See <a href="/features/windows/">Windows features</a>.
       </div>
     </div>
 
@@ -735,7 +734,7 @@
   </div>
   <br>
   <p>
-    Some Verbum AI versions are distributed through a controlled access path and require license approval before activation.
+    Direct-download editions use a controlled access process and require license approval. Features vary by platform and release. Review <a href="/features/">platform-specific features</a> before requesting access.
   </p>
   <br>
 </main>
@@ -773,7 +772,8 @@
 </footer>
 
   <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
+    const yearElement = document.getElementById("y");
+    if (yearElement) yearElement.textContent = new Date().getFullYear();
   </script>
 
   <!-- Tracking helper used by macOS/EXE/Pro/Advanced buttons -->
