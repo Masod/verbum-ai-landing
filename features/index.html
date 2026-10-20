@@ -4,13 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
  
-<title>Features — Offline Document Intelligence, OCR & Privacy | Verbum AI</title>
-<meta name="description" content="Explore Verbum AI features including offline Document Intelligence, summarization, OCR, privacy and PII analysis, evidence extraction, references, and legal document intelligence." />
+<title>Features for macOS &amp; Windows | Verbum AI</title>
+<meta name="description" content="Explore platform-specific Verbum AI features: advanced Document Intelligence on macOS and private offline document summarization on Windows." />
   <link rel="canonical" href="https://verbum-ai.com/features/" />
   
   <link rel="stylesheet" href="/assets/style.css" />
-  <meta property="og:title" content="Features — Verbum AI" />
-  <meta property="og:description" content="Private, offline Document Intelligence with summarization, OCR, privacy analysis, knowledge extraction, and legal intelligence." />
+  <meta property="og:title" content="Features for macOS &amp; Windows | Verbum AI" />
+  <meta property="og:description" content="Explore platform-specific Verbum AI features: advanced Document Intelligence on macOS and private offline document summarization on Windows." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://verbum-ai.com/features/" />
   <meta name="theme-color" content="#0b1220" />
@@ -422,9 +422,26 @@
   .topnav-links{ justify-content:flex-start; }
 }
 
+
+    /* Platform-specific feature navigation */
+    .platform-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:22px 0;}
+    .platform-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:25px;box-shadow:var(--shadow);}
+    .platform-card h2{margin:0 0 12px;color:var(--blueDark);font-size:1.55rem;}
+    .platform-card p{line-height:1.65;color:#374151;}
+    .platform-card ul{line-height:1.8;padding-left:22px;}
+    .platform-card .btn{margin-top:14px;}
+    .platform-note{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 20px;line-height:1.65;margin:16px 0;color:#374151;}
+    .platform-nav{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0;}
+    .platform-nav a{display:inline-block;padding:10px 15px;border:1px solid rgba(30,58,138,.22);border-radius:12px;background:#fff;color:var(--blueDark);text-decoration:none;font-weight:700;}
+    .platform-nav a[aria-current="page"]{background:var(--blueDark);color:white;}
+    .feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px;}
+    .feature-grid .card{min-width:0;}
+    .feature-grid .wide{grid-column:1 / -1;}
+    .feature-grid li{margin:5px 0;line-height:1.55;}
+    @media(max-width:720px){.platform-choices,.feature-grid{grid-template-columns:1fr;}.feature-grid .wide{grid-column:auto;}}
+  
   </style>
 </head>
-
 <body>
   <div class="topnav">
     <div class="topnav-inner">
@@ -443,129 +460,34 @@
     </div>
   </div>
 
+
   <main class="container">
+
     <section class="hero">
-     <span class="badge">Offline • On-device • Private</span>
-      <h1>Document Intelligence built for private, local analysis.</h1>
-      <p class="lead">
-        Verbum AI helps you summarize, analyze, search, OCR, and understand documents directly on your device.
-        Explore document structure, evidence, references, privacy signals, and legal intelligence without sending your documents to a cloud AI service.
-      </p>
-      <div class="btns">
-        <a class="btn primary" href="https://verbum-ai.com/">Download</a>
-        <a class="btn orange" href="/faq/">FAQ</a>
-      </div>
+      <span class="badge">Offline • On-device • Private</span>
+      <h1>Explore Verbum AI features by platform</h1>
+      <p class="lead">Verbum AI helps you work with documents privately on your own computer. Select your operating system to see the capabilities currently available in that edition.</p>
     </section>
+    <section class="platform-choices" aria-label="Choose your platform">
+      <article class="platform-card">
+        <h2>Verbum AI for macOS</h2>
+        <p>Comprehensive offline Document Intelligence with summarization, OCR for scanned documents, evidence and reference extraction, privacy analysis, and legal intelligence.</p>
+        <ul><li>Document Intelligence and advanced summaries</li><li>OCR and scanned document processing</li><li>Evidence, privacy, and legal analysis</li></ul>
+        <a class="btn" href="/features/macos/">Explore macOS features</a>
+      </article>
+      <article class="platform-card">
+        <h2>Verbum AI for Windows</h2>
+        <p>Core offline document summarization using the Summary workspace. Designed for documents with extractable text.</p>
+        <ul><li>Local document summarization</li><li>Text-based documents and PDFs</li><li>Simple, privacy-first workflow</li></ul>
+        <a class="btn" href="/features/windows/">Explore Windows features</a>
+      </article>
+    </section>
+    <p class="platform-note"><strong>Note:</strong> Features differ between macOS and Windows. OCR, scanned or image-based document processing, Evidence panels, PII panels, and Legal Document Intelligence are not currently included in the Windows edition.</p>
+    <div class="platform-nav"><a href="/download/">Download Verbum AI</a><a href="/faq/">Frequently Asked Questions</a></div>
 
-    <div class="grid">
-
-  <div class="card col6">
-    <h2 style="margin:0 0 8px;">Core features</h2>
-    <ul>
-      <li>Offline Document Intelligence and document summarization</li>
-      <li>Whole-document, per-section, and focused summaries</li>
-      <li>OCR for scanned PDFs and image-based documents</li>
-      <li>Evidence, reference, and URL extraction</li>
-      <li>Privacy and PII signal detection with redacted text output</li>
-      <li>Metadata and sensitive-information analysis</li>
-      <li>Local folder and document search</li>
-      <li>Privacy-first, on-device processing</li>
-    </ul>
-  </div>
-
-  <div class="card col6">
-    <h2 style="margin:0 0 8px;">Supported formats</h2>
-    <ul>
-      <li>PDF</li>
-      <li>Microsoft Word (DOCX)</li>
-      <li>Microsoft Excel</li>
-      <li>Microsoft PowerPoint</li>
-      <li>CSV</li>
-      <li>TXT</li>
-      <li>Markdown</li>
-      <li>Additional text-based document formats</li>
-    </ul>
-
-    <div class="small" style="margin-top:10px;">
-      If you have an edge case, check the <a href="/faq/">FAQ</a>.
-    </div>
-  </div>
-
-</div>
-
-
-<div class="intelligence-grid">
-
-  <div class="card legal-card">
-    <h2 style="margin:0 0 8px;">Legal Document Intelligence</h2>
-
-    <p>
-      Analyze legal briefs and motions locally on your Mac without uploading documents to a cloud AI service.
-    </p>
-
-    <ul>
-      <li>Identify legal document structure and major sections</li>
-      <li>Generate a Table of Contents from detected headings</li>
-      <li>Extract and organize cited cases, statutes, and rules</li>
-      <li>Build a Table of Authorities from detected legal citations</li>
-      <li>Review the original brief alongside extracted legal intelligence</li>
-      <li>Export generated legal reports to PDF or Microsoft Word</li>
-    </ul>
-
-    <div class="small" style="margin-top:10px;">
-      Legal Document Intelligence and legal report export are currently available in Verbum AI for macOS.
-    </div>
-  </div>
-
-
-  <div class="card">
-    <h2 style="margin:0 0 8px;">Privacy Intelligence</h2>
-
-    <ul>
-      <li>Detect Personally Identifiable Information (PII)</li>
-      <li>Identify sensitive information and privacy signals</li>
-      <li>Inspect document metadata</li>
-      <li>Generate redacted text output for detected sensitive information</li>
-    </ul>
-  </div>
-
-
-  <div class="card">
-    <h2 style="margin:0 0 8px;">Knowledge Extraction</h2>
-
-    <ul>
-      <li>Extract evidence and key findings</li>
-      <li>Identify references and source material</li>
-      <li>Extract URLs from documents</li>
-      <li>Navigate important information in large documents faster</li>
-    </ul>
-  </div>
-
-</div>
-
-    <div class="grid" style="margin-top:14px;">
-      <div class="card col12">
-        <h2 style="margin:0 0 8px;">Workflow (high-level)</h2>
-          <ul>
-            <li>Select a supported document</li>
-            <li>Choose the analysis or summarization workflow you need</li>
-            <li>Review summaries, evidence, references, URLs, privacy signals, or legal intelligence</li>
-            <li>Use or export the generated results based on the available workflow</li>
-          </ul>
-        <div class="small" style="margin-top:10px;">
-          Want the “why offline matters” story? See <a href="/privacy/">Privacy</a>.
-        </div>
-      </div>
-    </div>
   </main>
-
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
-</body>
-
   <footer>
-  Created by Masod — 2025 © Verbum AI Technologies<br/>
+  Created by Masod — <span id="y">2025</span> © Verbum AI Technologies<br/>
 
   <span style="color:#9ca3af;">
     Local-first by default • No cloud uploads unless you choose
@@ -595,4 +517,7 @@
     Unauthorized copying or commercial use prohibited. Verbum AI™. All rights reserved.
   </div>
 </footer>
+
+<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
 </html>
