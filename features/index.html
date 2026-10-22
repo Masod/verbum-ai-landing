@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
  
 <title>Features for macOS &amp; Windows | Verbum AI</title>
-<meta name="description" content="Explore platform-specific Verbum AI features: advanced Document Intelligence on macOS and private offline document summarization on Windows." />
+<meta name="description" content="Compare Verbum AI features for macOS and Windows. Explore Document, Legal, and Commercial Intelligence on macOS, including contracts, bills, policies, invoices, and receipts." />
   <link rel="canonical" href="https://verbum-ai.com/features/" />
   
   <link rel="stylesheet" href="/assets/style.css" />
   <meta property="og:title" content="Features for macOS &amp; Windows | Verbum AI" />
-  <meta property="og:description" content="Explore platform-specific Verbum AI features: advanced Document Intelligence on macOS and private offline document summarization on Windows." />
+  <meta property="og:description" content="Compare Verbum AI features for macOS and Windows. Explore Document, Legal, and Commercial Intelligence on macOS, including contracts, bills, policies, invoices, and receipts." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://verbum-ai.com/features/" />
   <meta name="theme-color" content="#0b1220" />
@@ -425,11 +425,12 @@
 
     /* Platform-specific feature navigation */
     .platform-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:22px 0;}
-    .platform-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:25px;box-shadow:var(--shadow);}
+    .platform-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:25px;box-shadow:var(--shadow);display:flex;flex-direction:column;}
     .platform-card h2{margin:0 0 12px;color:var(--blueDark);font-size:1.55rem;}
     .platform-card p{line-height:1.65;color:#374151;}
     .platform-card ul{line-height:1.8;padding-left:22px;}
-    .platform-card .btn{margin-top:14px;}
+    .platform-card .btn{margin-top:auto;}
+    .platform-card ul{margin-bottom:20px;}
     .platform-note{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 20px;line-height:1.65;margin:16px 0;color:#374151;}
     .platform-nav{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0;}
     .platform-nav a{display:inline-block;padding:10px 15px;border:1px solid rgba(30,58,138,.22);border-radius:12px;background:#fff;color:var(--blueDark);text-decoration:none;font-weight:700;}
@@ -471,8 +472,13 @@
     <section class="platform-choices" aria-label="Choose your platform">
       <article class="platform-card">
         <h2>Verbum AI for macOS</h2>
-        <p>Comprehensive offline Document Intelligence with summarization, OCR for scanned documents, evidence and reference extraction, privacy analysis, and legal intelligence.</p>
-        <ul><li>Document Intelligence and advanced summaries</li><li>OCR and scanned document processing</li><li>Evidence, privacy, and legal analysis</li></ul>
+        <p>Private, on-device Document, Legal, and Commercial Intelligence. Summarize documents, process scanned files with OCR, analyze legal materials, and extract structured information from business records.</p>
+        <ul>
+          <li>Document Intelligence, advanced summaries, and OCR</li>
+          <li>Evidence, privacy, and legal analysis</li>
+          <li>Commercial Intelligence for contracts, bills, policies, invoices, and receipts</li>
+          <li>Automatic document classification, structured extraction, table views, and Excel export</li>
+        </ul>
         <a class="btn" href="/features/macos/">Explore macOS features</a>
       </article>
       <article class="platform-card">
@@ -482,7 +488,7 @@
         <a class="btn" href="/features/windows/">Explore Windows features</a>
       </article>
     </section>
-    <p class="platform-note"><strong>Note:</strong> Features differ between macOS and Windows. OCR, scanned or image-based document processing, Evidence panels, PII panels, and Legal Document Intelligence are not currently included in the Windows edition.</p>
+    <p class="platform-note"><strong>Note:</strong> Features differ between macOS and Windows. The current Windows edition requires extractable text and does not include OCR, scanned PDF or image-based document processing, Evidence panels, PII panels, Legal Document Intelligence, or Commercial Intelligence.</p>
     <div class="platform-nav"><a href="/download/">Download Verbum AI</a><a href="/faq/">Frequently Asked Questions</a></div>
 
   </main>
