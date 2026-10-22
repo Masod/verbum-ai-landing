@@ -373,6 +373,21 @@
       background:#fff;
     }
 
+
+    /* Institutional email delivery guidance */
+    .email-delivery-note{
+      margin:0 0 16px;
+      padding:12px 14px;
+      border:1px solid rgba(59,130,246,0.22);
+      border-radius:14px;
+      background:rgba(59,130,246,0.06);
+      color:#374151;
+      font-size:0.91em;
+      line-height:1.6;
+    }
+    .email-delivery-note strong{color:var(--blueDark);}
+    .email-delivery-note p{margin:5px 0 0; color:inherit;}
+
     .field-error{
       margin-top:6px;
       color:#b91c1c;
@@ -541,6 +556,10 @@
             <label for="email">Email address</label>
             <input id="email" name="email" type="email" required />
           </div>
+          <aside class="email-delivery-note" aria-label="Email delivery guidance for organizations">
+            <strong>Using a school, government, or company email address?</strong>
+            <p>Some organizational email systems may block or quarantine external replies. Ask your IT team to allow messages from <strong>verbum-ai.com</strong>, and check your spam or quarantine folder. If needed, use another email address that you are authorized to use. Please do not share confidential organizational information through an unapproved account.</p>
+          </aside>
           <div class="field">
             <label for="organization">Organization / University / Company (optional)</label>
             <input id="organization" name="organization" type="text" />
@@ -881,7 +900,7 @@ form.addEventListener("submit", async (e) => {
 successTitle.textContent = "Request received successfully";
 
 successText.textContent =
-  "Thank you for your interest in Verbum AI. Your request has been recorded, and we’ll contact you with relevant availability and next steps.";
+  "Thank you for your interest in Verbum AI. Your request has been recorded, and we’ll contact you with relevant availability and next steps. If you used a school, government, or company email address, please check your spam or quarantine folder and ask your IT team to allow messages from verbum-ai.com.";
   
     gtag("event", "access_request_submitted", {
     platform: payload.platform,
