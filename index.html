@@ -533,7 +533,37 @@ footer a:hover{
   border-color: rgba(17,24,39,0.14);
   background: rgba(255,255,255,0.65);
 }
-.topnav-links a.active{
+    .topnav-links a.realestate-nav{
+      color:#1E3A8A;
+      background:rgba(59,130,246,0.09);
+      border-color:rgba(59,130,246,0.22);
+    }
+    .topnav-links a.realestate-nav:hover{
+      background:rgba(59,130,246,0.16);
+    }
+
+    .realestate-spotlight{
+      width:min(100% - 32px, 1180px);
+      margin:18px auto 20px;
+      padding:25px 28px;
+      border:1px solid rgba(59,130,246,0.24);
+      border-radius:20px;
+      background:linear-gradient(120deg,#ffffff 0%,#eef5ff 100%);
+      box-shadow:var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
+    .realestate-spotlight h2{margin:8px 0 8px;font-size:1.65em;color:#1E3A8A;}
+    .realestate-spotlight p{margin:0;line-height:1.65;color:#374151;max-width:720px;}
+    .realestate-spotlight .btn{width:auto;min-width:190px;white-space:nowrap;}
+    @media(max-width:720px){
+      .realestate-spotlight{flex-direction:column;align-items:stretch;padding:20px;}
+      .realestate-spotlight .btn{width:100%;}
+    }
+
+    .topnav-links a.active{
   background: rgba(59,130,246,0.10);
   border-color: rgba(59,130,246,0.22);
   color: var(--blueDark);
@@ -567,6 +597,7 @@ footer a:hover{
         <a class="active" href="/">Home</a>
         <a href="/offline-document-summarizer/">Offline Summarizer</a>
         <a href="/features/">Features</a>
+        <a href="https://realestate.verbum-ai.com/" class="realestate-nav">RealEstate AI</a>
         <a href="/faq/">FAQ</a>
         <a href="/download/">Download</a>
         <a href="/labs/">Labs</a>
@@ -590,6 +621,20 @@ footer a:hover{
       <p><strong>Offline document summarizer:</strong> Verbum AI helps you summarize PDFs and documents locally on macOS and Windows.</p>
       <p>Designed for privacy-first workflows — <strong>on-device</strong>, <strong>offline-ready</strong>, and <strong>no cloud uploads required</strong>.</p>
     </div>
+
+    <!-- Distinct hosted research product; separate from the offline document application -->
+    <section class="realestate-spotlight" aria-labelledby="realestate-product-title">
+      <div>
+        <span class="badge">Public research preview</span>
+        <h2 id="realestate-product-title">Introducing RealEstate AI</h2>
+        <p>
+          Explore historical property intelligence, Queens market trends, geographic
+          comparisons, and experimental predictive research. RealEstate AI is a separate,
+          web-hosted research platform — not part of Verbum AI's offline document processing.
+        </p>
+      </div>
+      <a class="btn" href="https://realestate.verbum-ai.com/">Explore RealEstate AI</a>
+    </section>
 
         <!-- SEO content block (high-level, patent-safe) -->
     <div class="cards" style="margin-top:14px;">
@@ -657,14 +702,13 @@ footer a:hover{
   <div class="card labs-card">
     <div class="card-top">
       <h3>Labs (new)</h3>
-      <span class="badge orange">Local-first</span>
+      <span class="badge orange">Exploratory</span>
     </div>
     <p class="sub" style="margin-bottom:10px;">
-      Additional privacy-first tools built with the same principle: <strong>no data leaves your device by default</strong>.
+      Exploratory projects and early-stage concepts beyond the current Verbum AI document application.
     </p>
     <ul style="margin:0; padding-left:18px; color:#374151; line-height:1.65;">
-      <li><strong>RealEstate AI</strong>: lead scoring + exportable insights (local-first pipeline)</li>
-      <li><strong>ShieldScope</strong>: macOS dashboard for monitoring iPhone activity over USB</li>
+      <li><strong>ShieldScope</strong>: exploratory device-activity monitoring concept</li>
     </ul>
     <div style="margin-top:12px;">
       <a class="btn outline" href="/labs/">Explore Labs</a>
@@ -710,9 +754,9 @@ footer a:hover{
   <br/><br/>
 
   <span style="color:#9ca3af;">
-    Labs:
+    Products: <a href="https://realestate.verbum-ai.com/">RealEstate AI</a>
+    &nbsp; • &nbsp; Labs:
     <a href="/labs/">Overview</a> •
-    <a href="/labs/realestate-ai/">RealEstate AI</a> •
     <a href="/labs/shieldscope/">ShieldScope</a>
   </span>
 
